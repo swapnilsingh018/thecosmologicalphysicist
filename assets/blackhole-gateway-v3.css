@@ -1,0 +1,133 @@
+/* Full-viewport cinematic entrance for the homepage only. */
+.blackhole-entry {
+  position: relative;
+  isolation: isolate;
+  height: 100svh;
+  min-height: 0;
+  width: 100%;
+  display: grid;
+  place-items: end center;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 50% 38%, #150d0e 0%, #05060c 41%, #010208 88%);
+  color: #f9f5ec;
+}
+#blackhole-gateway-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.blackhole-entry::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+     rgba(0,0,0,.045) 0%,
+     rgba(1,2,7,0) 35%,
+     rgba(1,2,7,.15) 53%,
+     rgba(1,2,7,.64) 77%,
+     rgba(1,2,7,.94) 100%);
+}
+.blackhole-entry-content {
+  width: 100%;
+  padding: 0 24px clamp(56px, 9svh, 106px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 3svh, 37px);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.blackhole-entry h1 {
+  max-width: min(95vw, 1100px);
+  margin: 0;
+  font: 400 clamp(3.25rem, 8vw, 8.6rem)/.98 var(--serif, Georgia, serif);
+  letter-spacing: -.042em;
+  font-kerning: normal;
+  text-wrap: balance;
+  color: #faf5ec;
+  text-shadow: 0 3px 34px rgba(0,0,0,.75), 0 0 60px rgba(0,0,0,.65);
+}
+.blackhole-enter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  min-width: 177px;
+  padding: 15px 33px;
+  background: rgba(9,12,20,.65);
+  border: 1px solid rgba(230,204,159,.75);
+  border-radius: 2px;
+  box-shadow: 0 0 30px rgba(194,149,82,.08), inset 0 0 20px rgba(255,255,255,.018);
+  color: #f6e6c8;
+  font: 600 .75rem/1.3 var(--sans, sans-serif);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .26em;
+  cursor: pointer;
+  transition: color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.blackhole-enter:hover {
+  transform: translateY(-2px);
+  color: #fff;
+  background: rgba(56,34,24,.78);
+  border-color: #f3d8a5;
+  box-shadow: 0 0 38px rgba(217,167,98,.22);
+}
+.blackhole-enter:focus-visible {
+  outline: 3px solid #f2d29a;
+  outline-offset: 5px;
+}
+.blackhole-entry.bh-render-fallback #blackhole-gateway-canvas { opacity: 0; }
+.blackhole-entry.bh-render-fallback {
+  background: radial-gradient(ellipse 20% 30% at 50% 39%, #000 38%, #e2a365 39%, #a25029 43%, #100a0c 56%, #02030a 88%);
+}
+/* The first screen has only the black hole, name and Enter button. */
+html.bh-gated,
+html.bh-gated body { overflow: hidden !important; }
+html.bh-gated .home-page .masthead,
+html.bh-gated .home-page main > :not(.blackhole-entry),
+html.bh-gated .home-page .site-footer,
+html.bh-gated .home-page .page-grain,
+html.bh-gated .home-page .ambient-field {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+html.bh-entered .home-page .masthead,
+html.bh-entered .home-page main > :not(.blackhole-entry),
+html.bh-entered .home-page .site-footer { visibility: visible; }
+.home-page .blackhole-entry { z-index: 1; }
+#home-content { scroll-margin-top: 76px; }
+@media (max-width: 720px) {
+  .blackhole-entry { min-height: 0; }
+  .blackhole-entry-content { padding-bottom: max(65px, 13svh); gap: 27px; }
+  .blackhole-entry h1 { font-size: clamp(3.4rem, 11vw, 5.2rem); max-width: 12ch; }
+  #home-content { scroll-margin-top: 65px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .blackhole-enter { transition: none; }
+  html { scroll-behavior: auto !important; }
+}
+
+/* Keep the only control visible on unusually short browser windows. */
+@media (max-height: 600px) {
+  .blackhole-entry-content { padding-bottom: clamp(22px, 6svh, 45px); gap: 16px; }
+  .blackhole-entry h1 { font-size: clamp(2.4rem, 7vw, 5.5rem); }
+  .blackhole-enter { min-height: 46px; padding: 11px 28px; }
+}
+
+/* The full-screen entrance remains clean in landscape and on notched phones. */
+@supports(padding-bottom:env(safe-area-inset-bottom)) {
+  .blackhole-entry-content { padding-bottom: max(58px, calc(8svh + env(safe-area-inset-bottom))); }
+}
+@media(max-width:720px) {
+  .blackhole-entry-content { padding-bottom: max(65px, calc(11svh + env(safe-area-inset-bottom))); }
+}
