@@ -134,11 +134,11 @@ float flareB(float t){ return pulse(t,37.0,26.8,.88); }
 // Textured and extremely dim sky. All of its stars are sampled from the
 // outgoing ray, so the lensing follows the deflection rather than a fake warp.
 vec3 distantSky(vec3 v) {
-  vec3 sky=vec3(.0007,.0012,.0024);
+  vec3 sky=vec3(.0010,.0017,.0031);
   float latitude = abs(v.y*.82 + v.x*.16 + v.z*.10);
   float milky=exp(-latitude*11.0);
   float nebula=fbm(v.xz*10.5+vec2(v.y*4.0));
-  sky += milky * smoothstep(.41,.79,nebula)*vec3(.015,.013,.018);
+  sky += milky * smoothstep(.41,.79,nebula)*vec3(.020,.019,.025);
   sky += vec3(.0025,.0038,.0050)*fbm(v.xy*5.4);
 
   vec2 uv=vec2(atan(v.z,v.x)/TAU,asin(clamp(v.y,-1.0,1.0))/PI);
@@ -170,11 +170,11 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   filaments=pow(.5+.5*filaments,5.0);
   float wisps=pow(smoothstep(.27,.78,fine),1.65);
   float lanes=1.0-.54*smoothstep(.57,.80,fbm(vec2(shear*8.2-7.0,r*1.42)));
-  float density=(.13+.56*wisps+.29*coarse+.30*filaments+.28*pow(knot,2.0))*lanes;
+  float density=(.20+.55*wisps+.27*coarse+.34*filaments+.27*pow(knot,2.0))*lanes;
   density *= .76+.54*smoothstep(.34,.78,knot);
 
   // Finite inner edge, steep temperature gradient and translucent outer falloff.
-  float radial=pow(isco/r,2.08);
+  float radial=pow(isco/r,1.73);
   radial *= smoothstep(isco,isco+.72,r);
   radial *= 1.0-smoothstep(diskMax-4.6,diskMax,r);
 
@@ -187,10 +187,10 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   float intensity=pow(doppler,3.8)*radial*density;
 
   // Warm continuum with a compact white-hot approaching zone; avoid neon hues.
-  vec3 rust=vec3(.34,.050,.012);
-  vec3 amber=vec3(.96,.21,.038);
-  vec3 gold=vec3(1.32,.67,.205);
-  vec3 whiteHot=vec3(2.15,1.71,1.24);
+  vec3 rust=vec3(.46,.075,.018);
+  vec3 amber=vec3(1.10,.30,.065);
+  vec3 gold=vec3(1.43,.78,.285);
+  vec3 whiteHot=vec3(2.26,1.89,1.51);
   vec3 spectral=mix(rust,amber,smoothstep(.23,.68,heat));
   spectral=mix(spectral,gold,smoothstep(.57,1.02,heat));
   spectral=mix(spectral,whiteHot,smoothstep(.83,1.36,heat));
@@ -207,7 +207,7 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   float flash2=flareB(t)*gaussian(r-4.67,.55)*gaussian(angDist(a,t*.19+2.85),.28);
   float magneticFlares=flash1*4.5+flash2*3.4;
   intensity *= .86+hotSpots*2.6;
-  vec3 radiance=spectral*intensity*3.10;
+  vec3 radiance=spectral*intensity*4.95;
   // Localized white-gold magnetic reconnection, not a full-screen flash.
   radiance += vec3(2.65,1.84,1.11)*magneticFlares;
   return radiance;
@@ -230,7 +230,7 @@ void main(){
   vec3 forward=normalize(-ro);
   vec3 right=normalize(cross(forward,vec3(0.0,1.0,0.0)));
   vec3 up=normalize(cross(right,forward));
-  vec3 rd=normalize(forward*1.82+right*p.x+up*p.y);
+  vec3 rd=normalize(forward*1.91+right*p.x+up*p.y);
   vec3 pos=ro, dir=rd;
   float L2=dot(cross(ro,rd),cross(ro,rd));
   float b=sqrt(L2);
@@ -274,7 +274,7 @@ void main(){
   // The ring is emphatically NOT a large uniform neon circle.
   float ring=gaussian(b-bcrit,.034);
   float angle=atan(p.y,p.x);
-  float ringVisibility=.012 + .045*smoothstep(.12,1.4,length(radiance));
+  float ringVisibility=.020 + .062*smoothstep(.12,1.4,length(radiance));
   float approach=.36+.64*smoothstep(-.9,.85,p.x*3.0);
   col += ring*ringVisibility*approach*vec3(.49,.31,.15);
   // A very faint, extremely narrow high-order image nested at the critical curve.
@@ -313,7 +313,7 @@ void main(){
   // Film-like tone mapping; avoid clipping the inner-disk structure to white.
   col=max(col,vec3(0.0));
   col=col*(2.51*col+.03)/(col*(2.43*col+.59)+.14);
-  col=pow(clamp(col,0.0,1.0),vec3(.91));
+  col=pow(clamp(col,0.0,1.0),vec3(.86));
   float vignette=smoothstep(1.40,.30,length(p/vec2(max(1.0,aspect*.55),1.0)));
   col*=mix(.69,1.0,vignette);
   // Low-amplitude dithering hides color banding in the warm corona.
@@ -351,7 +351,7 @@ void main(){
   broad*=.125;
   fine*=.125;
   // A constrained bloom halo; no universal fog or artificial neon ring.
-  vec3 glow=(broad*.13+fine*.075)*vec3(1.0,.79,.63);
+  vec3 glow=(broad*.21+fine*.115)*vec3(1.0,.86,.74);
   // Suppress bloom in the middle of pure black to preserve a deep shadow.
   vec3 col=clamp(base+glow,vec3(0.0),vec3(1.0));
   // Very mild photographic grain/dither avoids visible radial color bands.
@@ -413,7 +413,7 @@ void main(){
   const uQG=gl.getUniformLocation(program,'u_qg');
   const uPointer=gl.getUniformLocation(program,'u_pointer');
   const params=new URLSearchParams(location.search);
-  const mode=(params.get('qg')||'subtle').toLowerCase();
+  const mode=(params.get('qg')||'off').toLowerCase();
   const qgMode=mode==='off' ? 0 : (mode==='enhanced' ? 2 : 1);
   const vao=gl.createVertexArray();gl.bindVertexArray(vao);
 
@@ -434,8 +434,8 @@ void main(){
   // Conservative default on laptops, with an opt-in cinematic desktop mode.
   const renderQuality=(params.get('quality')||'balanced').toLowerCase();
   const frameInterval=1000/(renderQuality==='cinema' ? 30 : 24);
-  const maxWidth=renderQuality==='cinema' ? 1550 : renderQuality==='high' ? 1320 : renderQuality==='low' ? 720 : 1040;
-  const maxHeight=renderQuality==='cinema' ? 1000 : renderQuality==='high' ? 900 : renderQuality==='low' ? 500 : 700;
+  const maxWidth=renderQuality==='cinema' ? 1550 : renderQuality==='high' ? 1320 : renderQuality==='low' ? 720 : 1120;
+  const maxHeight=renderQuality==='cinema' ? 1000 : renderQuality==='high' ? 900 : renderQuality==='low' ? 500 : 740;
   let compositorOK=false;
   function resizeCompositor(width,height){
     compositorOK=false;

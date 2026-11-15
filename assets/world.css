@@ -9,9 +9,9 @@
 .atlas-welcome{background:#f4f0e8;color:var(--atlas-ink);padding-top:78px;overflow:hidden}
 .welcome-grid{display:grid;grid-template-columns:minmax(0,1.11fr) minmax(0,.73fr);gap:6%;min-height:735px;align-items:center;padding-block:85px 50px}
 .welcome-copy{align-self:center;position:relative;z-index:2}
-.welcome-copy h1{font:400 clamp(82px,8.4vw,145px)/.89 var(--serif);letter-spacing:-.055em;margin:24px 0 31px;max-width:960px}
+.welcome-copy h1{font:400 clamp(73px,7.1vw,121px)/.91 var(--serif);letter-spacing:-.05em;margin:24px 0 31px;max-width:960px}
 .welcome-copy h1 em{font-weight:400;color:#8c5260}
-.welcome-lede{font-size:19px;line-height:1.72;color:#5a6a74;max-width:650px;margin:0}
+.welcome-lede{font-size:16px;line-height:1.7;color:#64727a;max-width:650px;margin:0}
 .welcome-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:36px}
 .atlas-button{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;background:#102638;color:#eee4d3;min-height:54px;padding:16px 23px;font:10px var(--mono);letter-spacing:.07em;transition:background .2s}
 .atlas-button:hover{background:#354a52}
@@ -25,8 +25,9 @@
 .welcome-bottom{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #d4c9ba;padding:19px 0 30px;color:#8e8c86;font:9px var(--mono);letter-spacing:.08em}
 /* Each research direction is a clear disclosure, not a wall of cards. */
 .research-fields{padding:118px 0 125px;background:#e9e4da}
-.fields-heading{display:grid;grid-template-columns:1.2fr .58fr;gap:10%;align-items:end;margin:54px 0 62px}
+.fields-heading{display:block;margin:42px 0 44px}
 .fields-heading h2,.record-heading h2,.atlas-contact h2{font:400 clamp(67px,7.2vw,116px)/.9 var(--serif);letter-spacing:-.048em;margin:0}
+.fields-heading .period{color:#965768}
 .fields-heading h2 em,.record-heading h2 em,.atlas-contact h2 em{font-weight:400;color:#8c5260}
 .fields-heading p{font-size:17px;line-height:1.76;color:#626c72;margin:0 0 9px}
 .field-accordion{border-top:1px solid #bcb5ab}
@@ -41,12 +42,12 @@
 .field-plus{display:grid;place-items:center;width:36px;height:36px;border:1px solid #b8b2a7;border-radius:50%;font:27px var(--serif);color:#915768;transition:transform .35s,background .35s}
 .field-toggle[aria-expanded="true"] .field-plus{transform:rotate(45deg);background:#182c39;color:#f9edda;border-color:#182c39}
 .field-group:has(.field-toggle[aria-expanded="true"]){background:#f3efe7}
-.field-panel{padding:5px 32px 39px 94px}
+.field-panel{padding:5px 24px 32px 94px}
 .field-panel[hidden]{display:none}
 .field-group.is-open .field-panel{animation:field-reveal .45s cubic-bezier(.21,.8,.25,1) both}
 .panel-intro{max-width:730px;color:#586773;font-size:16px;line-height:1.72;margin:0 0 29px}
 .project-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #cfc6ba;border-left:1px solid #cfc6ba}
-.project-grid a{position:relative;display:flex;flex-direction:column;gap:14px;min-height:132px;padding:23px 44px 25px 24px;border-right:1px solid #cfc6ba;border-bottom:1px solid #cfc6ba;background:transparent;transition:background .2s}
+.project-grid a{position:relative;display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:103px;padding:19px 44px 19px 24px;border-right:1px solid #cfc6ba;border-bottom:1px solid #cfc6ba;background:transparent;transition:background .2s}
 .project-grid a:hover{background:#e8e0d3}
 .project-grid a>span{font:10px var(--mono);letter-spacing:.07em;color:#955e64}
 .project-grid strong{font:400 clamp(21px,2.05vw,32px)/1.07 var(--serif);letter-spacing:-.018em;max-width:430px}
@@ -68,7 +69,7 @@
 .simulation-caption{border-top:1px solid #294556;margin:20px 0 0;padding-top:17px;font:11px/1.6 var(--sans);color:#7792a2}
 /* Publications are evidence, not another overwhelming archive. */
 .atlas-publications{background:#f5f1e9;padding:120px 0 135px}
-.record-heading{display:grid;grid-template-columns:1fr .5fr;gap:12%;align-items:end;margin:54px 0 57px}
+.record-heading{display:block;margin:45px 0 50px}
 .record-heading p{font-size:16px;line-height:1.75;color:#67737b;margin:0 0 5px}
 .record-list{border-top:1px solid #c8bfb2}
 .record-list a{display:grid;grid-template-columns:178px minmax(0,1fr) 30px;gap:26px;align-items:center;min-height:130px;border-bottom:1px solid #cfc6ba;padding:23px 10px;transition:background .2s}
