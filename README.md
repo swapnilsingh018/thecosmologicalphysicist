@@ -7,12 +7,14 @@ A clean, buildless research portfolio for GitHub Pages at
 
 - index.html — full-screen interactive black-hole observatory entrance, an artistic Enter control, and two dynamically revealed destinations.
 - world.html — the public Research Atlas: a concise introduction and seventeen projects organized across three fields, plus a research feature and publications.
-- private.html — intentionally nonfunctional design for the future restricted workspace. Login fields stay disabled until secure server-side identity and access rules exist.
+- private.html — invitation-only Inner Observatory portal, ready for connection to Supabase Auth and private, per-project file sharing. Until configured, login is explicitly disabled.
 - lab.html — companion page embedding the complete interactive physics atlas for [arXiv:2611.08491](https://arxiv.org/abs/2611.08491).
 - publications.html — separately labelled preprints, accepted/published articles, manuscripts, and talks.
 - projects.html, cosmology.html, computation.html, engineering.html, and projects/ — research and engineering archive.
 - cv.html, news.html, quiet-hours.html — research profile, updates, and Quiet Hours.
 - assets/gateway.css, assets/gateway.js — the observatory entrance, visual transition, and destination choice.
+- assets/private.css, assets/private.js, assets/portal-config.js — private workspace interface and public backend configuration.
+- supabase/schema.sql, supabase/SETUP.md — server-side access policies and owner onboarding steps.
 - assets/home.css, assets/home.js, assets/world.css, assets/world.js — public atlas layout, research disclosure, and reduced-potential preview.
 - styles.css, assets/refinement.css, assets/css/, assets/site-runtime.js — shared styling and behavior for secondary pages.
 - sitemap.xml, robots.txt — crawler discovery.
@@ -37,7 +39,7 @@ Once a journal DOI or publisher page exists, replace the forthcoming-link elemen
 
 The interactive plot in assets/home.js uses the reduced potential defined in the Kähler Stability Wall manuscript. It illustrates a parameter sweep, not cosmological time evolution. The black-hole rendering is cinematic scientific artwork, not validated ray tracing or an observational dataset. The separate 3D atlas explains the paper's analytical and numerical structure.
 
-The Inner Observatory is a visual prototype only. A static HTML form must never validate a shared password in JavaScript or contain protected files in the published repository. Before enabling it, add a server-authenticated route with verified users, password hashing or an identity provider, session security, rate limits, and server-side authorization.
+The Inner Observatory uses external managed identity and row-level data authorization. It remains inactive until the owner provisions a Supabase project, runs supabase/schema.sql, disables public signups, and supplies the public publishable configuration in assets/portal-config.js. Follow supabase/SETUP.md before inviting anyone. Never place protected files, passwords, or secret/service-role keys inside this static repository.
 
 The public contact section uses a mailto link. Never put private keys or API credentials in this static repository.
 

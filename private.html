@@ -4,13 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
   <meta name="theme-color" content="#06121d">
-  <title>The Inner Observatory — Private Workspace</title>
+  <title>The Inner Observatory — Swapnil Kumar Singh</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/private.css">
+  <script defer src="assets/portal-config.js"></script>
+  <script defer type="module" src="assets/private.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#login-title">Skip to private access</a>
@@ -24,14 +27,41 @@
         <h1 id="login-title">The Inner<br/><em>Observatory.</em></h1>
       </div>
       <div class="private-form">
-        <form aria-label="Future private workspace login">
-          <label for="researchID">RESEARCH ID</label>
-          <input id="researchID" type="text" name="username" autocomplete="username" placeholder="Your assigned research ID" disabled>
-          <label for="researchPassword">PASSPHRASE</label>
-          <input id="researchPassword" type="password" name="password" autocomplete="current-password" placeholder="Your secure passphrase" disabled>
-          <button type="button" disabled>ACCESS WORKSPACE <span aria-hidden="true">↗</span></button>
-        </form>
-        <p class="access-note"><span class="access-dot"></span> Private access is not yet active.</p>
+        <p id="portalStatus" class="portal-status" role="status" aria-live="polite"></p>
+
+        <div id="loginView">
+          <form id="loginForm" aria-label="Inner Observatory sign in">
+            <label for="researchID">EMAIL ADDRESS</label>
+            <input id="researchID" type="email" name="email" autocomplete="username" placeholder="Your invited email" required disabled>
+            <label for="researchPassword">PASSWORD</label>
+            <input id="researchPassword" type="password" name="password" autocomplete="current-password" placeholder="Your password" required disabled>
+            <button id="loginButton" type="submit" disabled>ENTER THE OBSERVATORY <span aria-hidden="true">↗</span></button>
+          </form>
+          <div class="login-assistance">
+            <span>BY INVITATION ONLY</span>
+            <button id="resetButton" class="text-button" type="button" disabled>Forgot password?</button>
+          </div>
+        </div>
+
+        <div id="passwordView" hidden>
+          <p class="panel-intro">Choose your private password.</p>
+          <form id="passwordForm" aria-label="Set private workspace password">
+            <label for="newPassword">NEW PASSWORD</label>
+            <input id="newPassword" type="password" name="new-password" autocomplete="new-password" minlength="12" placeholder="12 characters or more" required>
+            <label for="confirmPassword">CONFIRM PASSWORD</label>
+            <input id="confirmPassword" type="password" name="confirm-password" autocomplete="new-password" minlength="12" required>
+            <button id="passwordButton" type="submit">SAVE PASSWORD <span aria-hidden="true">↗</span></button>
+          </form>
+        </div>
+
+        <div id="workspaceView" class="workspace-view" hidden>
+          <div class="workspace-account">
+            <span id="accountEmail" class="account-email"></span>
+            <button id="signOutButton" class="text-button" type="button">Sign out ↗</button>
+          </div>
+          <h2>Your research.</h2>
+          <div id="projectList" class="project-list" aria-live="polite"></div>
+        </div>
       </div>
       <div class="private-bottom"><a href="world.html">Research Atlas ↗</a></div>
     </section>

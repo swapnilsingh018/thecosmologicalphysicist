@@ -31,7 +31,33 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}:focus-visible{ou
 .private-form input{width:100%;border:0;border-bottom:1px solid #c7bfb4;padding:13px 0 15px;background:transparent;color:#1a2b38;border-radius:0;outline:none}
 .private-form input::placeholder{color:#a6a39f}
 .private-form input:disabled{opacity:1;cursor:not-allowed}
-.private-form button{display:flex;justify-content:space-between;gap:18px;margin-top:29px;padding:18px 21px;width:100%;border:0;background:#9fa6a4;color:#e8e6df;font:10px var(--mono);letter-spacing:.11em;cursor:not-allowed}
+.private-form form>button{display:flex;justify-content:space-between;gap:18px;margin-top:29px;padding:18px 21px;width:100%;border:0;background:#172d3a;color:#f5ede3;font:10px var(--mono);letter-spacing:.11em;cursor:pointer;transition:background .2s ease,transform .2s ease}
+.private-form form>button:hover:not(:disabled){background:#8d5862;transform:translateY(-2px)}
+.private-form form>button:disabled{background:#9fa6a4;cursor:not-allowed;transform:none}
+.private-form input:focus{border-bottom-color:#865463}
+.portal-status{min-height:0;margin:0;color:#687578;font-size:12px;line-height:1.55}
+.portal-status:not(:empty){margin:18px 0 12px;padding:12px 0;border-bottom:1px solid #d7cfc3}
+.portal-status.is-error{color:#a5464e}
+.login-assistance{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;margin:18px 0 0;color:#8c8b88;font:9px var(--mono);letter-spacing:.07em}
+.private-form .text-button{width:auto;border:0;background:none;color:#875665;padding:4px 0;cursor:pointer;font:12px var(--sans);letter-spacing:0}
+.private-form .text-button:hover:not(:disabled){text-decoration:underline;text-underline-offset:3px}
+.private-form .text-button:disabled{opacity:.45;cursor:not-allowed}
+.panel-intro{font-size:15px;color:#687578;line-height:1.5;margin:17px 0 5px}
+.workspace-view{padding-top:8px}
+.workspace-account{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:10px 0 32px}
+.account-email{font-size:12px;color:#617079;overflow-wrap:anywhere}
+.workspace-view h2{font:400 clamp(37px,4vw,54px)/1 var(--serif);letter-spacing:-.025em;margin:0 0 23px}
+.project-list{display:grid;gap:0}
+.shared-project{border-top:1px solid #cfc5b8;padding:20px 0 25px}
+.shared-project h3{font:400 25px/1.15 var(--serif);margin:0 0 8px}
+.shared-project>p{font-size:13px;color:#687578;line-height:1.6;margin:0 0 12px}
+.project-files{list-style:none;margin:0;padding:0}
+.project-files li{display:flex;justify-content:space-between;align-items:baseline;gap:18px;border-bottom:1px solid #e3dbd0;padding:11px 0}
+.file-name{font-size:13px;overflow-wrap:anywhere}
+.project-files button{flex-shrink:0;border:0;background:transparent;color:#8c5865;font:10px var(--mono);letter-spacing:.03em;cursor:pointer;padding:4px 0}
+.project-files button:hover:not(:disabled){text-decoration:underline;text-underline-offset:3px}
+.project-files button:disabled{opacity:.5;cursor:progress}
+.workspace-empty{font-size:13px;color:#687578;line-height:1.6;padding:6px 0 24px}
 .access-note{color:#727b7c;font-size:12px;line-height:1.65;max-width:590px;margin:18px 0 0}
 .access-dot{display:inline-block;width:6px;height:6px;background:#a78d73;border-radius:50%;margin-right:6px}
 .private-bottom{display:flex;justify-content:space-between;gap:24px;margin-top:58px;padding-top:22px;border-top:1px solid #d7cfc3;font:9px var(--mono);letter-spacing:.06em;color:#9d8e80}
