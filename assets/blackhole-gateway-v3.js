@@ -11,7 +11,7 @@
  */
 (() => {
   'use strict';
-  window.__BLACKHOLE_BUILD__ = 'observatory-v3-20261113';
+  window.__BLACKHOLE_BUILD__ = 'galactic-observatory-v4-20261115';
 
   const canvas = document.getElementById('blackhole-gateway-canvas');
   const gate = document.getElementById('blackhole-entry');
@@ -57,15 +57,24 @@
     const w = Math.max(1, Math.round(rect.width));
     const h = Math.max(1, Math.round(rect.height));
     canvas.width = w; canvas.height = h;
-    const bg = cx.createRadialGradient(w*.50, h*.39, 0, w*.50, h*.39, Math.max(w,h)*.55);
-    bg.addColorStop(0, '#171011'); bg.addColorStop(.55, '#06080d'); bg.addColorStop(1, '#010208');
+    const bg = cx.createRadialGradient(w*.48, h*.46, 0, w*.48, h*.46, Math.max(w,h)*.76);
+    bg.addColorStop(0, '#101823'); bg.addColorStop(.54, '#060d17'); bg.addColorStop(1, '#01040a');
     cx.fillStyle = bg; cx.fillRect(0,0,w,h);
-    const r = Math.min(w,h)*.18, x=w*.52, y=h*.38;
+    // A quiet, fixed starfield also appears when WebGL is unavailable.
+    for(let i=0;i<480;i++){
+      const sx=(Math.sin(i*127.1)*43758.5453)%1;
+      const sy=(Math.sin(i*73.7+12.4)*19243.135)%1;
+      const xStar=((sx+1)%1)*w, yStar=((sy+1)%1)*h;
+      const glow=(i%37===0)?.66:.24;
+      cx.fillStyle='rgba(171,195,225,'+glow+')';
+      cx.beginPath();cx.arc(xStar,yStar,i%37===0?1.2:.48,0,Math.PI*2);cx.fill();
+    }
+    const r = Math.min(w,h)*.12, x=w*.50, y=h*.48;
     cx.save(); cx.translate(x,y);
     for(let i=17;i>=0;i--){
       cx.beginPath(); cx.ellipse(0, 0, r*(1.33+i*.055), r*(.29+i*.021), -.05, 0, 2*Math.PI);
       cx.strokeStyle = `rgba(255,${155+i*2},${65+i*2},${(.015+(18-i)*.004).toFixed(3)})`;
-      cx.lineWidth = 1.7+i*.15; cx.stroke();
+      cx.lineWidth = 1.2+i*.10; cx.stroke();
     }
     const rim = cx.createRadialGradient(0,0,r*.95,0,0,r*1.15);
     rim.addColorStop(0,'#000'); rim.addColorStop(.84,'#000'); rim.addColorStop(.95,'#6b442c'); rim.addColorStop(1,'rgba(0,0,0,0)');
@@ -90,7 +99,6 @@ out vec4 fragColor;
 uniform vec2 u_resolution;
 uniform float u_time;
 uniform float u_qg;
-uniform vec2 u_pointer;
 
 #define PI 3.141592653589793
 #define TAU 6.283185307179586
@@ -131,23 +139,33 @@ float pulse(float sec,float cycle,float start,float duration) {
 float flareA(float t){ return pulse(t,37.0,9.5,1.55); }
 float flareB(float t){ return pulse(t,37.0,26.8,.88); }
 
-// Textured and extremely dim sky. All of its stars are sampled from the
-// outgoing ray, so the lensing follows the deflection rather than a fake warp.
+// Deep extragalactic dark, with a faint oblique Milky Way and cold dust.
+// Stars and nebulosity are sampled along outgoing null rays, so their apparent
+// positions follow the same lensing geometry as the disk.
 vec3 distantSky(vec3 v) {
-  vec3 sky=vec3(.0010,.0017,.0031);
-  float latitude = abs(v.y*.82 + v.x*.16 + v.z*.10);
-  float milky=exp(-latitude*11.0);
-  float nebula=fbm(v.xz*10.5+vec2(v.y*4.0));
-  sky += milky * smoothstep(.41,.79,nebula)*vec3(.020,.019,.025);
-  sky += vec3(.0025,.0038,.0050)*fbm(v.xy*5.4);
+  vec3 sky=vec3(.0012,.0021,.0040);
+  float latitude=abs(v.y*.84-v.x*.37+v.z*.12);
+  float band=exp(-latitude*7.5);
+  float cloud=fbm(v.xy*10.5+v.z*vec2(3.1,-5.7));
+  float dust=fbm(v.xy*23.0+v.z*vec2(-8.1,6.4));
+  float veil=smoothstep(.31,.75,cloud)*(1.0-.66*smoothstep(.43,.77,dust));
+  sky += band*(.25+1.10*veil)*vec3(.012,.025,.047);
+  sky += band*smoothstep(.48,.76,cloud)*vec3(.007,.006,.018);
+  sky += vec3(.0015,.0030,.0065)*fbm(v.xy*5.7);
 
+  // Two angular scales: pin-sharp stars, plus very rare soft stellar halos.
   vec2 uv=vec2(atan(v.z,v.x)/TAU,asin(clamp(v.y,-1.0,1.0))/PI);
-  vec2 g=uv*vec2(1120.0,560.0);
+  vec2 g=uv*vec2(1330.0,665.0);
   vec2 cell=floor(g), frac=fract(g)-.5;
-  float chance=hash12(cell);
-  float star=1.0-smoothstep(.016,.095,length(frac));
-  float brightness=smoothstep(.9977,.9999,chance);
-  sky += vec3(.72,.81,1.0)*brightness*star*(.3+.7*hash12(cell+46.7));
+  float seed=hash12(cell);
+  float radius=length(frac);
+  float star=1.0-smoothstep(.042,.19,radius);
+  float presence=smoothstep(.9908,.9999,seed);
+  float temperature=hash12(cell+vec2(13.7,81.1));
+  vec3 starlight=mix(vec3(.48,.68,1.0),vec3(1.0,.89,.73),temperature);
+  sky += starlight*presence*star*(.19+.65*hash12(cell+46.7));
+  float rare=step(.99964,seed);
+  sky += starlight*rare*exp(-radius*radius*37.0)*.21;
   return sky;
 }
 
@@ -190,7 +208,7 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   vec3 rust=vec3(.46,.075,.018);
   vec3 amber=vec3(1.10,.30,.065);
   vec3 gold=vec3(1.43,.78,.285);
-  vec3 whiteHot=vec3(2.26,1.89,1.51);
+  vec3 whiteHot=vec3(1.85,1.51,1.18);
   vec3 spectral=mix(rust,amber,smoothstep(.23,.68,heat));
   spectral=mix(spectral,gold,smoothstep(.57,1.02,heat));
   spectral=mix(spectral,whiteHot,smoothstep(.83,1.36,heat));
@@ -207,30 +225,27 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   float flash2=flareB(t)*gaussian(r-4.67,.55)*gaussian(angDist(a,t*.19+2.85),.28);
   float magneticFlares=flash1*4.5+flash2*3.4;
   intensity *= .86+hotSpots*2.6;
-  vec3 radiance=spectral*intensity*4.95;
+  vec3 radiance=spectral*intensity*3.55;
   // Localized white-gold magnetic reconnection, not a full-screen flash.
   radiance += vec3(2.65,1.84,1.11)*magneticFlares;
   return radiance;
 }
 
 void main(){
-  // The observer responds gently to the pointer without altering the metric.
+  // A fixed, wider astronomical framing: movement comes from orbiting matter,
+  // never the viewer's mouse position.
   vec2 p=(gl_FragCoord.xy-.5*u_resolution)/u_resolution.y;
-  p.x-=u_pointer.x*.045;
-  p.y-=u_pointer.y*.035;
   float aspect=u_resolution.x/u_resolution.y;
-  // On portrait phones, widen the field of view so the shadow and lensing arc
-  // remain visible instead of cropping into an enormous black disk.
   float portraitFactor=1.0-smoothstep(.45,.95,aspect);
-  float portraitScale=1.0+1.08*portraitFactor;
+  float portraitScale=1.0+.56*portraitFactor;
   p*=portraitScale;
-  p.y+=mix(.13,-.15,portraitFactor);
+  p.y+=mix(.025,-.045,portraitFactor);
 
-  vec3 ro=vec3(u_pointer.x*.62,3.25+u_pointer.y*.46,18.5);
+  vec3 ro=vec3(0.0,3.25,18.5);
   vec3 forward=normalize(-ro);
   vec3 right=normalize(cross(forward,vec3(0.0,1.0,0.0)));
   vec3 up=normalize(cross(right,forward));
-  vec3 rd=normalize(forward*1.91+right*p.x+up*p.y);
+  vec3 rd=normalize(forward*1.24+right*p.x+up*p.y);
   vec3 pos=ro, dir=rd;
   float L2=dot(cross(ro,rd),cross(ro,rd));
   float b=sqrt(L2);
@@ -302,8 +317,8 @@ void main(){
   // the rest of the image stays dark, so there are no full-screen flashes.
   float flareGlow=(flareA(u_time)*.85+flareB(u_time)*.65);
   // Optical glints from compact, orbiting emission; they are deliberately short.
-  vec2 spotA=vec2(.355*cos(u_time*.28+.4), -.012-.068*sin(u_time*.28+.4));
-  vec2 spotB=vec2(.428*cos(u_time*.19+2.85), -.015-.086*sin(u_time*.19+2.85));
+  vec2 spotA=vec2(.228*cos(u_time*.28+.4), -.008-.045*sin(u_time*.28+.4));
+  vec2 spotB=vec2(.275*cos(u_time*.19+2.85), -.010-.055*sin(u_time*.19+2.85));
   vec2 hotCenter=mix(spotA,spotB,step(.50,flareB(u_time)));
   float core=gaussian(length((p-hotCenter)*vec2(1.08,1.24)),.14);
   float horizontal=gaussian(p.y-hotCenter.y,.010)*gaussian(p.x-hotCenter.x,.45);
@@ -311,7 +326,7 @@ void main(){
   col += flareGlow*(core*vec3(.24,.140,.068)+horizontal*vec3(.040,.021,.009)+vertical*vec3(.017,.010,.004));
 
   // Film-like tone mapping; avoid clipping the inner-disk structure to white.
-  col=max(col,vec3(0.0));
+  col=max(col,vec3(0.0))*.86;
   col=col*(2.51*col+.03)/(col*(2.43*col+.59)+.14);
   col=pow(clamp(col,0.0,1.0),vec3(.86));
   float vignette=smoothstep(1.40,.30,length(p/vec2(max(1.0,aspect*.55),1.0)));
@@ -411,7 +426,6 @@ void main(){
   const uResolution=gl.getUniformLocation(program,'u_resolution');
   const uTime=gl.getUniformLocation(program,'u_time');
   const uQG=gl.getUniformLocation(program,'u_qg');
-  const uPointer=gl.getUniformLocation(program,'u_pointer');
   const params=new URLSearchParams(location.search);
   const mode=(params.get('qg')||'off').toLowerCase();
   const qgMode=mode==='off' ? 0 : (mode==='enhanced' ? 2 : 1);
@@ -421,21 +435,12 @@ void main(){
   let stopped = false;
   let previousTime = 0;
   let raf = 0;
-  const pointerTarget={x:0,y:0};
-  const pointerCurrent={x:0,y:0};
-  if (portalMode && !reduced) {
-    window.addEventListener('pointermove',event=>{
-      pointerTarget.x=Math.max(-1,Math.min(1,(event.clientX/innerWidth-.5)*2));
-      pointerTarget.y=Math.max(-1,Math.min(1,(.5-event.clientY/innerHeight)*2));
-    },{passive:true});
-    document.addEventListener('pointerleave',()=>{pointerTarget.x=0;pointerTarget.y=0});
-  }
   const startTime = performance.now();
-  // Conservative default on laptops, with an opt-in cinematic desktop mode.
+  // Higher-resolution default without demanding a full 4K ray pass on laptops.
   const renderQuality=(params.get('quality')||'balanced').toLowerCase();
   const frameInterval=1000/(renderQuality==='cinema' ? 30 : 24);
-  const maxWidth=renderQuality==='cinema' ? 1550 : renderQuality==='high' ? 1320 : renderQuality==='low' ? 720 : 1120;
-  const maxHeight=renderQuality==='cinema' ? 1000 : renderQuality==='high' ? 900 : renderQuality==='low' ? 500 : 740;
+  const maxWidth=renderQuality==='cinema' ? 1920 : renderQuality==='high' ? 1680 : renderQuality==='low' ? 760 : 1440;
+  const maxHeight=renderQuality==='cinema' ? 1180 : renderQuality==='high' ? 1020 : renderQuality==='low' ? 540 : 900;
   let compositorOK=false;
   function resizeCompositor(width,height){
     compositorOK=false;
@@ -453,9 +458,12 @@ void main(){
   }
   function resize() {
     const box=gate.getBoundingClientRect();
-    const scale = Math.min(1, maxWidth/Math.max(1,box.width), maxHeight/Math.max(1,box.height));
-    const width=Math.max(2,Math.round(box.width*scale));
-    const height=Math.max(2,Math.round(box.height*scale));
+    const deviceScale=Math.min(window.devicePixelRatio||1,1.35);
+    const targetWidth=Math.max(1,box.width*deviceScale);
+    const targetHeight=Math.max(1,box.height*deviceScale);
+    const scale = Math.min(1, maxWidth/targetWidth, maxHeight/targetHeight);
+    const width=Math.max(2,Math.round(targetWidth*scale));
+    const height=Math.max(2,Math.round(targetHeight*scale));
     if(canvas.width!==width || canvas.height!==height){
       canvas.width=width;canvas.height=height;
       gl.viewport(0,0,width,height);
@@ -469,7 +477,6 @@ void main(){
     gl.uniform2f(uResolution,canvas.width,canvas.height);
     gl.uniform1f(uTime,seconds);
     gl.uniform1f(uQG,qgMode);
-    gl.uniform2f(uPointer,pointerCurrent.x,pointerCurrent.y);
     gl.drawArrays(gl.TRIANGLES,0,3);
     if(compositorOK){
       gl.bindFramebuffer(gl.FRAMEBUFFER,null);
@@ -483,8 +490,6 @@ void main(){
   function frame(now) {
     raf=0;
     if(stopped || document.hidden || !visible || reduced) return;
-    pointerCurrent.x+=(pointerTarget.x-pointerCurrent.x)*.055;
-    pointerCurrent.y+=(pointerTarget.y-pointerCurrent.y)*.055;
     if(now-previousTime >= frameInterval){
       previousTime=now;
       render((now-startTime)*.001);

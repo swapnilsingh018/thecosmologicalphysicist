@@ -9,8 +9,8 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 .skip-link{position:fixed;z-index:90;left:18px;top:-100px;background:var(--white);color:#07121b;padding:10px 16px;font-size:13px}
 .skip-link:focus{top:18px}
 .observatory{position:relative;width:100%;height:100svh;min-height:100svh;background:#010409;overflow:hidden;isolation:isolate}
-#blackhole-gateway-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:saturate(1.16) contrast(1.05) brightness(1.1);transition:filter 1.15s ease,transform 1.15s cubic-bezier(.2,.8,.2,1)}
-.cosmic-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(1,5,9,.42),transparent 19%,transparent 76%,rgba(1,5,9,.58)),radial-gradient(ellipse at center,transparent 33%,rgba(1,5,9,.28) 100%)}
+#blackhole-gateway-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:saturate(1.07) contrast(1.035) brightness(.98);transition:filter 1.15s ease,transform 1.15s cubic-bezier(.2,.8,.2,1)}
+.cosmic-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 23% 28%,rgba(26,52,83,.11),transparent 41%),radial-gradient(ellipse at 79% 67%,rgba(27,29,65,.075),transparent 39%),linear-gradient(180deg,rgba(1,5,10,.27),transparent 20%,transparent 77%,rgba(1,5,10,.49)),radial-gradient(ellipse at center,transparent 38%,rgba(1,5,10,.25) 100%)}
 .minimal-brand{position:absolute;top:clamp(25px,4vw,56px);left:clamp(25px,4vw,58px);z-index:5;font:400 clamp(18px,1.7vw,24px)/1 var(--serif);letter-spacing:.005em;color:rgba(249,243,232,.85);text-shadow:0 3px 15px #000a}
 .minimal-brand:hover{color:#fff}
 .portal-entry{position:absolute;z-index:6;left:50%;bottom:clamp(42px,8.7vh,115px);transform:translateX(-50%);transition:opacity .65s,transform .8s cubic-bezier(.2,.8,.2,1)}
@@ -33,7 +33,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 .observatory[data-phase="transition"] #blackhole-gateway-canvas{filter:saturate(1.45) brightness(1.55);transform:scale(1.07)}
 .observatory[data-phase="transition"] .portal-entry,.observatory[data-phase="choices"] .portal-entry{opacity:0;pointer-events:none;transform:translateX(-50%) scale(.75)}
 .observatory[data-phase="choices"] #blackhole-gateway-canvas{filter:saturate(.95) brightness(.54) blur(1px);transform:scale(1.04)}
-.observatory.bh-render-fallback:after{content:"";position:absolute;z-index:0;inset:18% 22%;border-radius:50%;transform:rotate(-17deg);background:radial-gradient(ellipse,#000 0 21%,#c58c52 23%,#533321 28%,transparent 33%),radial-gradient(ellipse,transparent 29%,rgba(218,148,78,.46) 36%,transparent 57%)}
+.observatory.bh-render-fallback:after{content:"";position:absolute;z-index:0;inset:26% 34%;border-radius:50%;transform:rotate(-17deg);background:radial-gradient(ellipse,#000 0 21%,#c58c52 23%,#533321 28%,transparent 33%),radial-gradient(ellipse,transparent 29%,rgba(218,148,78,.37) 36%,transparent 57%)}
 .portal-choices{position:absolute;z-index:10;inset:0;display:flex;align-items:center;justify-content:center;overflow-y:auto;background:rgba(1,8,13,.66);backdrop-filter:blur(8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .6s,visibility .6s}
 .observatory[data-phase="choices"] .portal-choices{opacity:1;visibility:visible;pointer-events:auto}
 .choices-shell{width:min(1000px,calc(100% - 100px));margin:auto;padding:100px 0 70px}

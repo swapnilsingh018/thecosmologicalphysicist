@@ -13,6 +13,7 @@ A clean, buildless research portfolio for GitHub Pages at
 - projects.html, cosmology.html, computation.html, engineering.html, and projects/ — research and engineering archive.
 - cv.html, news.html, quiet-hours.html — research profile, updates, and Quiet Hours.
 - assets/gateway.css, assets/gateway.js — the observatory entrance, visual transition, and destination choice.
+- assets/blackhole-gateway-v3.js — fixed-view, WebGL2 black-hole rendering with a wider field of view, a faint lensed galactic sky and continuously evolving accretion flow; no mouse-driven camera motion.
 - assets/private.css, assets/private.js, assets/portal-config.js — private workspace interface and public backend configuration.
 - supabase/schema.sql, supabase/SETUP.md — server-side access policies and owner onboarding steps.
 - assets/home.css, assets/home.js, assets/world.css, assets/world.js — public atlas layout, research disclosure, and reduced-potential preview.
