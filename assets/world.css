@@ -1,0 +1,144 @@
+:root{--atlas-paper:#f4f0e8;--atlas-ink:#172a36;--atlas-rule:#d9d0c4;--atlas-gold:#bd9778;--atlas-blue:#102330}
+.atlas-page{background:var(--atlas-paper)}
+.atlas-page .masthead nav a[aria-current="page"]{color:#e4cba2}
+.section-kicker{font:10px "DM Mono",monospace;letter-spacing:.12em;color:#976b5e;text-transform:uppercase;margin:0}
+.atlas-topline{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-top:1px solid #c9beb1;font:10px "DM Mono",monospace;letter-spacing:.08em;color:#886c61}
+.atlas-topline a:hover{color:#8e4053}
+.atlas-topline.dark{border-color:#324a58;color:#c1a77c}
+/* Open, editorial introduction after the cinematic gateway. */
+.atlas-welcome{background:#f4f0e8;color:var(--atlas-ink);padding-top:78px;overflow:hidden}
+.welcome-grid{display:grid;grid-template-columns:minmax(0,1.11fr) minmax(0,.73fr);gap:6%;min-height:735px;align-items:center;padding-block:85px 50px}
+.welcome-copy{align-self:center;position:relative;z-index:2}
+.welcome-copy h1{font:400 clamp(82px,8.4vw,145px)/.89 var(--serif);letter-spacing:-.055em;margin:24px 0 31px;max-width:960px}
+.welcome-copy h1 em{font-weight:400;color:#8c5260}
+.welcome-lede{font-size:19px;line-height:1.72;color:#5a6a74;max-width:650px;margin:0}
+.welcome-actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap;margin-top:36px}
+.atlas-button{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;background:#102638;color:#eee4d3;min-height:54px;padding:16px 23px;font:10px var(--mono);letter-spacing:.07em;transition:background .2s}
+.atlas-button:hover{background:#354a52}
+.atlas-quiet-link{border-bottom:1px solid #987169;padding:12px 0;color:#784c54;font:10px var(--mono);letter-spacing:.07em}
+.welcome-footnote{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:60px;color:#9a8b7e;font:9px var(--mono);letter-spacing:.07em}
+.welcome-footnote i{width:3px;height:3px;border-radius:50%;background:#ac8175}
+.welcome-portrait{align-self:stretch;margin:0;max-height:710px;min-height:610px;position:relative;overflow:hidden;background:#18262b}
+.welcome-portrait:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,17,27,.72),transparent 31%)}
+.welcome-portrait img{width:100%;height:100%;object-fit:cover;object-position:center 31%;filter:saturate(.7) contrast(1.02)}
+.welcome-portrait figcaption{position:absolute;z-index:2;left:24px;right:24px;bottom:23px;display:flex;justify-content:space-between;gap:16px;color:#f6eae0;font:9px var(--mono);letter-spacing:.07em}
+.welcome-bottom{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #d4c9ba;padding:19px 0 30px;color:#8e8c86;font:9px var(--mono);letter-spacing:.08em}
+/* Each research direction is a clear disclosure, not a wall of cards. */
+.research-fields{padding:118px 0 125px;background:#e9e4da}
+.fields-heading{display:grid;grid-template-columns:1.2fr .58fr;gap:10%;align-items:end;margin:54px 0 62px}
+.fields-heading h2,.record-heading h2,.atlas-contact h2{font:400 clamp(67px,7.2vw,116px)/.9 var(--serif);letter-spacing:-.048em;margin:0}
+.fields-heading h2 em,.record-heading h2 em,.atlas-contact h2 em{font-weight:400;color:#8c5260}
+.fields-heading p{font-size:17px;line-height:1.76;color:#626c72;margin:0 0 9px}
+.field-accordion{border-top:1px solid #bcb5ab}
+.field-group{border-bottom:1px solid #bcb5ab}
+.field-toggle{width:100%;display:grid;grid-template-columns:76px minmax(0,1fr) 176px 38px;gap:18px;align-items:center;background:transparent;color:#182c39;border:0;padding:31px 8px;text-align:left;transition:background .3s,padding .3s}
+.field-toggle:hover{background:rgba(255,255,255,.36);padding-left:19px;padding-right:19px}
+.field-index{align-self:start;font:29px var(--serif);color:#975a64}
+.field-title{display:grid;gap:10px}
+.field-title strong{font:400 clamp(31px,3.6vw,56px)/1.02 var(--serif);letter-spacing:-.025em}
+.field-title small{font-size:13px;line-height:1.5;color:#7b8182}
+.field-count{font:10px var(--mono);color:#8c746d;letter-spacing:.04em}
+.field-plus{display:grid;place-items:center;width:36px;height:36px;border:1px solid #b8b2a7;border-radius:50%;font:27px var(--serif);color:#915768;transition:transform .35s,background .35s}
+.field-toggle[aria-expanded="true"] .field-plus{transform:rotate(45deg);background:#182c39;color:#f9edda;border-color:#182c39}
+.field-group:has(.field-toggle[aria-expanded="true"]){background:#f3efe7}
+.field-panel{padding:5px 32px 39px 94px}
+.field-panel[hidden]{display:none}
+.field-group.is-open .field-panel{animation:field-reveal .45s cubic-bezier(.21,.8,.25,1) both}
+.panel-intro{max-width:730px;color:#586773;font-size:16px;line-height:1.72;margin:0 0 29px}
+.project-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #cfc6ba;border-left:1px solid #cfc6ba}
+.project-grid a{position:relative;display:flex;flex-direction:column;gap:14px;min-height:132px;padding:23px 44px 25px 24px;border-right:1px solid #cfc6ba;border-bottom:1px solid #cfc6ba;background:transparent;transition:background .2s}
+.project-grid a:hover{background:#e8e0d3}
+.project-grid a>span{font:10px var(--mono);letter-spacing:.07em;color:#955e64}
+.project-grid strong{font:400 clamp(21px,2.05vw,32px)/1.07 var(--serif);letter-spacing:-.018em;max-width:430px}
+.project-grid b{position:absolute;right:19px;bottom:17px;font:24px var(--serif);font-weight:400;color:#875264}
+.fields-endnote{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #bdb3a7;padding-top:20px;color:#80776d;font:9px/1.7 var(--mono);letter-spacing:.065em;margin:40px 0 0}
+.fields-endnote a{color:#875463;white-space:nowrap}
+/* One meaningful working equation, in a quieter research feature. */
+.atlas-feature{padding:120px 0 135px;background:#0b2030;color:#f3e9df}
+.feature-grid{display:grid;grid-template-columns:.83fr 1.17fr;gap:9%;align-items:center;margin-top:54px}
+.feature-copy .section-kicker{color:#c6ac84}
+.feature-copy h2{font:400 clamp(61px,6vw,99px)/.93 var(--serif);letter-spacing:-.043em;margin:24px 0 31px}
+.feature-copy h2 em{font-weight:400;color:#d7bc91}
+.feature-copy>p:not(.section-kicker){font-size:16px;line-height:1.82;color:#9db1bf;max-width:600px}
+.feature-links{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-top:27px}
+.feature-links a{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:470px;width:100%;padding:15px 0;border-bottom:1px solid #476073;color:#e5cb9c;font:10px var(--mono);letter-spacing:.035em}
+.feature-links a:hover{color:#fff}
+.feature-visual{padding:24px 27px 22px;background:radial-gradient(ellipse at 45% 49%,#1a384c,#081727 77%);border:1px solid #365063;min-width:0}
+#featureCanvas{height:385px}
+.simulation-caption{border-top:1px solid #294556;margin:20px 0 0;padding-top:17px;font:11px/1.6 var(--sans);color:#7792a2}
+/* Publications are evidence, not another overwhelming archive. */
+.atlas-publications{background:#f5f1e9;padding:120px 0 135px}
+.record-heading{display:grid;grid-template-columns:1fr .5fr;gap:12%;align-items:end;margin:54px 0 57px}
+.record-heading p{font-size:16px;line-height:1.75;color:#67737b;margin:0 0 5px}
+.record-list{border-top:1px solid #c8bfb2}
+.record-list a{display:grid;grid-template-columns:178px minmax(0,1fr) 30px;gap:26px;align-items:center;min-height:130px;border-bottom:1px solid #cfc6ba;padding:23px 10px;transition:background .2s}
+.record-list a:hover{background:#ece5db}
+.record-list span{font:10px var(--mono);letter-spacing:.055em;color:#9b6f65}
+.record-list strong{font:400 clamp(24px,2.7vw,38px)/1.1 var(--serif);letter-spacing:-.015em}
+.record-list b{font:29px var(--serif);font-weight:400;color:#985a67}
+.atlas-contact{padding:113px 0 120px;background:#e4ded3;color:#1b3040}
+.contact-inner{display:grid;grid-template-columns:1.15fr .85fr;gap:10%;align-items:end}
+.atlas-contact h2{margin:23px 0 30px}
+.atlas-contact p:not(.section-kicker){max-width:480px;color:#617078;font-size:17px;line-height:1.75}
+.contact-route>a{display:block;font:32px/1.2 var(--serif);border-bottom:1px solid #a99589;padding-bottom:18px;overflow-wrap:anywhere}
+.contact-route>a span{font-size:22px;color:#995c68}
+.contact-route>div{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:23px;font:10px var(--mono);color:#815563}
+.contact-route a:hover{color:#905765}
+@keyframes field-reveal{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1180px){
+ .welcome-grid{grid-template-columns:1.1fr .8fr;gap:5%}
+ .welcome-copy h1{font-size:clamp(70px,7vw,107px)}
+ .field-toggle{grid-template-columns:65px minmax(0,1fr) 140px 35px}
+ .feature-grid{gap:5%}
+ .feature-copy h2{font-size:clamp(59px,6vw,86px)}
+}
+@media(prefers-reduced-motion:reduce){.field-group.is-open .field-panel{animation:none}}
+@media(max-width:950px){
+ .welcome-grid{min-height:0;grid-template-columns:1fr .66fr;padding-top:70px;gap:4%}
+ .welcome-copy h1{font-size:clamp(63px,8.5vw,93px)}
+ .welcome-lede{font-size:16px}
+ .welcome-portrait{min-height:500px}
+ .fields-heading,.record-heading,.feature-grid,.contact-inner{grid-template-columns:1fr;gap:24px}
+ .fields-heading p,.record-heading p{max-width:680px}
+ .feature-grid{gap:50px}
+ .feature-copy h2{font-size:clamp(64px,9vw,92px)}
+ .feature-copy>p:not(.section-kicker){max-width:700px}
+ .contact-route{max-width:650px}
+}
+@media(max-width:760px){
+ .atlas-welcome{padding-top:68px}
+ .welcome-grid{grid-template-columns:1fr;gap:35px;padding-top:65px}
+ .welcome-copy h1{font-size:clamp(68px,12vw,100px);max-width:600px}
+ .welcome-portrait{min-height:0;max-width:490px;height:520px}
+ .welcome-footnote{margin-top:36px;font-size:8px}
+ .welcome-bottom{font-size:8px}
+ .research-fields,.atlas-feature,.atlas-publications,.atlas-contact{padding:85px 0}
+ .fields-heading{margin:38px 0 38px}
+ .fields-heading h2,.record-heading h2,.atlas-contact h2{font-size:clamp(62px,11vw,85px)}
+ .field-toggle{grid-template-columns:34px minmax(0,1fr) 37px;gap:10px;padding:26px 3px}
+ .field-title strong{font-size:clamp(30px,6vw,45px)}
+ .field-count{grid-column:2;grid-row:2;font-size:9px}
+ .field-plus{grid-column:3;grid-row:1/3}
+ .field-panel{padding:0 0 31px 0}
+ .project-grid{grid-template-columns:1fr}
+ .project-grid a{min-height:109px}
+ .fields-endnote{flex-direction:column}
+ .feature-copy h2{font-size:clamp(63px,10vw,83px)}
+ .record-heading{margin:40px 0}
+ .record-list a{grid-template-columns:1fr 22px;gap:9px 20px;padding:23px 0}
+ .record-list span{grid-column:1}
+ .record-list strong{grid-column:1;grid-row:2}
+ .record-list b{grid-column:2;grid-row:2}
+}
+@media(max-width:480px){
+ .welcome-copy h1{font-size:65px}
+ .welcome-portrait{height:410px}
+ .welcome-portrait figcaption{font-size:8px;gap:10px}
+ .welcome-actions{align-items:flex-start;flex-direction:column}
+ .fields-heading h2,.record-heading h2,.atlas-contact h2{font-size:61px}
+ .field-title strong{font-size:32px}
+ .feature-copy h2{font-size:61px}
+ .feature-visual{padding:20px 17px}
+ #featureCanvas{height:300px}
+ .contact-route>a{font-size:27px}
+}

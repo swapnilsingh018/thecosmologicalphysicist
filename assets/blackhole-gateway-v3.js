@@ -17,7 +17,8 @@
   const gate = document.getElementById('blackhole-entry');
   const enter = document.getElementById('blackhole-enter');
   const destination = document.getElementById('home-content');
-  if (!gate || !canvas || !enter || !destination) return;
+  if (!gate || !canvas) return;
+  const portalMode = gate.dataset.gatewayMode === 'portal';
 
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -37,7 +38,7 @@
       enter.blur();
     }));
   }
-  enter.addEventListener('click', enterSite);
+  if (enter && destination && !portalMode) enter.addEventListener('click', enterSite);
 
   // For browser navigation back to an anchored section, do not show the entrance gate.
   if (location.hash && location.hash !== '#blackhole-entry') {
@@ -89,6 +90,7 @@ out vec4 fragColor;
 uniform vec2 u_resolution;
 uniform float u_time;
 uniform float u_qg;
+uniform vec2 u_pointer;
 
 #define PI 3.141592653589793
 #define TAU 6.283185307179586
@@ -212,8 +214,10 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
 }
 
 void main(){
-  // The camera is fixed: stability is essential for an observational look.
+  // The observer responds gently to the pointer without altering the metric.
   vec2 p=(gl_FragCoord.xy-.5*u_resolution)/u_resolution.y;
+  p.x-=u_pointer.x*.045;
+  p.y-=u_pointer.y*.035;
   float aspect=u_resolution.x/u_resolution.y;
   // On portrait phones, widen the field of view so the shadow and lensing arc
   // remain visible instead of cropping into an enormous black disk.
@@ -222,7 +226,7 @@ void main(){
   p*=portraitScale;
   p.y+=mix(.13,-.15,portraitFactor);
 
-  vec3 ro=vec3(0.0,3.25,18.5);
+  vec3 ro=vec3(u_pointer.x*.62,3.25+u_pointer.y*.46,18.5);
   vec3 forward=normalize(-ro);
   vec3 right=normalize(cross(forward,vec3(0.0,1.0,0.0)));
   vec3 up=normalize(cross(right,forward));
@@ -407,6 +411,7 @@ void main(){
   const uResolution=gl.getUniformLocation(program,'u_resolution');
   const uTime=gl.getUniformLocation(program,'u_time');
   const uQG=gl.getUniformLocation(program,'u_qg');
+  const uPointer=gl.getUniformLocation(program,'u_pointer');
   const params=new URLSearchParams(location.search);
   const mode=(params.get('qg')||'subtle').toLowerCase();
   const qgMode=mode==='off' ? 0 : (mode==='enhanced' ? 2 : 1);
@@ -416,6 +421,15 @@ void main(){
   let stopped = false;
   let previousTime = 0;
   let raf = 0;
+  const pointerTarget={x:0,y:0};
+  const pointerCurrent={x:0,y:0};
+  if (portalMode && !reduced) {
+    window.addEventListener('pointermove',event=>{
+      pointerTarget.x=Math.max(-1,Math.min(1,(event.clientX/innerWidth-.5)*2));
+      pointerTarget.y=Math.max(-1,Math.min(1,(.5-event.clientY/innerHeight)*2));
+    },{passive:true});
+    document.addEventListener('pointerleave',()=>{pointerTarget.x=0;pointerTarget.y=0});
+  }
   const startTime = performance.now();
   // Conservative default on laptops, with an opt-in cinematic desktop mode.
   const renderQuality=(params.get('quality')||'balanced').toLowerCase();
@@ -455,6 +469,7 @@ void main(){
     gl.uniform2f(uResolution,canvas.width,canvas.height);
     gl.uniform1f(uTime,seconds);
     gl.uniform1f(uQG,qgMode);
+    gl.uniform2f(uPointer,pointerCurrent.x,pointerCurrent.y);
     gl.drawArrays(gl.TRIANGLES,0,3);
     if(compositorOK){
       gl.bindFramebuffer(gl.FRAMEBUFFER,null);
@@ -468,6 +483,8 @@ void main(){
   function frame(now) {
     raf=0;
     if(stopped || document.hidden || !visible || reduced) return;
+    pointerCurrent.x+=(pointerTarget.x-pointerCurrent.x)*.055;
+    pointerCurrent.y+=(pointerTarget.y-pointerCurrent.y)*.055;
     if(now-previousTime >= frameInterval){
       previousTime=now;
       render((now-startTime)*.001);

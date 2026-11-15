@@ -17,8 +17,8 @@ const paths = new Set(htmlFiles.map(f => path.relative(root, f)));
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, "utf8");
   const rel = path.relative(root, file);
-  if (rel === "404.html") {
-    if (!html.includes('name="robots" content="noindex"')) issues.push("404 page must be noindex");
+  if (rel === "404.html" || rel === "private.html") {
+    if (!html.includes('name="robots" content="noindex')) issues.push(rel + ": must be noindex");
     continue;
   }
   const target = new URL(rel === "index.html" ? "/" : "/" + rel, "https://www.swapnilsingh.co.in/").href;
@@ -43,7 +43,7 @@ for (const file of htmlFiles) {
 }
 const map = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 for (const rel of paths) {
-  if (rel === "404.html") continue;
+  if (rel === "404.html" || rel === "private.html") continue;
   if (!map.includes("https://www.swapnilsingh.co.in/" + (rel === "index.html" ? "" : rel))) {
     issues.push("Sitemap missing " + rel);
   }
