@@ -1,0 +1,221 @@
+/* Observatory palette — shared across public research, profile and private pages.
+   Deep olive surfaces, parchment typography and restrained antique-gold actions. */
+:root {
+  --olive-void: #0a100b;
+  --olive-deep: #111a12;
+  --olive-panel: #1a261a;
+  --olive-raised: #243324;
+  --olive-hover: #30432c;
+  --olive-cream: #f0ecdd;
+  --olive-soft: #c6c9b5;
+  --olive-dim: #a6ad95;
+  --olive-rule: rgba(229, 201, 130, .21);
+  --olive-gold: #daba6d;
+  --olive-gold-light: #efd99d;
+  --navy: #101910;
+  --navy-mid: #192619;
+  --navy-2: #243324;
+  --navy-3: #30432c;
+  --paper: #141e15;
+  --paper-deep: #1b281b;
+  --ivory: #1d2b1d;
+  --ink: #f0ecdd;
+  --ink-soft: #c3c8b3;
+  --muted: #adb5a0;
+  --gold: #daba6d;
+  --wine: #daba6d;
+  --teal: #a8bd86;
+  --red: #daba6d;
+  --rule: rgba(229,201,130,.21);
+  --line: rgba(229,201,130,.21);
+  --atlas-paper: #141e15;
+  --atlas-ink: #f0ecdd;
+  --atlas-rule: rgba(229,201,130,.21);
+  --atlas-gold: #daba6d;
+  --atlas-blue: #1b281b;
+}
+html { background: var(--olive-void); }
+body { background: var(--olive-deep); color: var(--olive-cream); }
+::selection { background: var(--olive-gold); color: var(--olive-void); }
+:focus-visible { outline-color: var(--olive-gold-light); }
+.skip-link { background: var(--olive-gold-light); color: var(--olive-void); }
+
+/* Navigation and common controls */
+.masthead, .masthead.compact {
+  background: rgba(15, 24, 15, .94);
+  border-bottom-color: var(--olive-rule);
+}
+.masthead nav a, .identity, .identity-copy strong { color: var(--olive-cream); }
+.masthead nav a:hover, .masthead nav a.active,
+.masthead nav a[aria-current="page"] { color: var(--olive-gold-light); }
+.identity-copy small { color: var(--olive-dim); }
+.seal { border-color: var(--olive-gold); }
+.menu { border-color: var(--olive-rule); color: var(--olive-cream); }
+.menu span { background: var(--olive-gold-light); }
+.scroll-progress span { background: var(--olive-gold); }
+.eyebrow, .section-kicker, .section-topline, .lab-kicker,
+.section-topline.light, .small-label { color: var(--olive-gold); }
+.display em, .page-hero h1 em { color: var(--olive-gold-light); }
+.button-primary, .atlas-button, .dark-button, .profile-inquiry {
+  background: var(--olive-gold);
+  border: 1px solid var(--olive-gold);
+  color: #182111;
+}
+.button-primary:hover, .atlas-button:hover, .dark-button:hover,
+.profile-inquiry:hover {
+  background: var(--olive-gold-light);
+  border-color: var(--olive-gold-light);
+  color: #11190f;
+}
+.button-outline { color: var(--olive-gold-light); border-color: rgba(225,193,116,.55); }
+.button-outline:hover { background: var(--olive-hover); }
+.text-link, .cv-link, .pub-link, .back-link { color: var(--olive-gold-light); }
+.text-link:hover, .cv-link:hover, .pub-link:hover { color: #fff3c5; }
+.section-topline, .atlas-topline { border-color: var(--olive-rule); }
+
+/* Research Atlas */
+.atlas-page, .atlas-welcome, .atlas-publications { background: var(--olive-deep); color: var(--olive-cream); }
+.atlas-welcome { background: #111b12; }
+.welcome-copy h1 em, .fields-heading .period, .fields-heading h2 em,
+.record-heading h2 em, .atlas-contact h2 em { color: var(--olive-gold-light); }
+.welcome-lede, .fields-heading p, .record-heading p,
+.atlas-contact p:not(.section-kicker) { color: var(--olive-soft); }
+.welcome-portrait { background: var(--olive-panel); border: 1px solid var(--olive-rule); }
+.atlas-quiet-link { border-bottom-color: var(--olive-gold); color: var(--olive-gold-light); }
+.welcome-footnote, .welcome-bottom { color: var(--olive-dim); }
+.welcome-bottom { border-color: var(--olive-rule); }
+.research-fields { background: #1b281c; color: var(--olive-cream); }
+.field-accordion, .field-group { border-color: var(--olive-rule); }
+.field-toggle { color: var(--olive-cream); }
+.field-toggle:hover, .field-group:has(.field-toggle[aria-expanded="true"]) {
+  background: rgba(239,217,157,.045);
+}
+.field-index, .field-plus, .field-count { color: var(--olive-gold); }
+.field-plus { border-color: rgba(229,201,130,.42); }
+.field-toggle[aria-expanded="true"] .field-plus {
+  background: var(--olive-gold);
+  border-color: var(--olive-gold);
+  color: var(--olive-void);
+}
+.field-title small, .panel-intro { color: var(--olive-soft); }
+.project-grid { border-color: var(--olive-rule); }
+.project-grid a { border-color: var(--olive-rule); }
+.project-grid a:hover { background: var(--olive-raised); }
+.project-grid a>span, .project-grid b, .fields-endnote a { color: var(--olive-gold-light); }
+.fields-endnote { border-color: var(--olive-rule); color: var(--olive-dim); }
+.atlas-feature { background: #111c13; color: var(--olive-cream); }
+.feature-copy>p:not(.section-kicker), .simulation-caption { color: var(--olive-soft); }
+.feature-visual, .atlas-feature .feature-visual {
+  background: radial-gradient(ellipse at 48% 46%,#273c28,#101a12 78%);
+  border-color: var(--olive-rule);
+}
+.feature-links a { color: var(--olive-gold-light); border-color: var(--olive-rule); }
+.record-list, .record-list a { border-color: var(--olive-rule); }
+.record-list a:hover { background: var(--olive-raised); }
+.record-list span, .record-list b { color: var(--olive-gold); }
+.atlas-contact { background: #263525; color: var(--olive-cream); }
+.contact-route>a { border-color: var(--olive-gold); color: var(--olive-gold-light); }
+.contact-route a:hover { color: #fff0bd; }
+.contact-route>div, .contact-route>a span { color: var(--olive-gold); }
+
+/* Laboratory and paper links */
+.lab-page { background: var(--olive-deep); color: var(--olive-cream); }
+.lab-hero, .lab-findings { background: #101a12; }
+.lab-hero:before {
+  background: radial-gradient(ellipse 48% 65% at 89% 40%,#2f412c,transparent 80%),
+              repeating-radial-gradient(circle at 77% 42%,transparent 0 56px,rgba(218,186,109,.055) 57px 58px);
+}
+.lab-hero h1 em, .lab-formula strong { color: var(--olive-gold-light); }
+.lab-lead, .lab-formula span, .atlas-heading p { color: var(--olive-soft); }
+.atlas-section, .lab-paper { background: #1b281c; color: var(--olive-cream); }
+.atlas-frame { background: var(--olive-void); border-color: var(--olive-rule); }
+.atlas-bar { border-color: var(--olive-rule); color: var(--olive-soft); }
+.atlas-bar a, .atlas-note a { color: var(--olive-gold-light); }
+.atlas-note, .lab-paper p:not(.eyebrow) { color: var(--olive-soft); }
+.lab-findings-grid { background: var(--olive-rule); border-color: var(--olive-rule); }
+.lab-findings-grid article { background: var(--olive-panel); }
+.lab-findings-grid article>span { color: var(--olive-gold); }
+.lab-findings-grid p { color: var(--olive-soft); }
+.paper-links, .paper-links>a, .paper-links>.forthcoming-link { border-color: var(--olive-rule); }
+.paper-links span, .paper-links b { color: var(--olive-gold); }
+
+/* Archive, publications and the profile */
+.interior-page, .project-page { background: var(--olive-deep); color: var(--olive-cream); }
+.page-hero, .cv-intro, .project-question, .light-section {
+  background: #1d2a1d; color: var(--olive-cream);
+}
+.page-hero:before { border-color: var(--olive-rule); }
+.page-hero>p:not(.eyebrow), .cv-intro p, .cv-list p,
+.project-line em, .project-institution, .project-meta,
+.preprint-abstract { color: var(--olive-soft); }
+.cv-details, .project-list, .publication-section.light-section,
+.project-future { background: #151f16; color: var(--olive-cream); }
+.cv-list, .cv-list li, .project-line, .project-question,
+.publication-ledger, .publication-record { border-color: var(--olive-rule); }
+.project-line:hover, .publication-entry>a:hover { background: var(--olive-raised); }
+.cv-intro figcaption, .cv-list p { color: var(--olive-dim); }
+.cv-link { border-color: var(--olive-gold); }
+.cv-closing, .dark-section, .preprint-feature,
+.project-cover, .domain-hero, .project-pagination {
+  background: #101a12; color: var(--olive-cream);
+}
+.engineering-page .domain-hero, .project-horizon { background: #293929; }
+.project-institution, .project-prelude { color: var(--olive-gold-light); }
+.project-pagination a:hover { background: var(--olive-hover); }
+.publication-entry div>small, .publication-copy>small { color: var(--olive-dim); }
+.publication-status, .light-section .publication-status { color: var(--olive-gold); border-color: var(--olive-rule); }
+.site-footer, .footer { background: var(--olive-void); color: var(--olive-soft); }
+.site-footer strong, .footer strong { color: var(--olive-cream); }
+.site-footer a:hover, .footer a:hover { color: var(--olive-gold-light); }
+.profile-hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:16px 28px; margin-top:34px; position:relative; z-index:2; }
+.profile-inquiry { padding:17px 22px; display:inline-flex; align-items:center; gap:38px; font:10px "DM Mono",monospace; letter-spacing:.09em; text-decoration:none; transition:background .2s; }
+.profile-explore { color:var(--olive-gold-light); border-bottom:1px solid var(--olive-rule); padding:12px 0; font:10px "DM Mono",monospace; letter-spacing:.09em; text-decoration:none; }
+.profile-explore span { margin-left:15px; }
+.profile-explore:hover { color:#fff1bf; }
+#education { scroll-margin-top:105px; }
+.discipline-panel:last-child, .correspondence { background:var(--olive-raised); }
+.discipline-panel:first-child { background:var(--olive-deep); }
+.home-statement, .route-section, .selected, .publications-preview,
+.work-card { background:var(--olive-deep); color:var(--olive-cream); }
+.work-grid { background:var(--olive-rule); border-color:var(--olive-rule); }
+.work-card:hover, .route-row:hover { background:var(--olive-raised); color:var(--olive-cream); }
+.work-card p, .section-heading-row p, .discipline-rows a small { color:var(--olive-soft); }
+.project-line:hover { background:var(--olive-raised); }
+.news-hero { background:var(--olive-deep); }
+.news-hero:before { background:radial-gradient(circle at 72% 35%,rgba(218,186,109,.10),transparent 27%),linear-gradient(115deg,#101910,#1a2918); }
+.news-signal { color:var(--olive-gold-light); }
+.news-signal span { background:var(--olive-gold); box-shadow:none; }
+.news-hero-copy>p { color:var(--olive-soft); }
+.news-register { background:var(--olive-panel); }
+.quiet-cinema { background:var(--olive-void); color:var(--olive-cream); }
+.quiet-shade { background:linear-gradient(90deg,rgba(7,14,8,.85),rgba(8,16,9,.40)); }
+.quiet-copy { color:var(--olive-cream); }
+
+/* Private collaborator workspace: dark on both halves, gold on real actions. */
+.private-shell, .private-form-section { background: #19241a; color: var(--olive-cream); }
+.private-art { background: radial-gradient(ellipse at 50% 45%,#34432c,#1b2a1b 47%,#0b140d 85%); }
+.orbit-core { background:#080d08; }
+.return-link, .private-bottom a, .private-form .text-button,
+.project-files button { color: var(--olive-gold-light); }
+.private-heading h1 em { color: var(--olive-gold); }
+.private-form, .private-bottom, .shared-project, .project-files li { border-color: var(--olive-rule); }
+.private-form label, .portal-status, .panel-intro, .account-email,
+.workspace-empty, .shared-project>p { color: var(--olive-soft); }
+.private-form input { color:var(--olive-cream); border-color:var(--olive-rule); }
+.private-form input::placeholder { color:var(--olive-dim); }
+.private-form input:focus { border-color:var(--olive-gold); }
+.private-form form>button { background:var(--olive-gold); color:#172012; }
+.private-form form>button:hover:not(:disabled) { background:var(--olive-gold-light); }
+.private-form form>button:disabled { background:#495341; color:#d0d3c2; }
+.login-assistance { color:var(--olive-dim); }
+.portal-status.is-error { color:#efaa8c; }
+
+/* Error page and one-off secondary surfaces. */
+.lost { background: var(--olive-deep); color: var(--olive-cream); }
+.lost h1 em, .lost-label { color: var(--olive-gold-light); }
+.lost p { color: var(--olive-soft); }
+.lost a { background: var(--olive-gold); color: var(--olive-void); }
+
+@media(max-width:1100px){
+  .masthead nav { background:rgba(17,26,18,.98); }
+}

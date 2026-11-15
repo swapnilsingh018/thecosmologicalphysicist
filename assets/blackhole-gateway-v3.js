@@ -179,17 +179,17 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   float phase=a-t*omega;
   float shear=phase-2.35*log(r/isco);
 
-  // Magnetically sheared spiral structure: large eddies, narrow hot filaments,
-  // dark lanes and transient knots advect at different orbital frequencies.
-  float coarse=fbm(vec2(shear*3.5,r*.89));
-  float fine=fbm(vec2(shear*12.8 + coarse*2.4,r*2.65));
-  float knot=fbm(vec2(shear*6.4 + fine*.8,r*4.35));
-  float filaments=sin(shear*22.0 + r*3.6 + coarse*6.3 + fine*2.0);
-  filaments=pow(.5+.5*filaments,5.0);
-  float wisps=pow(smoothstep(.27,.78,fine),1.65);
-  float lanes=1.0-.54*smoothstep(.57,.80,fbm(vec2(shear*8.2-7.0,r*1.42)));
-  float density=(.20+.55*wisps+.27*coarse+.34*filaments+.27*pow(knot,2.0))*lanes;
-  density *= .76+.54*smoothstep(.34,.78,knot);
+  // Broad, flowing spiral structure. The previous high-frequency harmonics
+  // produced concentric moire and hard-looking lines at display resolution.
+  float coarse=fbm(vec2(shear*2.6,r*.71));
+  float fine=fbm(vec2(shear*5.3+coarse*1.7,r*1.56));
+  float knot=fbm(vec2(shear*3.9+fine*.55,r*2.24));
+  float filaments=.5+.5*sin(shear*7.8+r*2.5+coarse*3.2+fine);
+  filaments=pow(filaments,2.15);
+  float wisps=smoothstep(.23,.76,fine);
+  float lanes=1.0-.39*smoothstep(.47,.79,fbm(vec2(shear*4.2-7.0,r*.97)));
+  float density=(.23+.47*wisps+.23*coarse+.16*filaments+.19*knot)*lanes;
+  density *= .83+.31*smoothstep(.35,.76,knot);
 
   // Finite inner edge, steep temperature gradient and translucent outer falloff.
   float radial=pow(isco/r,1.73);
@@ -257,11 +257,11 @@ void main(){
   // Null-ray spatial projection in Schwarzschild geometry. The projected
   // light-bending force is integrated adaptively, and the ray can cross the
   // disk multiple times, producing a secondary gravitationally lensed image.
-  for(int i=0; i<160; i++){
+  for(int i=0; i<176; i++){
     float r=length(pos);
     if(r<1.018){swallowed=true; break;}
-    if(r>34.0 && dot(pos,dir)>0.0) break;
-    float stepSize=clamp(r*.088,.037,.38);
+    if(r>29.0 && dot(pos,dir)>0.0) break;
+    float stepSize=clamp(r*.095,.037,.46);
     vec3 accel=pos*(-1.5*rs*L2/max(pow(r,5.0),.0003));
     vec3 nextDir=dir+accel*stepSize;
     vec3 nextPos=pos+(dir+nextDir)*.5*stepSize;
@@ -353,6 +353,18 @@ float lightMask(vec3 c) {
 void main(){
   vec2 uv=gl_FragCoord.xy*u_texel;
   vec3 base=texture(u_scene,uv).rgb;
+  // Edge-aware resolve softens thin high-contrast streaks without washing out
+  // the black-hole shadow or the broad, low-frequency flow.
+  vec3 east=texture(u_scene,uv+vec2(u_texel.x,0.0)).rgb;
+  vec3 west=texture(u_scene,uv-vec2(u_texel.x,0.0)).rgb;
+  vec3 north=texture(u_scene,uv+vec2(0.0,u_texel.y)).rgb;
+  vec3 south=texture(u_scene,uv-vec2(0.0,u_texel.y)).rgb;
+  vec3 luma=vec3(.2126,.7152,.0722);
+  float centerLight=dot(base,luma);
+  float contrast=max(max(abs(dot(east,luma)-centerLight),abs(dot(west,luma)-centerLight)),
+                     max(abs(dot(north,luma)-centerLight),abs(dot(south,luma)-centerLight)));
+  float resolve=smoothstep(.075,.38,contrast)*.52;
+  base=mix(base,(east+west+north+south+base*2.0)/6.0,resolve);
   vec3 broad=vec3(0.0);
   vec3 fine=vec3(0.0);
   for(int i=0;i<8;i++){
@@ -438,9 +450,9 @@ void main(){
   const startTime = performance.now();
   // Higher-resolution default without demanding a full 4K ray pass on laptops.
   const renderQuality=(params.get('quality')||'balanced').toLowerCase();
-  const frameInterval=1000/(renderQuality==='cinema' ? 30 : 24);
-  const maxWidth=renderQuality==='cinema' ? 1920 : renderQuality==='high' ? 1680 : renderQuality==='low' ? 760 : 1440;
-  const maxHeight=renderQuality==='cinema' ? 1180 : renderQuality==='high' ? 1020 : renderQuality==='low' ? 540 : 900;
+  const frameInterval=1000/(renderQuality==='low' ? 24 : 30);
+  const maxWidth=renderQuality==='cinema' ? 1920 : renderQuality==='high' ? 1600 : renderQuality==='low' ? 760 : 1320;
+  const maxHeight=renderQuality==='cinema' ? 1180 : renderQuality==='high' ? 980 : renderQuality==='low' ? 540 : 830;
   let compositorOK=false;
   function resizeCompositor(width,height){
     compositorOK=false;

@@ -14,6 +14,7 @@ A clean, buildless research portfolio for GitHub Pages at
 - cv.html, news.html, quiet-hours.html — research profile, updates, and Quiet Hours.
 - assets/gateway.css, assets/gateway.js — the observatory entrance, visual transition, and destination choice.
 - assets/blackhole-gateway-v3.js — fixed-view, WebGL2 black-hole rendering with a wider field of view, a faint lensed galactic sky and continuously evolving accretion flow; no mouse-driven camera motion.
+- assets/olive-theme.css — shared dark-olive and antique-gold styling loaded last on all thirty pages. tools/apply-olive-theme.mjs is an idempotent migration helper.
 - assets/private.css, assets/private.js, assets/portal-config.js — private workspace interface and public backend configuration.
 - supabase/schema.sql, supabase/SETUP.md — server-side access policies and owner onboarding steps.
 - assets/home.css, assets/home.js, assets/world.css, assets/world.js — public atlas layout, research disclosure, and reduced-potential preview.
@@ -39,6 +40,8 @@ Once a journal DOI or publisher page exists, replace the forthcoming-link elemen
 ## Scientific and publication notes
 
 The interactive plot in assets/home.js uses the reduced potential defined in the Kähler Stability Wall manuscript. It illustrates a parameter sweep, not cosmological time evolution. The black-hole rendering is cinematic scientific artwork, not validated ray tracing or an observational dataset. The separate 3D atlas explains the paper's analytical and numerical structure.
+
+The entrance uses a fixed camera and a 30 fps target, with softer disk filaments and edge-aware antialiasing. The entrance name and profile link now lead to cv.html for background, education and project inquiries.
 
 The Inner Observatory uses external managed identity and row-level data authorization. It remains inactive until the owner provisions a Supabase project, runs supabase/schema.sql, disables public signups, and supplies the public publishable configuration in assets/portal-config.js. Follow supabase/SETUP.md before inviting anyone. Never place protected files, passwords, or secret/service-role keys inside this static repository.
 
