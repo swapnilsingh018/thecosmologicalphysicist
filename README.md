@@ -41,7 +41,7 @@ Once a journal DOI or publisher page exists, replace the forthcoming-link elemen
 
 The interactive plot in assets/home.js uses the reduced potential defined in the Kähler Stability Wall manuscript. It illustrates a parameter sweep, not cosmological time evolution. The black-hole rendering is cinematic scientific artwork, not validated ray tracing or an observational dataset. The separate 3D atlas explains the paper's analytical and numerical structure.
 
-The entrance uses a fixed camera and a 30 fps target, with softer disk filaments and edge-aware antialiasing. The entrance name and profile link now lead to cv.html for background, education and project inquiries.
+The entrance uses a fixed camera and a 30 fps target, with softened disk filaments and edge-aware antialiasing. The artificial photon-ring outline and narrow diffraction spikes have been removed; gravitational lensing comes from the integrated light rays. The entrance name and profile link lead to cv.html for background, education and project inquiries.
 
 The Inner Observatory uses external managed identity and row-level data authorization. It remains inactive until the owner provisions a Supabase project, runs supabase/schema.sql, disables public signups, and supplies the public publishable configuration in assets/portal-config.js. Follow supabase/SETUP.md before inviting anyone. Never place protected files, passwords, or secret/service-role keys inside this static repository.
 

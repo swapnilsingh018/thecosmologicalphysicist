@@ -1,17 +1,16 @@
 /*
  * Black Hole Gateway — standalone, dependency-free WebGL2 rendering.
  * Physically inspired Schwarzschild null-ray bending, differential disk flow,
- * Doppler brightening, turbulent emission and localized flares. Optional QG
- * radiative anomalies are deliberately speculative, NOT physical predictions.
+ * Doppler brightening, turbulent emission and localized flares.
  * Cinematic visualization, not a validated GR/MHD or quantum-gravity model.
  * Final observatory-grade cinematic pass: multi-scale magnetized-disk filaments,
- * sparse reconnection flares, lens-tied photon-ring modulation, optical bloom,
- * diffraction-like horizontal glare, and optional speculative QG echoes.
+ * sparse reconnection flares, gentle optical bloom and a finely textured
+ * distant sky. No explicit ring or diffraction lines are superimposed.
  * Copyright (c) 2026, portfolio owner. All rights reserved.
  */
 (() => {
   'use strict';
-  window.__BLACKHOLE_BUILD__ = 'galactic-observatory-v4-20261115';
+  window.__BLACKHOLE_BUILD__ = 'galactic-observatory-v8-20261116';
 
   const canvas = document.getElementById('blackhole-gateway-canvas');
   const gate = document.getElementById('blackhole-entry');
@@ -98,14 +97,12 @@ in vec2 v_uv;
 out vec4 fragColor;
 uniform vec2 u_resolution;
 uniform float u_time;
-uniform float u_qg;
 
 #define PI 3.141592653589793
 #define TAU 6.283185307179586
 const float rs = 1.0;              // Schwarzschild radius (2GM/c^2) as unit
 const float isco = 3.04;          // Schwarzschild ISCO in rs units
 const float diskMax = 12.7;
-const float bcrit = 2.598076211; // photon-sphere critical impact parameter
 
 float hash12(vec2 p) {
   vec3 p3 = fract(vec3(p.xyx) * .1031);
@@ -184,11 +181,10 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   float coarse=fbm(vec2(shear*2.6,r*.71));
   float fine=fbm(vec2(shear*5.3+coarse*1.7,r*1.56));
   float knot=fbm(vec2(shear*3.9+fine*.55,r*2.24));
-  float filaments=.5+.5*sin(shear*7.8+r*2.5+coarse*3.2+fine);
-  filaments=pow(filaments,2.15);
-  float wisps=smoothstep(.23,.76,fine);
+  float spiral=noise2(vec2(shear*3.0+coarse*.65,r*.88));
+  float wisps=smoothstep(.23,.74,fine);
   float lanes=1.0-.39*smoothstep(.47,.79,fbm(vec2(shear*4.2-7.0,r*.97)));
-  float density=(.23+.47*wisps+.23*coarse+.16*filaments+.19*knot)*lanes;
+  float density=(.26+.44*wisps+.23*coarse+.11*spiral+.16*knot)*lanes;
   density *= .83+.31*smoothstep(.35,.76,knot);
 
   // Finite inner edge, steep temperature gradient and translucent outer falloff.
@@ -202,13 +198,13 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   float doppler=sqrt(1.0-beta*beta)/max(.25,1.0-beta*mu);
   float redshift=sqrt(max(.15,1.0-rs/r));
   float heat=pow(isco/r,.60)*doppler*redshift;
-  float intensity=pow(doppler,3.8)*radial*density;
+  float intensity=pow(doppler,2.55)*radial*density;
 
   // Warm continuum with a compact white-hot approaching zone; avoid neon hues.
   vec3 rust=vec3(.46,.075,.018);
   vec3 amber=vec3(1.10,.30,.065);
   vec3 gold=vec3(1.43,.78,.285);
-  vec3 whiteHot=vec3(1.85,1.51,1.18);
+  vec3 whiteHot=vec3(1.52,1.19,.72);
   vec3 spectral=mix(rust,amber,smoothstep(.23,.68,heat));
   spectral=mix(spectral,gold,smoothstep(.57,1.02,heat));
   spectral=mix(spectral,whiteHot,smoothstep(.83,1.36,heat));
@@ -225,9 +221,9 @@ vec3 accretionRadiance(vec3 pt, vec3 viewRay, float t) {
   float flash2=flareB(t)*gaussian(r-4.67,.55)*gaussian(angDist(a,t*.19+2.85),.28);
   float magneticFlares=flash1*4.5+flash2*3.4;
   intensity *= .86+hotSpots*2.6;
-  vec3 radiance=spectral*intensity*3.55;
+  vec3 radiance=spectral*intensity*3.10;
   // Localized white-gold magnetic reconnection, not a full-screen flash.
-  radiance += vec3(2.65,1.84,1.11)*magneticFlares;
+  radiance += vec3(1.85,1.37,.77)*magneticFlares;
   return radiance;
 }
 
@@ -248,7 +244,6 @@ void main(){
   vec3 rd=normalize(forward*1.24+right*p.x+up*p.y);
   vec3 pos=ro, dir=rd;
   float L2=dot(cross(ro,rd),cross(ro,rd));
-  float b=sqrt(L2);
   bool swallowed=false;
   float prevY=pos.y;
   float alpha=1.0;
@@ -285,50 +280,24 @@ void main(){
   vec3 col=radiance;
   if(!swallowed) col += distantSky(dir)*alpha;
 
-  // Small photon-ring contribution tied to near-critical geodesics.
-  // The ring is emphatically NOT a large uniform neon circle.
-  float ring=gaussian(b-bcrit,.034);
-  float angle=atan(p.y,p.x);
-  float ringVisibility=.020 + .062*smoothstep(.12,1.4,length(radiance));
-  float approach=.36+.64*smoothstep(-.9,.85,p.x*3.0);
-  col += ring*ringVisibility*approach*vec3(.49,.31,.15);
-  // A very faint, extremely narrow high-order image nested at the critical curve.
-  // Its visibility follows the lens and available emission, not a decorative halo.
-  float secondary=gaussian(b-(bcrit+.078),.022);
-  col += secondary*.012*smoothstep(.12,1.15,length(radiance))*vec3(.34,.20,.10);
-
-  // Speculative 'QG signatures': only a tiny radiative modulation near the
-  // critical curve, NOT any claimed observation or actual modified metric.
-  // u_qg=0: none, =1: restrained artistic hypothesis, =2: demonstration.
-  if(u_qg>0.0){
-    float strength=u_qg==1.0 ? .013 : .045;
-    float ripple=sin(angle*17.0+u_time*.69+sin(angle*7.0-u_time*.21)*.7);
-    ripple += .44*sin(angle*29.0-u_time*1.12);
-    float micro=gaussian(b-bcrit,.065)*(0.5+.5*ripple);
-    col += vec3(.65,.61,.52)*micro*strength;
-
-    float echo=gaussian(b-(bcrit+.095),.030);
-    float delayed=pulse(u_time-1.25,37.0,9.5,1.0)*.52 +
-                  pulse(u_time-.8,37.0,26.8,.64)*.35;
-    col += vec3(.40,.50,.63)*echo*delayed*strength*.50;
-  }
+  // No painted photon ring or outline. The shadow and its gravitationally
+  // lensed emission are entirely consequences of the integrated light rays.
 
   // Small, localized photographic light bloom around the hot inner flow;
   // the rest of the image stays dark, so there are no full-screen flashes.
   float flareGlow=(flareA(u_time)*.85+flareB(u_time)*.65);
-  // Optical glints from compact, orbiting emission; they are deliberately short.
+  // A broad flare wash only. Thin optical spikes looked like artificial lines.
   vec2 spotA=vec2(.228*cos(u_time*.28+.4), -.008-.045*sin(u_time*.28+.4));
   vec2 spotB=vec2(.275*cos(u_time*.19+2.85), -.010-.055*sin(u_time*.19+2.85));
   vec2 hotCenter=mix(spotA,spotB,step(.50,flareB(u_time)));
-  float core=gaussian(length((p-hotCenter)*vec2(1.08,1.24)),.14);
-  float horizontal=gaussian(p.y-hotCenter.y,.010)*gaussian(p.x-hotCenter.x,.45);
-  float vertical=gaussian(p.x-hotCenter.x,.009)*gaussian(p.y-hotCenter.y,.18);
-  col += flareGlow*(core*vec3(.24,.140,.068)+horizontal*vec3(.040,.021,.009)+vertical*vec3(.017,.010,.004));
+  float core=gaussian(length((p-hotCenter)*vec2(1.05,1.20)),.18);
+  col += flareGlow*core*vec3(.18,.11,.055);
 
-  // Film-like tone mapping; avoid clipping the inner-disk structure to white.
-  col=max(col,vec3(0.0))*.86;
-  col=col*(2.51*col+.03)/(col*(2.43*col+.59)+.14);
-  col=pow(clamp(col,0.0,1.0),vec3(.86));
+  // Soft, photographic highlight roll-off. The former curve pushed the
+  // approaching disk into a clipped white band.
+  col=max(col,vec3(0.0))*.90;
+  col=col/(col+vec3(1.35));
+  col=pow(clamp(col,0.0,1.0),vec3(.91));
   float vignette=smoothstep(1.40,.30,length(p/vec2(max(1.0,aspect*.55),1.0)));
   col*=mix(.69,1.0,vignette);
   // Low-amplitude dithering hides color banding in the warm corona.
@@ -378,7 +347,7 @@ void main(){
   broad*=.125;
   fine*=.125;
   // A constrained bloom halo; no universal fog or artificial neon ring.
-  vec3 glow=(broad*.21+fine*.115)*vec3(1.0,.86,.74);
+  vec3 glow=(broad*.14+fine*.065)*vec3(1.0,.78,.55);
   // Suppress bloom in the middle of pure black to preserve a deep shadow.
   vec3 col=clamp(base+glow,vec3(0.0),vec3(1.0));
   // Very mild photographic grain/dither avoids visible radial color bands.
@@ -437,10 +406,7 @@ void main(){
   gl.useProgram(program);
   const uResolution=gl.getUniformLocation(program,'u_resolution');
   const uTime=gl.getUniformLocation(program,'u_time');
-  const uQG=gl.getUniformLocation(program,'u_qg');
   const params=new URLSearchParams(location.search);
-  const mode=(params.get('qg')||'off').toLowerCase();
-  const qgMode=mode==='off' ? 0 : (mode==='enhanced' ? 2 : 1);
   const vao=gl.createVertexArray();gl.bindVertexArray(vao);
 
   let visible = true;
@@ -488,7 +454,6 @@ void main(){
     gl.useProgram(program);
     gl.uniform2f(uResolution,canvas.width,canvas.height);
     gl.uniform1f(uTime,seconds);
-    gl.uniform1f(uQG,qgMode);
     gl.drawArrays(gl.TRIANGLES,0,3);
     if(compositorOK){
       gl.bindFramebuffer(gl.FRAMEBUFFER,null);
@@ -503,7 +468,7 @@ void main(){
     raf=0;
     if(stopped || document.hidden || !visible || reduced) return;
     if(now-previousTime >= frameInterval){
-      previousTime=now;
+      previousTime=now-((now-previousTime)%frameInterval);
       render((now-startTime)*.001);
     }
     raf=requestAnimationFrame(frame);
