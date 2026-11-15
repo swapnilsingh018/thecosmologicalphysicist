@@ -39,9 +39,9 @@ alter table public.research_projects enable row level security;
 alter table public.project_members enable row level security;
 alter table public.project_files enable row level security;
 
-revoke all on public.research_projects from anon, authenticated;
-revoke all on public.project_members from anon, authenticated;
-revoke all on public.project_files from anon, authenticated;
+revoke all on public.research_projects from public, anon, authenticated;
+revoke all on public.project_members from public, anon, authenticated;
+revoke all on public.project_files from public, anon, authenticated;
 grant select on public.research_projects to authenticated;
 grant select on public.project_members to authenticated;
 grant select on public.project_files to authenticated;
