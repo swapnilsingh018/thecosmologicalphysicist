@@ -4,10 +4,8 @@
 (() => {
   'use strict';
   const config = window.SKS_ENGAGEMENT_CONFIG || {};
-  const dock = document.querySelector('[data-availability]');
-  const label = dock?.querySelector('[data-availability-label]');
-  const action = dock?.matches?.('[data-chat-action]') ? dock : dock?.querySelector('[data-chat-action]');
-  const actionLabel = action?.querySelector('[data-chat-label]');
+  const docks = [...document.querySelectorAll('[data-availability]')];
+  const actions = [...document.querySelectorAll('[data-chat-trigger]')];
   const stat = document.querySelector('[data-visitor-stat]');
   const number = stat?.querySelector('[data-visitor-number]');
   let status = 'unknown';
@@ -21,16 +19,30 @@
   };
   const translate = (key, fallback) => window.SKSLanguage?.translate(key, fallback) ?? fallback;
   const reflect = () => {
-    if (dock) {
+    docks.forEach(dock => {
       dock.classList.toggle('is-online', status === 'online');
       dock.classList.toggle('is-away', status === 'away');
       dock.dataset.status = status;
-    }
-    if (label) {
+      const label = dock.querySelector('[data-availability-label]');
+      if (!label) return;
       const [key, fallback] = words[status] || words.unknown;
       label.textContent = translate(key, fallback);
+    });
+    actions.forEach(action => {
+      const actionLabel = action.querySelector('[data-chat-label]');
+      if (actionLabel) actionLabel.textContent = chatReady ? translate('chat_live', 'Live chat') : translate('message_me', 'Message me');
+    });
+    document.dispatchEvent(new CustomEvent('sks:chatstatus', { detail: { status, ready: chatReady } }));
+  };
+  window.SKSChat = {
+    get status() { return status; },
+    get ready() { return chatReady; },
+    openLive() {
+      if (!chatReady || typeof window.Tawk_API?.maximize !== 'function') return false;
+      window.Tawk_API.showWidget?.();
+      window.Tawk_API.maximize();
+      return true;
     }
-    if (actionLabel) actionLabel.textContent = chatReady ? translate('chat_live', 'Live chat') : translate('message_me', 'Message me');
   };
   document.addEventListener('sks:languagechange', reflect);
   reflect();
@@ -47,6 +59,7 @@
     };
     window.Tawk_API.onLoad = () => {
       chatReady = true;
+      window.Tawk_API.hideWidget?.(); // A single contact control on the page.
       const current = window.Tawk_API.getStatus?.();
       status = ['online','away','offline'].includes(current) ? current : 'unknown';
       reflect();
@@ -58,12 +71,6 @@
     tag.onerror = () => { chatReady = false; status = 'unknown'; reflect(); };
     document.head.appendChild(tag);
   }
-  action?.addEventListener('click', event => {
-    if (!chatReady || typeof window.Tawk_API?.maximize !== 'function') return; // Email is the accessible fallback.
-    event.preventDefault();
-    window.Tawk_API.maximize();
-  });
-
   // A public read-only stats endpoint must return { uniqueVisitors: number }.
   // An empty endpoint results in no counter, never a fake or zero value.
   const endpoint = String(config.visitorStatsEndpoint || '').trim();

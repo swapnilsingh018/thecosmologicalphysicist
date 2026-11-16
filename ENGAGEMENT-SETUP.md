@@ -13,11 +13,19 @@ counts or show a green online dot until a real service is connected.
 3. In the operator dashboard, set yourself to **Online** when accepting chats.
    The small dot will turn green only after tawk.to's official status callback
    reports `online`. It turns amber for `away`, grey for `offline`, and stays
-   grey when the widget is not connected. The visible button opens the chat.
+   grey when the widget is not connected. The entrance button opens a custom
+   contact panel; when a real widget is connected, that panel offers an
+   **Open live chat** action. On the public research page, the corner contact
+   button opens the same panel.
 4. Set conversation notification and transcript emails to
    `swapnilsingh.ph@gmail.com` in the operator dashboard.
 5. Before enabling the third-party widget publicly, update the site's privacy
    notice and check the applicable consent requirements.
+
+The panel's email form is deliberately **not a simulated chat**. It composes a
+message in the visitor's own email app and never claims to deliver or store it
+on the site. The visitor must send the message from that app. Without valid
+widget IDs, the live-chat action is not displayed, and no tawk.to script loads.
 
 **Important distinction:** an operator being **Online** is not identical to a
 Mac being powered on. If the owner needs the latter literally, it requires an

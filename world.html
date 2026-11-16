@@ -25,11 +25,13 @@
   <link rel="stylesheet" href="assets/finish-v14.css">
   <link rel="stylesheet" href="assets/glass-v15.css">
   <link rel="stylesheet" href="assets/minimal-v16.css">
+  <link rel="stylesheet" href="assets/atelier-v18.css">
   <script defer src="assets/i18n-v13.js"></script>
   <script defer src="assets/public-v13.js"></script>
   <script defer src="assets/fold-study-v14.js"></script>
   <script defer src="assets/engagement-config.js"></script>
   <script defer src="assets/engagement.js"></script>
+  <script defer src="assets/contact-panel-v18.js"></script>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"Swapnil Kumar Singh","url":"https://www.swapnilsingh.co.in/","image":"https://www.swapnilsingh.co.in/assets/profile.jpeg","jobTitle":["Physicist","Engineer"],"sameAs":["https://github.com/swapnilsingh018","https://inspirehep.net/authors/2052015"]}
   </script>
@@ -178,7 +180,29 @@
   <aside class="availability-dock" data-availability aria-label="Contact availability">
     <span class="availability-light" data-availability-light aria-hidden="true"></span>
     <span class="availability-label" data-availability-label>By email</span>
-    <a class="availability-action" data-chat-action href="mailto:swapnilsingh.ph@gmail.com?subject=Website%20enquiry"><span data-chat-label>Message me</span><span aria-hidden="true">↗</span></a>
+    <button class="availability-action" type="button" data-chat-trigger aria-haspopup="dialog" aria-controls="contact-panel"><span data-chat-label>Message me</span><span aria-hidden="true">↗</span></button>
   </aside>
+  <div class="contact-overlay" data-contact-overlay hidden>
+    <div class="contact-scrim" data-chat-close aria-hidden="true"></div>
+    <section class="contact-panel" id="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-panel-title" tabindex="-1">
+      <div class="contact-panel-top">
+        <img src="assets/sks-seal.svg" alt="" width="56" height="56">
+        <button class="contact-close" type="button" data-chat-close aria-label="Close contact panel" data-i18n-aria="chat_close">×</button>
+      </div>
+      <p class="contact-kicker" data-i18n="chat_kicker">PERSONAL CORRESPONDENCE</p>
+      <h2 id="contact-panel-title" data-i18n="chat_title">A conversation starts here.</h2>
+      <div class="contact-presence"><span class="availability-light" data-chat-presence-light aria-hidden="true"></span><span data-chat-presence role="status">Available by email</span></div>
+      <p class="contact-intro" data-i18n="chat_intro">Research, engineering or a new idea? Send me a note directly.</p>
+      <button class="contact-live-action" type="button" data-chat-live hidden><span data-i18n="chat_connect">Open live chat</span><span aria-hidden="true">↗</span></button>
+      <form data-chat-email-form>
+        <label for="contact-reply" data-i18n="chat_reply">Your email (optional)</label>
+        <input id="contact-reply" type="email" name="reply" autocomplete="email" placeholder="you@example.com" maxlength="180">
+        <label for="contact-message" data-i18n="chat_message">Your message</label>
+        <textarea id="contact-message" name="message" rows="4" maxlength="2000" required data-i18n-placeholder="chat_message_hint" placeholder="Tell me what you're working on…"></textarea>
+        <button class="contact-send" type="submit"><span data-i18n="chat_email_action">Continue by email</span><span aria-hidden="true">↗</span></button>
+        <p class="contact-note" data-i18n="chat_mail_note">Opens your email app. No message is stored on this website.</p>
+      </form>
+    </section>
+  </div>
 </body>
 </html>

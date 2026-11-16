@@ -5,23 +5,33 @@ const read = file => readFileSync(new URL(`../${file}`, import.meta.url), 'utf8'
 const entrance = read('index.html');
 const world = read('world.html');
 const ideas = read('ideas.html');
+const about = read('cv.html');
+const papers = read('publications.html');
 const seal = read('assets/sks-seal.svg');
 const blackhole = read('assets/blackhole-gateway-v3.js');
 
-assert.match(seal, /<rect\b[^>]*rx="43"/, 'clean softly rounded monogram frame');
+assert.match(seal, /<circle\b[^>]*r="74"/, 'clean circular engraved monogram');
 assert.match(seal, />SKS<\/text>/, 'readable SKS letters');
 assert.doesNotMatch(seal, /laurel|stroke-dasharray|©|>SINGH</i, 'no ornamental clutter');
-assert.equal((seal.match(/<path\b/g) ?? []).length, 1, 'one minimal underline only');
+assert.equal((seal.match(/<path\b/g) ?? []).length, 1, 'one restrained engraved ornament');
 assert.match(entrance, /gateway-location[^>]*data-i18n="location_florence"/, 'Florence follows entrance name');
 assert.match(world, /data-i18n="location_florence"/, 'Florence appears in public identity');
-assert.match(entrance, /class="gateway-live" data-availability data-chat-action/, 'presence is on the entry screen');
+assert.match(entrance, /class="gateway-live" type="button" data-availability data-chat-trigger/, 'presence and real contact trigger are on the entry screen');
+assert.match(entrance, /role="dialog" aria-modal="true" aria-labelledby="contact-panel-title"/, 'accessible correspondence panel is present');
 assert.match(read('assets/minimal-v16.css'), /nav-island a \+ a::before/, 'navigation has restrained visual separators');
+assert.match(read('assets/atelier-v18.css'), /content: "\|"/, 'the five island links are separated with hairline bars');
 
 for (const [name, page] of [['public', world], ['ideas', ideas]]) {
   const nav = page.match(/<nav class="nav-island"[\s\S]*?<\/nav>/)?.[0] ?? '';
   assert.equal((nav.match(/<a\s/g) ?? []).length, 5, `${name} has five navigation destinations`);
   const labels = [...nav.matchAll(/data-i18n="(nav_[^"]+)"/g)].map(match => match[1]);
   assert.deepEqual(labels, ['nav_home', 'nav_about', 'nav_work', 'nav_publications', 'nav_ideas']);
+}
+for (const [name, page] of [['about', about], ['publications', papers]]) {
+  const nav = page.match(/<nav\b[^>]*id="nav"[^>]*>[\s\S]*?<\/nav>/)?.[0] ?? '';
+  assert.equal((nav.match(/<a\s/g) ?? []).length, 5, `${name} retains five destinations`);
+  assert.deepEqual([...nav.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map(m => m[1]),
+    ['Home', 'About', 'Research', 'Publications', 'Idea'], `${name} uses the canonical menu order`);
 }
 assert.match(ideas, /noindex, follow/, 'unfinished notes are not pushed into search');
 assert.match(world, /data-availability-light/, 'a real-status indicator is present');

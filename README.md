@@ -3,7 +3,7 @@
 A clean, buildless research portfolio for GitHub Pages at
 [www.swapnilsingh.co.in](https://www.swapnilsingh.co.in/).
 
-## Current redesign phase — minimal public research (V17)
+## Current redesign phase — private V18 preview
 
 The visitor-facing flow has three primary rooms. Public Research now provides
 the planned structure for ten future interactive study pages:
@@ -25,22 +25,25 @@ warm-paper appearances, subtle gold detail, and responsive layouts.
 `assets/public-v13.css` and `assets/public-v13.js` implement the public landing
 and island/filter behavior; `assets/i18n-v13.js` maintains both languages with
 saved language preference and shareable `?lang=it` state. `assets/sks-seal.svg`
-is a first-party original rounded-square monogram, not an institutional seal.
+is an original circular SKS signet, not an institutional seal.
 `assets/finish-v14.css` adds engraved-gold interaction details and
 `assets/fold-study-v14.js` draws the animated local saddle-node normal form,
 not the full Kähler potential. `assets/glass-v15.css` applies the darker
 smoked-olive palette and translucent, accessible controls to the three rooms.
-`assets/minimal-v16.css` maintains the clean SKS identity (now a softly rounded
-gold-frame monogram), adds Florence to the entrance and public identity, and
+`assets/minimal-v16.css` adds Florence to the entrance and public identity, and
 supports the five-link Home / About / Research / Publications / Idea navigation
 with fine separators. `ideas.html` is a
 minimal bilingual, noindex reservation until real notes are supplied.
+`assets/atelier-v18.css` consolidates a near-black olive finish, softer
+rounded controls and a horizontal five-link menu with engraved separators.
 The entrance black-hole renderer now adapts internal resolution to sustained
 frame drops while preserving a fixed camera and smooth animation time.
 
 The compact contact dock appears on Public Research and as a smaller pill
-alongside Enter. It is honest by design: without a configured live-chat
-service, it offers email and shows no false online status. A public visitor
+alongside Enter. Both open a bilingual correspondence panel. Its email form
+composes a message in the visitor's own mail app without storing or claiming
+delivery; only a configured provider enables the actual live-chat control.
+The presence light shows no false online status. A public visitor
 counter is hidden until a trusted backend returns real data. Email reporting,
 provider activation and a strict Mac-power heartbeat require external setup;
 see `ENGAGEMENT-SETUP.md`. No analytics or third-party chat script is loaded
