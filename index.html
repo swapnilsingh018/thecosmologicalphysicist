@@ -22,6 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <script src="assets/theme.js"></script>
   <link rel="stylesheet" href="assets/portal-v12.css">
+  <script defer src="assets/i18n-v13.js"></script>
   <script defer src="assets/blackhole-gateway-v3.js?v=8"></script>
   <script defer src="assets/gateway.js"></script>
   <script type="application/ld+json">
@@ -29,46 +30,51 @@
   </script>
 </head>
 <body class="room-v12 gateway-v12">
-  <a class="skip-link" href="#blackhole-enter">Skip to entrance</a>
+  <a class="skip-link" href="#blackhole-enter" data-i18n="skip_entrance">Skip to entrance</a>
   <main>
     <section class="observatory" id="blackhole-entry" data-gateway-mode="portal" aria-label="Portfolio entrance">
       <canvas id="blackhole-gateway-canvas" aria-hidden="true"></canvas>
       <div class="cosmic-vignette" aria-hidden="true"></div>
 
       <div class="gateway-nav">
-        <span class="gateway-initials" aria-hidden="true">SKS.</span>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false">
-          <span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span>
-        </button>
+        <a class="gateway-initials" href="index.html" aria-label="Swapnil Kumar Singh — home"><img src="assets/sks-seal.svg" alt="SKS monogram" width="60" height="60"></a>
+        <div class="gateway-nav-tools">
+        <div class="language-switch" role="group" aria-label="Language" data-i18n-aria="language">
+            <button type="button" data-set-lang="en" aria-pressed="true">EN</button><span aria-hidden="true">/</span><button type="button" data-set-lang="it" aria-pressed="false">IT</button>
+          </div>
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false">
+            <span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span>
+          </button>
+        </div>
       </div>
 
       <div class="gateway-identity">
-        <p class="gateway-role">Physicist &amp; Engineer</p>
+        <p class="gateway-role" data-i18n="role">Physicist &amp; Engineer</p>
         <h1><span>Swapnil Kumar</span><span><em>Singh.</em></span></h1>
       </div>
 
       <div class="portal-entry">
         <button id="blackhole-enter" class="enter-orbit" type="button" aria-controls="portalChoices" aria-expanded="false">
-          <span class="enter-label">Enter</span><span class="enter-arrow" aria-hidden="true">↗</span>
+          <span class="enter-label" data-i18n="enter">Enter</span><span class="enter-arrow" aria-hidden="true">↗</span>
         </button>
       </div>
 
       <div class="warp-field" aria-hidden="true"><span></span></div>
       <div id="portalChoices" class="portal-choices" aria-hidden="true">
         <div class="choices-shell">
-          <button id="portalReturn" class="return-button" type="button">← Back</button>
-          <h2 class="choices-heading">Choose a space.</h2>
+          <button id="portalReturn" class="return-button" type="button" data-i18n="back">← Back</button>
+          <h2 class="choices-heading" data-i18n="choose_space">Choose a space.</h2>
           <div class="choices-grid">
             <a class="choice-card" href="world.html" tabindex="-1">
               <span class="choice-number">01 / Open</span>
-              <strong>Public Research</strong>
-              <span class="choice-detail">The public space</span>
+              <strong data-i18n="public_choice">Public Research</strong>
+              <span class="choice-detail" data-i18n="public_detail">The public space</span>
               <span class="choice-arrow" aria-hidden="true">↗</span>
             </a>
             <a class="choice-card" href="private.html" tabindex="-1">
               <span class="choice-number">02 / Invited</span>
-              <strong>Private Workspace</strong>
-              <span class="choice-detail">Password-protected access</span>
+              <strong data-i18n="private_choice">Private Workspace</strong>
+              <span class="choice-detail" data-i18n="private_detail">Password-protected access</span>
               <span class="choice-arrow" aria-hidden="true">↗</span>
             </a>
           </div>

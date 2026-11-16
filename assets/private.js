@@ -18,11 +18,17 @@ const linkFlow = new URLSearchParams(location.hash.slice(1)).get("type")
 let passwordFlow = linkFlow === "invite" || linkFlow === "recovery";
 let client;
 let refreshNumber = 0;
+let lastStatusMessage = "";
 
 function setStatus(message, isError = false) {
-  statusArea.textContent = message;
+  lastStatusMessage = message;
+  statusArea.textContent = window.SKSLanguage?.message(message) ?? message;
   statusArea.classList.toggle("is-error", isError);
 }
+
+document.addEventListener('sks:languagechange', () => {
+  statusArea.textContent = window.SKSLanguage?.message(lastStatusMessage) ?? lastStatusMessage;
+});
 
 function showView(id) {
   for (const viewId of viewIds) $(viewId).hidden = viewId !== id;
@@ -51,7 +57,7 @@ function enableLogin() {
 function make(tag, className, value) {
   const element = document.createElement(tag);
   if (className) element.className = className;
-  if (value !== undefined) element.textContent = value;
+  if (value !== undefined) element.textContent = window.SKSLanguage?.message(value) ?? value;
   return element;
 }
 

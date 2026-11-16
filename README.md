@@ -3,26 +3,37 @@
 A clean, buildless research portfolio for GitHub Pages at
 [www.swapnilsingh.co.in](https://www.swapnilsingh.co.in/).
 
-## Current redesign phase — minimal entrance (V12)
+## Current redesign phase — bilingual public research (V13)
 
-The visitor-facing flow is deliberately limited to three pages while the owner
-redesigns the content:
+The visitor-facing flow has three primary rooms. Public Research now provides
+the planned structure for ten future interactive study pages:
 
 1. `index.html` — fixed-camera black-hole scene, name and role set in STIX Two
-   Text, one Enter button, then exactly two choices.
-2. `world.html` — intentionally empty public research holding page with a
-   clear return path. It carries `noindex` while there is no research content.
+   Text, one Enter button, then exactly two choices. EN/IT is available.
+2. `world.html` — the public research homepage: floating island navigation,
+   author's portrait, a live Kähler atlas feature, ten selected linked studies
+   in a discipline-filterable index, a concise work-practice section, and a
+   collaboration contact. It has English and Italian interface copy.
 3. `private.html` — a minimal login surface, retaining the Supabase-based
    invitation, password-recovery and per-project authorization implementation.
-   Sign-in remains disabled until the owner completes the backend setup.
+   Sign-in remains disabled until the owner completes the backend setup; its
+   visible labels and statuses support EN/IT.
 
 `assets/portal-v12.css` is the self-contained visual system for these three
 pages. It carries the consistent mathematical-book typeface, dark olive and
-warm-paper appearances, subtle gold detail, and responsive layouts. Earlier
-project and publication pages are preserved in source control but are not
-linked from the new public entrance. They can be redesigned without losing
-their research content. Do not mistake the temporary public holding page for
-an SEO-ready research archive.
+warm-paper appearances, subtle gold detail, and responsive layouts.
+`assets/public-v13.css` and `assets/public-v13.js` implement the public landing
+and island/filter behavior; `assets/i18n-v13.js` maintains both languages with
+saved language preference and shareable `?lang=it` state. `assets/sks-seal.svg`
+is a first-party original laurel monogram, not a copy of an institutional logo.
+
+The ten existing project destinations are **research records**, not ten fully
+interactive models yet. Each will be designed and verified separately before
+being described as a simulation. The Kähler atlas is already interactive.
+For multilingual search indexing, create dedicated language-specific URLs and
+`hreflang` references when the final Italian research content is approved;
+the present visitor-facing switch does not by itself create separate indexed
+Italian pages.
 
 ## Site structure
 

@@ -13,22 +13,28 @@
   <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <script src="assets/theme.js"></script>
   <link rel="stylesheet" href="assets/portal-v12.css">
+  <script defer src="assets/i18n-v13.js"></script>
   <script defer src="assets/portal-config.js"></script>
   <script defer type="module" src="assets/private.js"></script>
 </head>
 <body class="room-v12 quiet-v12">
-  <a class="skip-link" href="#login-title">Skip to private access</a>
+  <a class="skip-link" href="#login-title" data-i18n="skip">Skip to private access</a>
   <header class="quiet-header">
-    <a href="index.html" class="quiet-brand">Swapnil Kumar Singh</a>
-    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false">
-      <span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span>
-    </button>
+    <a href="index.html" class="quiet-brand"><img src="assets/sks-seal.svg" alt="SKS monogram" width="48" height="48"><span>Swapnil Kumar Singh</span></a>
+    <div class="quiet-tools">
+        <div class="language-switch" role="group" aria-label="Language" data-i18n-aria="language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button><span aria-hidden="true">/</span><button type="button" data-set-lang="it" aria-pressed="false">IT</button>
+      </div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false">
+        <span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span>
+      </button>
+    </div>
   </header>
   <main class="private-main" id="main">
     <div class="private-intro">
-      <p class="quiet-index">02 / Invited</p>
-      <h1 id="login-title">Private<br><em>Workspace.</em></h1>
-      <p class="private-subtitle">For invited collaborators.</p>
+      <p class="quiet-index" data-i18n="private_index">02 / Invited</p>
+      <h1 id="login-title"><span data-i18n="private_title_a">Private</span><br><em data-i18n="private_title_b">Workspace.</em></h1>
+      <p class="private-subtitle" data-i18n="private_subtitle">For invited collaborators.</p>
     </div>
 
     <section class="private-form" aria-label="Private account access">
@@ -36,39 +42,39 @@
 
       <div id="loginView">
         <form id="loginForm" aria-label="Sign in to private workspace">
-          <label for="researchID">Email address</label>
-          <input id="researchID" type="email" name="email" autocomplete="username" placeholder="Invited email" required disabled>
-          <label for="researchPassword">Password</label>
-          <input id="researchPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" required disabled>
-          <button id="loginButton" type="submit" disabled><span>Sign in</span><span aria-hidden="true">↗</span></button>
+          <label for="researchID" data-i18n="email">Email address</label>
+          <input id="researchID" type="email" name="email" autocomplete="username" placeholder="Invited email" data-i18n-placeholder="invited_email" required disabled>
+          <label for="researchPassword" data-i18n="password">Password</label>
+          <input id="researchPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" data-i18n-placeholder="password" required disabled>
+          <button id="loginButton" type="submit" disabled><span data-i18n="sign_in">Sign in</span><span aria-hidden="true">↗</span></button>
         </form>
         <div class="login-assistance">
-          <span>Invitation only</span>
-          <button id="resetButton" class="text-button" type="button" disabled>Forgot password?</button>
+          <span data-i18n="invitation_only">Invitation only</span>
+          <button id="resetButton" class="text-button" type="button" disabled data-i18n="forgot_password">Forgot password?</button>
         </div>
       </div>
 
       <div id="passwordView" hidden>
         <p class="panel-intro">Create your private password.</p>
         <form id="passwordForm" aria-label="Set your workspace password">
-          <label for="newPassword">New password</label>
-          <input id="newPassword" type="password" name="new-password" autocomplete="new-password" minlength="12" placeholder="At least 12 characters" required>
-          <label for="confirmPassword">Confirm password</label>
+          <label for="newPassword" data-i18n="new_password">New password</label>
+          <input id="newPassword" type="password" name="new-password" autocomplete="new-password" minlength="12" placeholder="At least 12 characters" data-i18n-placeholder="new_password_hint" required>
+          <label for="confirmPassword" data-i18n="confirm_password">Confirm password</label>
           <input id="confirmPassword" type="password" name="confirm-password" autocomplete="new-password" minlength="12" required>
-          <button id="passwordButton" type="submit"><span>Save password</span><span aria-hidden="true">↗</span></button>
+          <button id="passwordButton" type="submit"><span data-i18n="save_password">Save password</span><span aria-hidden="true">↗</span></button>
         </form>
       </div>
 
       <div id="workspaceView" class="workspace-view" hidden>
         <div class="workspace-account">
           <span id="accountEmail" class="account-email"></span>
-          <button id="signOutButton" class="text-button" type="button">Sign out</button>
+          <button id="signOutButton" class="text-button" type="button" data-i18n="sign_out">Sign out</button>
         </div>
-        <h2>Shared research</h2>
+        <h2 data-i18n="shared_research">Shared research</h2>
         <div id="projectList" class="project-list" aria-live="polite"></div>
       </div>
     </section>
   </main>
-  <footer class="quiet-footer"><a href="index.html">← Return to entrance</a><span>Private access</span></footer>
+  <footer class="quiet-footer"><a href="index.html" data-i18n="return_entrance">← Return to entrance</a><span data-i18n="private_access">Private access</span></footer>
 </body>
 </html>

@@ -18,8 +18,8 @@ for (const page of [index, publicPage, privatePage]) {
 assert.match(index, /id="blackhole-gateway-canvas"/);
 assert.match(index, /data-gateway-mode="portal"/);
 assert.equal((index.match(/class="choice-card"/g) ?? []).length, 2, 'the entrance has exactly two options');
-assert.match(publicPage, /noindex, follow/, 'blank public space should not be indexed');
-assert.doesNotMatch(publicPage, /Selected research|Project index|Publication record/i);
+assert.doesNotMatch(publicPage, /noindex, follow/, 'developed public research page can be indexed');
+assert.match(publicPage, /class="research-row"/, 'public space must contain the selected research index');
 for (const id of ['portalStatus', 'loginForm', 'researchID', 'researchPassword', 'loginButton', 'resetButton', 'passwordView', 'passwordForm', 'workspaceView', 'signOutButton', 'projectList']) {
   assert.ok(privatePage.includes(`id="${id}"`), `auth flow requires ${id}`);
 }

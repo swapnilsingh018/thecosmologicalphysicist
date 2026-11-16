@@ -17,12 +17,14 @@
     if (color) color.content = value === "light" ? "#ebe6da" : "#101811";
     document.querySelectorAll("[data-theme-toggle]").forEach(button => {
       const next = value === "dark" ? "light" : "dark";
-      button.setAttribute("aria-label", `Switch to ${next} mode`);
-      button.setAttribute("title", `Switch to ${next} mode`);
+      const italian = root.lang === "it";
+      const action = italian ? `Passa al tema ${next === "light" ? "chiaro" : "scuro"}` : `Switch to ${next} mode`;
+      button.setAttribute("aria-label", action);
+      button.setAttribute("title", action);
       button.setAttribute("aria-pressed", String(value === "light"));
       const label = button.querySelector(".theme-word");
       const symbol = button.querySelector(".theme-symbol");
-      if (label) label.textContent = next === "light" ? "Light" : "Dark";
+      if (label) label.textContent = italian ? (next === "light" ? "Chiaro" : "Scuro") : (next === "light" ? "Light" : "Dark");
       if (symbol) symbol.textContent = next === "light" ? "☼" : "☾";
     });
   }
@@ -47,4 +49,5 @@
   window.addEventListener("storage", event => {
     if (event.key === key && valid(event.newValue)) apply(event.newValue);
   });
+  document.addEventListener("sks:languagechange", () => apply(theme));
 })();
