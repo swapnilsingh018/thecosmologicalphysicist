@@ -22,8 +22,10 @@
   <script src="assets/theme.js"></script>
   <link rel="stylesheet" href="assets/portal-v12.css">
   <link rel="stylesheet" href="assets/public-v13.css">
+  <link rel="stylesheet" href="assets/finish-v14.css">
   <script defer src="assets/i18n-v13.js"></script>
   <script defer src="assets/public-v13.js"></script>
+  <script defer src="assets/fold-study-v14.js"></script>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"Swapnil Kumar Singh","url":"https://www.swapnilsingh.co.in/","image":"https://www.swapnilsingh.co.in/assets/profile.jpeg","jobTitle":["Physicist","Engineer"],"sameAs":["https://github.com/swapnilsingh018","https://inspirehep.net/authors/2052015"]}
   </script>
@@ -79,9 +81,35 @@
     <section class="research-feature" id="featured" aria-labelledby="feature-heading">
       <div class="research-container">
         <div class="research-section-head"><div><p class="research-index-label" data-i18n="feature_kicker">01 / Featured research</p><h2 id="feature-heading" data-i18n="feature_heading">A model to explore.</h2></div><a href="lab.html" class="research-section-link"><span data-i18n="open_lab">Open laboratory</span><span aria-hidden="true">↗</span></a></div>
-        <a href="lab.html" class="research-feature-image" aria-label="Open the Kähler Stability Wall interactive laboratory">
-          <img src="research/kahler-stability-wall/og-cover.png" alt="Kähler Stability Wall research illustration" width="1200" height="630" loading="lazy">
-          <span class="research-image-action"><span data-i18n="feature_explore">Explore the live model</span><b aria-hidden="true">↗</b></span>
+        <a href="lab.html" class="research-feature-image fold-feature" aria-label="Open the Kähler Stability Wall interactive laboratory">
+          <div class="fold-stage" data-fold-stage>
+            <div class="fold-stage-heading"><span class="fold-stage-mark" aria-hidden="true">✳</span><span data-i18n="fold_header">THE STABILITY WALL</span><span class="fold-stage-id">arXiv:2611.08491</span></div>
+            <svg class="fold-plot" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Animated illustration of a saddle-node fold: a potential minimum and barrier approach each other as the control parameter decreases">
+              <defs>
+                <linearGradient id="foldStroke" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#90794c"/><stop offset="39%" stop-color="#f3dfb1"/><stop offset="72%" stop-color="#e4b96d"/><stop offset="100%" stop-color="#c9a060"/></linearGradient>
+                <radialGradient id="foldHalo"><stop stop-color="#cba366" stop-opacity=".22"/><stop offset="1" stop-color="#cba366" stop-opacity="0"/></radialGradient>
+              </defs>
+              <ellipse class="fold-halo" cx="730" cy="278" rx="475" ry="255" fill="url(#foldHalo)"/>
+              <g class="fold-measure" aria-hidden="true">
+                <path d="M 96 88 V 477 H 1100"/>
+                <path d="M 96 182 H 1100 M 96 290 H 1100 M 96 398 H 1100"/>
+                <path d="M 315 88 V 477 M 550 88 V 477 M 785 88 V 477 M 1015 88 V 477"/>
+              </g>
+              <g fill="none" stroke-linecap="round" aria-hidden="true">
+                <path class="fold-trace fold-trace-far" data-fold-echo="far" d="M 130 370 Q 400 230 600 300 T 1080 250"/>
+                <path class="fold-trace fold-trace-near" data-fold-echo="near" d="M 130 380 Q 420 220 600 300 T 1080 220"/>
+                <path class="fold-trace fold-trace-main" data-fold-main d="M 130 385 Q 420 180 590 290 T 1080 210"/>
+              </g>
+              <g class="fold-critical" aria-hidden="true">
+                <line data-fold-guide="barrier" x1="480" y1="180" x2="480" y2="477"/>
+                <line data-fold-guide="minimum" x1="755" y1="400" x2="755" y2="477"/>
+                <circle data-fold-point="barrier" cx="480" cy="180" r="6"/>
+                <circle data-fold-point="minimum" cx="755" cy="400" r="6"/>
+              </g>
+              <g class="fold-numerals" aria-hidden="true"><text x="108" y="77">V</text><text x="1094" y="506">σ</text><text x="104" y="507">0</text></g>
+            </svg>
+            <div class="fold-stage-footer"><span class="fold-formula">V(x; a) = x³/3 − ax <span class="fold-disclaimer" data-i18n="fold_normal">· local normal form</span></span><span class="fold-stage-action"><span data-i18n="feature_explore">Explore the live model</span><b aria-hidden="true">↗</b></span></div>
+          </div>
         </a>
         <div class="research-feature-detail">
           <div><p class="research-index-label">arXiv:2611.08491 <span class="research-dot-separator">·</span> 2026</p><h3>The Kähler Stability Wall in Perturbative Brane–Antibrane Inflation</h3></div>

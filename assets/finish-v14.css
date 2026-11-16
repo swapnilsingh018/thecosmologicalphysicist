@@ -1,0 +1,260 @@
+/* Fine details — gold is used like a material, not a generic interface color. */
+.room-v12 .theme-toggle,
+.room-v12 .language-switch {
+  position: relative;
+  border-color: color-mix(in srgb, var(--room-gold) 45%, var(--room-rule));
+  box-shadow: inset 0 1px rgba(255,255,255,.055), 0 4px 22px rgba(0,0,0,.055);
+  transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+.room-v12 .theme-toggle:hover,
+.room-v12 .language-switch:focus-within {
+  border-color: var(--room-gold);
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 7px 30px rgba(0,0,0,.12);
+}
+.room-v12 .language-switch button { min-width: 18px; min-height: 29px; }
+
+/* Engraved entrance control, with one deliberate response to hover or focus. */
+.gateway-v12 .enter-orbit {
+  isolation: isolate;
+  position: relative;
+  overflow: hidden;
+  min-width: 224px;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 16px 17px 16px 24px;
+  border: 1px solid rgba(215,184,121,.82);
+  background: linear-gradient(126deg, rgba(198,164,99,.13), rgba(198,164,99,.025) 49%, rgba(198,164,99,.11));
+  box-shadow: 0 15px 38px rgba(0,0,0,.12), inset 0 1px rgba(240,212,163,.19);
+  color: var(--room-ink);
+  transition: border-color .35s ease, background .35s ease, box-shadow .35s ease, transform .35s ease;
+}
+.gateway-v12 .enter-orbit::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -100%; left: -70%; width: 50%; height: 300%;
+  background: linear-gradient(90deg, transparent, rgba(238,209,149,.17), transparent);
+  transform: rotate(24deg) translateX(0);
+  transition: transform .7s ease;
+  pointer-events: none;
+}
+.gateway-v12 .enter-orbit::after {
+  content: ""; position: absolute; inset: 5px;
+  border: 1px solid rgba(199,171,115,.23); pointer-events: none;
+}
+.gateway-v12 .enter-orbit:hover,
+.gateway-v12 .enter-orbit:focus-visible {
+  gap: 48px;
+  color: var(--room-ink);
+  transform: translateY(-3px);
+  border-color: #f0d8a2;
+  background: linear-gradient(126deg, rgba(198,164,99,.20), rgba(198,164,99,.08));
+  box-shadow: 0 18px 45px rgba(0,0,0,.20), inset 0 1px rgba(240,212,163,.22);
+}
+.gateway-v12 .enter-orbit:hover::before,
+.gateway-v12 .enter-orbit:focus-visible::before { transform: rotate(24deg) translateX(510px); }
+.gateway-v12 .enter-label { font-size: 25px; }
+.gateway-v12 .enter-arrow {
+  display: grid; place-items: center;
+  width: 42px; height: 42px;
+  border: 1px solid rgba(214,186,132,.75);
+  border-radius: 50%;
+  transition: background .25s ease, color .25s ease, rotate .3s ease;
+}
+.gateway-v12 .enter-orbit:hover .enter-arrow,
+.gateway-v12 .enter-orbit:focus-visible .enter-arrow { background: var(--room-gold); color: var(--room-gold-ink); rotate: 45deg; }
+
+/* Two original scientific engravings distinguish the choice of public/private. */
+.gateway-v12 .choice-card { isolation: isolate; overflow: hidden; }
+.gateway-v12 .choice-card::before {
+  content: ""; position: absolute; z-index: -1;
+  inset: 0 auto 0 0; width: 0;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--room-gold) 10%, transparent), transparent);
+  transition: width .55s cubic-bezier(.2,.65,.25,1);
+}
+.gateway-v12 .choice-card:hover::before,
+.gateway-v12 .choice-card:focus-visible::before { width: 100%; }
+.gateway-v12 .choice-engraving {
+  position: absolute; right: clamp(50px, 5vw, 83px); top: 82px;
+  width: 118px; height: 118px;
+  fill: none; stroke: var(--room-gold); stroke-width: .8;
+  opacity: .54;
+  transform: rotate(-7deg);
+  transition: transform .65s cubic-bezier(.2,.7,.3,1), opacity .35s;
+  pointer-events: none;
+}
+.gateway-v12 .choice-engraving .choice-engraving-point { fill: var(--room-gold); stroke: none; }
+.gateway-v12 .choice-card:hover .choice-engraving,
+.gateway-v12 .choice-card:focus-visible .choice-engraving { transform: rotate(0deg) scale(1.065); opacity: .92; }
+.gateway-v12 .choice-card:hover .choice-arrow { transform: translate(4px,-4px) rotate(8deg); }
+
+/* The navigation is a tactile floating instrument. */
+.public-v13 .nav-island {
+  position: relative;
+  border-color: color-mix(in srgb, var(--room-gold) 45%, var(--room-rule));
+  background: linear-gradient(170deg, color-mix(in srgb, var(--room-paper) 96%, transparent), color-mix(in srgb, var(--room-paper) 80%, transparent));
+  box-shadow: 0 13px 45px rgba(0,0,0,.18), inset 0 1px rgba(236,219,174,.13);
+}
+.public-v13 .nav-island a { position: relative; padding-block: 3px; }
+.public-v13 .nav-island a::after {
+  content: ""; position: absolute; height: 1px; left: 0; right: 100%; bottom: -4px;
+  background: var(--room-gold); transition: right .33s cubic-bezier(.2,.75,.2,1);
+}
+.public-v13 .nav-island a:hover::after,
+.public-v13 .nav-island a:focus-visible::after,
+.public-v13 .nav-island a[aria-current]::after { right: 0; }
+
+/* Gold-foil buttons, never relying on motion to signal interactivity. */
+.public-v13 .research-gold-link,
+.public-v13 .research-contact-link,
+.public-v13 .research-section-link,
+.public-v13 .research-inline-links a { position: relative; }
+.public-v13 .research-gold-link {
+  isolation: isolate; overflow: hidden;
+  min-width: 224px;
+  min-height: 59px;
+  padding: 11px 12px 11px 22px;
+  background: linear-gradient(115deg, #ae8950 0%, #ecd29b 38%, #c69e63 100%);
+  border: 1px solid #e5c98e;
+  box-shadow: inset 0 1px rgba(255,255,255,.55), 0 9px 22px rgba(0,0,0,.14);
+  font-size: 16px;
+  transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+}
+.public-v13 .research-gold-link::before {
+  content: ""; position: absolute; inset: 5px;
+  border: 1px solid rgba(72,49,18,.19); pointer-events: none;
+}
+.public-v13 .research-gold-link::after {
+  content: ""; position: absolute; top: -90%; left: -75%; width: 35%; height: 300%; z-index: -1;
+  transform: rotate(22deg);
+  background: linear-gradient(90deg, transparent, rgba(255,246,217,.42), transparent);
+  transition: left .65s ease;
+}
+.public-v13 .research-gold-link:hover,
+.public-v13 .research-gold-link:focus-visible { transform: translateY(-3px); filter: saturate(1.06); box-shadow: 0 15px 33px rgba(0,0,0,.18), inset 0 1px rgba(255,255,255,.6); }
+.public-v13 .research-gold-link:hover::after,
+.public-v13 .research-gold-link:focus-visible::after { left: 135%; }
+.public-v13 .research-gold-link b {
+  display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px;
+  border: 1px solid rgba(37,47,30,.45); border-radius: 50%; font-size: 22px;
+  transition: transform .3s ease, background .3s ease;
+}
+.public-v13 .research-gold-link:hover b { transform: rotate(45deg); background: rgba(255,248,216,.3); }
+.public-v13 .research-underlined,
+.public-v13 .research-section-link,
+.public-v13 .research-inline-links a { transition: color .25s ease, border-color .25s ease; }
+.public-v13 .research-underlined:hover,
+.public-v13 .research-section-link:hover,
+.public-v13 .research-inline-links a:hover { border-color: var(--room-gold); }
+
+/* Scientific graphic: the local fold normal form, drawn at runtime. */
+.public-v13 .fold-feature {
+  display: block;
+  background: #101e18;
+  border: 1px solid rgba(215,186,124,.52);
+  color: #f1eadc;
+  box-shadow: 0 18px 50px rgba(0,0,0,.12);
+  transition: border-color .35s ease, box-shadow .35s ease;
+}
+.public-v13 .fold-feature:hover,
+.public-v13 .fold-feature:focus-visible { border-color: #e2c791; box-shadow: 0 25px 65px rgba(0,0,0,.19); }
+.fold-stage {
+  isolation: isolate;
+  position: relative; display: flex; flex-direction: column; justify-content: space-between;
+  min-height: 560px; overflow: hidden;
+  background: radial-gradient(ellipse at 64% 43%, #2c4130 0%, #172a20 36%, #0b1814 83%);
+}
+.fold-stage::before {
+  content: ""; position: absolute; z-index: -1; inset: 0;
+  opacity: .15; pointer-events: none;
+  background: url("paper-grain.svg") repeat;
+}
+.fold-stage::after {
+  content: ""; position: absolute; inset: 7px;
+  border: 1px solid rgba(212,174,105,.23); pointer-events: none;
+}
+.fold-stage-heading,
+.fold-stage-footer { z-index: 2; position: relative; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 22px 27px; }
+.fold-stage-heading { color: #dbc9a4; font-size: 14px; letter-spacing: .13em; }
+.fold-stage-mark { font-size: 24px; line-height: 1; color: #e3bb79; margin-right: 10px; }
+.fold-stage-heading>span:nth-child(2) { margin-right: auto; }
+.fold-stage-id { color: #a8ad9a; font-size: 13px; letter-spacing: .04em; }
+.fold-plot { display: block; width: 100%; flex: 1; min-height: 320px; max-height: 465px; margin: -15px auto; overflow: hidden; }
+.fold-halo { opacity: .88; }
+.fold-measure path { fill: none; stroke: #c9b78d; stroke-width: .7; opacity: .17; }
+.fold-measure path:first-child { opacity: .42; }
+.fold-trace { vector-effect: non-scaling-stroke; transition: stroke-width .4s ease, opacity .4s ease; }
+.fold-trace-far { stroke: #c6aa78; stroke-width: 1.1; opacity: .24; }
+.fold-trace-near { stroke: #dbb87e; stroke-width: 1.45; opacity: .43; }
+.fold-trace-main { stroke: url(#foldStroke); stroke-width: 3.5; filter: drop-shadow(0 0 4px rgba(234,186,108,.31)); }
+.fold-feature:hover .fold-trace-main { stroke-width: 4.25; }
+.fold-critical line { stroke: #d4b77b; stroke-width: 1; stroke-dasharray: 4 7; opacity: .39; }
+.fold-critical circle { fill: #efe1bd; stroke: #a0783c; stroke-width: 4; filter: drop-shadow(0 0 11px rgba(242,211,141,.45)); }
+.fold-numerals { fill: #acb3a1; font-size: 18px; font-family: "STIX Two Text", Georgia, serif; font-style: italic; }
+.fold-stage-footer { padding-block: 15px 24px; color: #d7c9aa; font-size: 15px; letter-spacing: .015em; }
+.fold-formula { white-space: nowrap; }
+.fold-disclaimer { margin-left: 8px; font-size: 12px; color: #9ca898; }
+.fold-stage-action { display: inline-flex; align-items: center; gap: 18px; color: #f3e3c3; }
+.fold-stage-action b {
+  display: grid; place-items: center; flex: 0 0 37px; width: 37px; height: 37px;
+  border: 1px solid rgba(224,188,124,.65); border-radius: 50%; font-size: 22px; font-weight: 400;
+  transition: background .3s ease, color .3s ease, transform .3s ease;
+}
+.fold-feature:hover .fold-stage-action b,
+.fold-feature:focus-visible .fold-stage-action b { background: #e3c68e; color: #1c2a20; transform: rotate(45deg); }
+
+/* Portrait and study index details—small gestures, not UI decoration everywhere. */
+.public-v13 .research-portrait { transition: box-shadow .45s ease, border-color .45s ease; }
+.public-v13 .research-portrait:hover { border-color: color-mix(in srgb, var(--room-gold) 66%, var(--room-rule)); box-shadow: 12px 16px 45px rgba(0,0,0,.14); }
+.public-v13 .research-portrait img { transition: filter .7s ease, transform .8s cubic-bezier(.2,.75,.2,1); }
+.public-v13 .research-portrait:hover img { filter: saturate(.77) contrast(1.03); transform: scale(1.015); }
+.public-v13 .research-portrait { overflow: hidden; }
+.public-v13 .research-row { position: relative; }
+.public-v13 .research-row::before { content: ""; position: absolute; width: 2px; left: 0; top: 26px; bottom: 26px; background: var(--room-gold); opacity: 0; transform: scaleY(.25); transform-origin: center; transition: opacity .28s ease, transform .28s ease; }
+.public-v13 .research-row:hover::before,
+.public-v13 .research-row:focus-visible::before { opacity: 1; transform: scaleY(1); }
+.public-v13 .research-row b { transition: transform .25s ease, color .25s ease; }
+.public-v13 .research-row:hover b { transform: translate(4px,-4px) rotate(8deg); }
+.public-v13 .research-filters button { box-shadow: inset 0 1px rgba(255,255,255,.025); }
+.public-v13 .research-filters button:hover { background: color-mix(in srgb, var(--room-gold) 10%, transparent); }
+.public-v13 .research-filters button.is-selected { box-shadow: inset 0 1px rgba(255,255,255,.18), 0 6px 19px rgba(0,0,0,.10); }
+.public-v13 .research-contact-link span:last-child { font-size: 28px; transition: transform .3s ease; }
+.public-v13 .research-contact-link:hover span:last-child { transform: translate(4px,-4px); }
+
+/* Invite-only access is visually complete, but never claims to be enabled. */
+.quiet-v12 .private-form form>button {
+  border-color: #e5c98e; background: linear-gradient(110deg, #bb985e, #edcf96 50%, #c9a368);
+  color: #1d271c; box-shadow: inset 0 1px rgba(255,255,255,.35), 0 8px 24px rgba(0,0,0,.08);
+  transition: filter .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.quiet-v12 .private-form form>button:hover:not(:disabled) { filter: brightness(1.09); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.15); opacity: 1; }
+.quiet-v12 .private-form form>button:disabled { box-shadow: none; filter: saturate(.62); }
+
+@media (max-width: 1220px) {
+  .public-v13 .nav-island { position: absolute; }
+  .public-v13 .nav-island a::after { bottom: 5px; }
+}
+@media (max-width: 620px) {
+  .fold-stage { min-height: 395px; }
+  .fold-stage-heading, .fold-stage-footer { padding-inline: 18px; }
+  .fold-stage-heading { font-size: 11px; }
+  .fold-stage-mark { font-size: 20px; }
+  .fold-stage-id { font-size: 10px; }
+  .fold-plot { min-height: 230px; }
+  .fold-stage-footer { flex-wrap: wrap; align-items: start; gap: 18px; padding-bottom: 18px; }
+  .fold-formula { white-space: normal; font-size: 14px; }
+  .fold-disclaimer { display: block; margin-left: 0; margin-top: 5px; font-size: 11px; }
+  .fold-stage-action { width: 100%; justify-content: space-between; font-size: 14px; }
+  .gateway-v12 .choice-engraving { top: 25px; right: 36px; width: 72px; height: 72px; }
+  .gateway-v12 .enter-orbit { min-width: 203px; padding: 12px 12px 12px 20px; }
+  .gateway-v12 .enter-label { font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .room-v12 .enter-orbit,
+  .room-v12 .choice-card,
+  .room-v12 .choice-engraving,
+  .room-v12 .research-row,
+  .room-v12 .research-gold-link,
+  .room-v12 .research-portrait img,
+  .room-v12 .fold-stage-action b { transition-duration: .01ms !important; }
+}

@@ -37,6 +37,8 @@
     feature_heading: 'Un modello da esplorare.',
     open_lab: 'Apri il laboratorio',
     feature_explore: 'Esplora il modello',
+    fold_header: 'IL CONFINE DI STABILITÀ',
+    fold_normal: '· forma normale locale',
     feature_summary: 'Un complemento computazionale all’articolo: esplora il punto in cui un minimo metastabile e la sua barriera scompaiono insieme.',
     interactive_atlas: 'Atlante interattivo ↗',
     read_preprint: 'Leggi il preprint ↗',
