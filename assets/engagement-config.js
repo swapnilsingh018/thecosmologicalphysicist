@@ -2,7 +2,7 @@
    Leave values empty until the services and privacy notice are configured.
    A blank configuration NEVER invents visitor counts or online availability. */
 window.SKS_ENGAGEMENT_CONFIG = Object.freeze({
-  tawkPropertyId: "",
-  tawkWidgetId: "",
+  tawkPropertyId: "6afb1aa20808f53cc365feca",
+  tawkWidgetId: "1k7ie034n",
   visitorStatsEndpoint: ""
 });

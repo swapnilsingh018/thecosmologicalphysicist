@@ -5,27 +5,27 @@ counts or show a green online dot until a real service is connected.
 
 ## Live chat — a practical free starting point
 
-1. Create a website property in [tawk.to](https://www.tawk.to/) and add
-   `www.swapnilsingh.co.in` to its allowed sites if requested.
-2. Copy the public property and widget IDs from the supplied embed snippet
-   (`https://embed.tawk.to/PROPERTY_ID/WIDGET_ID`) into
-   `assets/engagement-config.js`. No password or private API key belongs here.
+1. The owner's website property in [tawk.to](https://www.tawk.to/) is linked
+   through the public IDs in `assets/engagement-config.js`. Add
+   `www.swapnilsingh.co.in` to the allowed sites if the dashboard requests it.
+   No account password or private API key belongs in the repository.
 3. In the operator dashboard, set yourself to **Online** when accepting chats.
    The small dot will turn green only after tawk.to's official status callback
    reports `online`. It turns amber for `away`, grey for `offline`, and stays
-   grey when the widget is not connected. The entrance button opens a custom
-   contact panel; when a real widget is connected, that panel offers an
-   **Open live chat** action. On the public research page, the corner contact
-   button opens the same panel.
+   grey for `offline`. Before the service loads, the button says `Connecting…`;
+   if the script cannot load it says `Chat unavailable`. Clicking the entrance
+   button or a Public Research contact action opens tawk.to's actual chat
+   widget, even if the visitor clicks during loading. There is no email form.
 4. Set conversation notification and transcript emails to
    `swapnilsingh.ph@gmail.com` in the operator dashboard.
 5. Before enabling the third-party widget publicly, update the site's privacy
    notice and check the applicable consent requirements.
 
-The panel's email form is deliberately **not a simulated chat**. It composes a
-message in the visitor's own email app and never claims to deliver or store it
-on the site. The visitor must send the message from that app. Without valid
-widget IDs, the live-chat action is not displayed, and no tawk.to script loads.
+The website loads the widget exactly once through `assets/engagement.js`.
+Do not paste the vendor embed snippet as a second script into the HTML: that
+would load duplicate chat widgets. The chat provider handles transcripts and
+offline messages. Verify that messages actually reach the owner's dashboard
+after GitHub Pages is updated.
 
 **Important distinction:** an operator being **Online** is not identical to a
 Mac being powered on. If the owner needs the latter literally, it requires an

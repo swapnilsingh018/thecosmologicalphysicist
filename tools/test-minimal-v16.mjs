@@ -17,7 +17,7 @@ assert.equal((seal.match(/<path\b/g) ?? []).length, 1, 'one restrained engraved 
 assert.match(entrance, /gateway-location[^>]*data-i18n="location_florence"/, 'Florence follows entrance name');
 assert.match(world, /data-i18n="location_florence"/, 'Florence appears in public identity');
 assert.match(entrance, /class="gateway-live" type="button" data-availability data-chat-trigger/, 'presence and real contact trigger are on the entry screen');
-assert.match(entrance, /role="dialog" aria-modal="true" aria-labelledby="contact-panel-title"/, 'accessible correspondence panel is present');
+assert.doesNotMatch(entrance, /contact-overlay|data-chat-email-form/, 'no intermediary email form or dialog');
 assert.match(read('assets/minimal-v16.css'), /nav-island a \+ a::before/, 'navigation has restrained visual separators');
 assert.match(read('assets/atelier-v18.css'), /content: "\|"/, 'the five island links are separated with hairline bars');
 

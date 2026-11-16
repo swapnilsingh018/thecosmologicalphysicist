@@ -1,6 +1,5 @@
-/* Truthful availability and analytics presentation.
-   Chat is available only after the owner configures a genuine operator account.
-   Visit counts are shown only after a trusted backend supplies a real integer. */
+/* Tawk-powered live chat and truthful availability; no simulated message form.
+   Visitor totals appear only after a trusted backend supplies a real integer. */
 (() => {
   'use strict';
   const config = window.SKS_ENGAGEMENT_CONFIG || {};
@@ -8,14 +7,21 @@
   const actions = [...document.querySelectorAll('[data-chat-trigger]')];
   const stat = document.querySelector('[data-visitor-stat]');
   const number = stat?.querySelector('[data-visitor-number]');
-  let status = 'unknown';
+  const property = String(config.tawkPropertyId || '').trim();
+  const widget = String(config.tawkWidgetId || '').trim();
+  const configured = /^[a-z0-9]{8,32}$/i.test(property) && /^[a-z0-9_-]{1,50}$/i.test(widget);
+  let status = configured ? 'connecting' : 'unavailable';
   let chatReady = false;
+  let pendingOpen = false;
+  let loadFailed = false;
 
   const words = {
-    unknown: ['availability_unknown', 'By email'],
+    unknown: ['availability_unknown', 'Chat ready'],
+    connecting: ['availability_connecting', 'Connecting…'],
     online: ['availability_online', 'Online'],
     away: ['availability_away', 'Away'],
-    offline: ['availability_offline', 'Offline']
+    offline: ['availability_offline', 'Offline'],
+    unavailable: ['availability_unavailable', 'Chat unavailable']
   };
   const translate = (key, fallback) => window.SKSLanguage?.translate(key, fallback) ?? fallback;
   const reflect = () => {
@@ -30,7 +36,9 @@
     });
     actions.forEach(action => {
       const actionLabel = action.querySelector('[data-chat-label]');
-      if (actionLabel) actionLabel.textContent = chatReady ? translate('chat_live', 'Live chat') : translate('message_me', 'Message me');
+      if (actionLabel) actionLabel.textContent = status === 'unavailable'
+        ? translate('chat_unavailable', 'Unavailable')
+        : chatReady ? translate('chat_live', 'Live chat') : translate('chat_open_action', 'Open chat');
     });
     document.dispatchEvent(new CustomEvent('sks:chatstatus', { detail: { status, ready: chatReady } }));
   };
@@ -42,16 +50,26 @@
       window.Tawk_API.showWidget?.();
       window.Tawk_API.maximize();
       return true;
+    },
+    requestLive() {
+      if (this.openLive()) return true;
+      if (!configured || loadFailed) { status = 'unavailable'; reflect(); return false; }
+      pendingOpen = true;
+      status = 'connecting';
+      reflect();
+      return true;
     }
   };
   document.addEventListener('sks:languagechange', reflect);
   reflect();
+  actions.forEach(action => action.addEventListener('click', event => {
+    event.preventDefault();
+    window.SKSChat.requestLive();
+  }));
 
   // These are public widget identifiers, not credentials. The provider supplies
   // online/away/offline; browser code never guesses a user's laptop state.
-  const property = String(config.tawkPropertyId || '').trim();
-  const widget = String(config.tawkWidgetId || '').trim();
-  if (/^[a-z0-9]{8,32}$/i.test(property) && /^[a-z0-9_-]{1,50}$/i.test(widget)) {
+  if (configured) {
     window.Tawk_API = window.Tawk_API || {};
     window.Tawk_API.onStatusChange = next => {
       status = ['online','away','offline'].includes(next) ? next : 'unknown';
@@ -63,13 +81,22 @@
       const current = window.Tawk_API.getStatus?.();
       status = ['online','away','offline'].includes(current) ? current : 'unknown';
       reflect();
+      if (pendingOpen) { pendingOpen = false; window.SKSChat.openLive(); }
     };
+    window.Tawk_API.onChatMinimized = () => window.Tawk_API.hideWidget?.();
     const tag = document.createElement('script');
     tag.async = true;
     tag.src = `https://embed.tawk.to/${property}/${widget}`;
     tag.referrerPolicy = 'strict-origin-when-cross-origin';
-    tag.onerror = () => { chatReady = false; status = 'unknown'; reflect(); };
+    tag.onerror = () => { chatReady = false; pendingOpen = false; loadFailed = true; status = 'unavailable'; reflect(); };
     document.head.appendChild(tag);
+    window.setTimeout?.(() => {
+      if (chatReady || loadFailed) return;
+      pendingOpen = false;
+      loadFailed = true;
+      status = 'unavailable';
+      reflect();
+    }, 18000);
   }
   // A public read-only stats endpoint must return { uniqueVisitors: number }.
   // An empty endpoint results in no counter, never a fake or zero value.

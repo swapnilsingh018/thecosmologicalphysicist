@@ -3,7 +3,7 @@
 A clean, buildless research portfolio for GitHub Pages at
 [www.swapnilsingh.co.in](https://www.swapnilsingh.co.in/).
 
-## Current redesign phase — private V18 preview
+## Current redesign phase — V19 live-chat release
 
 The visitor-facing flow has three primary rooms. Public Research now provides
 the planned structure for ten future interactive study pages:
@@ -40,14 +40,15 @@ The entrance black-hole renderer now adapts internal resolution to sustained
 frame drops while preserving a fixed camera and smooth animation time.
 
 The compact contact dock appears on Public Research and as a smaller pill
-alongside Enter. Both open a bilingual correspondence panel. Its email form
-composes a message in the visitor's own mail app without storing or claiming
-delivery; only a configured provider enables the actual live-chat control.
-The presence light shows no false online status. A public visitor
-counter is hidden until a trusted backend returns real data. Email reporting,
-provider activation and a strict Mac-power heartbeat require external setup;
-see `ENGAGEMENT-SETUP.md`. No analytics or third-party chat script is loaded
-by default.
+alongside Enter. Both open the same real tawk.to live-chat widget directly,
+as do the collaboration links in Public Research. There is no custom email
+message form or simulated conversation. The widget uses only the public
+property and widget IDs in `assets/engagement-config.js`; the green Online
+indicator follows the provider's actual operator state. Chat can also
+accept offline messages through the provider when the agent is unavailable.
+A public visitor counter remains hidden until a trusted backend returns real
+data. Visitor reports and a strict Mac-power heartbeat require separate
+setup; see `ENGAGEMENT-SETUP.md`.
 
 The ten existing project destinations are **research records**, not ten fully
 interactive models yet. Each will be designed and verified separately before
@@ -109,6 +110,7 @@ The entrance uses a fixed camera and a 30 fps target, with softened disk filamen
 
 The Inner Observatory uses external managed identity and row-level data authorization. It remains inactive until the owner provisions a Supabase project, runs supabase/schema.sql, disables public signups, and supplies the public publishable configuration in assets/portal-config.js. Follow supabase/SETUP.md before inviting anyone. Never place protected files, passwords, or secret/service-role keys inside this static repository.
 
-The public contact section uses a mailto link. Never put private keys or API credentials in this static repository.
+The public contact and entrance buttons use the tawk.to live-chat widget.
+Never put private keys or API credentials in this static repository.
 
 © 2026 Swapnil Kumar Singh.

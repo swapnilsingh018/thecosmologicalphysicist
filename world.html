@@ -31,7 +31,6 @@
   <script defer src="assets/fold-study-v14.js"></script>
   <script defer src="assets/engagement-config.js"></script>
   <script defer src="assets/engagement.js"></script>
-  <script defer src="assets/contact-panel-v18.js"></script>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"Swapnil Kumar Singh","url":"https://www.swapnilsingh.co.in/","image":"https://www.swapnilsingh.co.in/assets/profile.jpeg","jobTitle":["Physicist","Engineer"],"sameAs":["https://github.com/swapnilsingh018","https://inspirehep.net/authors/2052015"]}
   </script>
@@ -73,7 +72,7 @@
         <p class="research-lead" data-i18n="hero_lead">I investigate physical systems through analytical models and numerical work, from fundamental cosmology to practical engineering.</p>
         <div class="research-hero-actions">
           <a class="research-gold-link" href="#work"><span data-i18n="explore_work">Explore research</span><b aria-hidden="true">↗</b></a>
-          <a class="research-underlined" href="mailto:swapnilsingh.ph@gmail.com?subject=Research%20or%20Engineering%20Collaboration" data-i18n="discuss_project">Discuss a project</a>
+          <button class="research-underlined research-chat-button" type="button" data-chat-trigger data-i18n="discuss_project">Discuss a project</button>
         </div>
       </div>
       <figure class="research-portrait">
@@ -167,7 +166,7 @@
 
     <section class="research-contact" id="contact" aria-labelledby="contact-heading"><div class="research-container research-contact-grid">
       <div><p class="research-index-label" data-i18n="contact_kicker">04 / Collaboration</p><h2 id="contact-heading"><span data-i18n="contact_title_a">Have a problem</span><br><em data-i18n="contact_title_b">worth solving?</em></h2></div>
-      <div><p data-i18n="contact_desc">I’m open to research collaborations, computational modelling and engineering projects. Describe the question and we can start there.</p><a href="mailto:swapnilsingh.ph@gmail.com?subject=Research%20or%20Engineering%20Project" class="research-contact-link"><span data-i18n="contact_action">Start a conversation</span><span aria-hidden="true">↗</span></a></div>
+      <div><p data-i18n="contact_desc">I’m open to research collaborations, computational modelling and engineering projects. Describe the question and we can start there.</p><button class="research-contact-link research-chat-button" type="button" data-chat-trigger><span data-i18n="contact_action">Start a conversation</span><span aria-hidden="true">↗</span></button></div>
     </div></section>
   </main>
 
@@ -179,30 +178,8 @@
   </div></footer>
   <aside class="availability-dock" data-availability aria-label="Contact availability">
     <span class="availability-light" data-availability-light aria-hidden="true"></span>
-    <span class="availability-label" data-availability-label>By email</span>
-    <button class="availability-action" type="button" data-chat-trigger aria-haspopup="dialog" aria-controls="contact-panel"><span data-chat-label>Message me</span><span aria-hidden="true">↗</span></button>
+    <span class="availability-label" data-availability-label aria-live="polite">Connecting…</span>
+    <button class="availability-action" type="button" data-chat-trigger><span data-chat-label>Open chat</span><span aria-hidden="true">↗</span></button>
   </aside>
-  <div class="contact-overlay" data-contact-overlay hidden>
-    <div class="contact-scrim" data-chat-close aria-hidden="true"></div>
-    <section class="contact-panel" id="contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-panel-title" tabindex="-1">
-      <div class="contact-panel-top">
-        <img src="assets/sks-seal.svg" alt="" width="56" height="56">
-        <button class="contact-close" type="button" data-chat-close aria-label="Close contact panel" data-i18n-aria="chat_close">×</button>
-      </div>
-      <p class="contact-kicker" data-i18n="chat_kicker">PERSONAL CORRESPONDENCE</p>
-      <h2 id="contact-panel-title" data-i18n="chat_title">A conversation starts here.</h2>
-      <div class="contact-presence"><span class="availability-light" data-chat-presence-light aria-hidden="true"></span><span data-chat-presence role="status">Available by email</span></div>
-      <p class="contact-intro" data-i18n="chat_intro">Research, engineering or a new idea? Send me a note directly.</p>
-      <button class="contact-live-action" type="button" data-chat-live hidden><span data-i18n="chat_connect">Open live chat</span><span aria-hidden="true">↗</span></button>
-      <form data-chat-email-form>
-        <label for="contact-reply" data-i18n="chat_reply">Your email (optional)</label>
-        <input id="contact-reply" type="email" name="reply" autocomplete="email" placeholder="you@example.com" maxlength="180">
-        <label for="contact-message" data-i18n="chat_message">Your message</label>
-        <textarea id="contact-message" name="message" rows="4" maxlength="2000" required data-i18n-placeholder="chat_message_hint" placeholder="Tell me what you're working on…"></textarea>
-        <button class="contact-send" type="submit"><span data-i18n="chat_email_action">Continue by email</span><span aria-hidden="true">↗</span></button>
-        <p class="contact-note" data-i18n="chat_mail_note">Opens your email app. No message is stored on this website.</p>
-      </form>
-    </section>
-  </div>
 </body>
 </html>
