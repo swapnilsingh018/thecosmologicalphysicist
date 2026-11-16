@@ -6,16 +6,23 @@ A clean, buildless research portfolio for GitHub Pages at
 ## Site structure
 
 - index.html — full-screen interactive black-hole observatory entrance, an artistic Enter control, and two dynamically revealed destinations.
-- world.html — the public Research Atlas: a concise introduction and seventeen projects organized across three fields, plus a research feature and publications.
+- world.html — editorial public homepage: a personal introduction, authentic portrait, featured Kähler research cover, a live reduced-potential instrument, three research directions, selected publications and a collaboration contact.
 - private.html — invitation-only Inner Observatory portal, ready for connection to Supabase Auth and private, per-project file sharing. Until configured, login is explicitly disabled.
 - lab.html — companion page embedding the first-party interactive physics atlas for [arXiv:2611.08491](https://arxiv.org/abs/2611.08491).
 - research/kahler-stability-wall/ — complete self-hosted 3D scientific simulator, served under the portfolio domain with independent canonical, social metadata, and local assets.
 - publications.html — separately labelled preprints, accepted/published articles, manuscripts, and talks.
-- projects.html, cosmology.html, computation.html, engineering.html, and projects/ — research and engineering archive.
+- projects.html — filterable research index of seventeen studies across theory, observation, and engineering; the `?field=` query parameter deep-links to a discipline.
+- projects/ — seventeen concise research records with real research questions, dates, affiliations and methodology. The former decorative city animations and filler copy have been removed.
+- cosmology.html, computation.html, engineering.html — retained subject-specific legacy navigation routes.
 - cv.html, news.html, quiet-hours.html — research profile, updates, and Quiet Hours.
 - assets/gateway.css, assets/gateway.js — the observatory entrance, visual transition, and destination choice.
 - assets/blackhole-gateway-v3.js — fixed-view, WebGL2 black-hole rendering with a wider field of view, a faint lensed galactic sky and continuously evolving accretion flow; no mouse-driven camera motion.
-- assets/olive-theme.css — shared dark-olive and antique-gold styling loaded last on all thirty pages. tools/apply-olive-theme.mjs is an idempotent migration helper.
+- assets/olive-theme.css — original dark-olive and antique-gold palette, retained for compatibility.
+- assets/editorial-system.css, assets/paper-grain.svg — previous editorial foundation, warm ivory and deep olive modes.
+- assets/folio-v11.css, assets/folio-v11.js — new site architecture and interactions: a restrained floating navigation, confident type, substantial research imagery, structural layouts, section entrance motion, and field-filtered project archive. These are loaded after the compatibility styles.
+- assets/theme.js — accessible site-wide appearance switch, persisted in browser storage (`sks-appearance`); dark is the first-visit default. The black-hole scene and scientific plots remain dark for legibility.
+- tools/apply-editorial-theme.mjs, tools/apply-folio-v11.mjs, tools/test-theme.mjs — repeatable HTML integration and dependency-free regression checks for both design layers. The prior `tools/apply-olive-theme.mjs` remains available.
+- tools/rebuild-project-records-v11.mjs — one-time, content-preserving migration from unrelated animated-city project pages into editorial research records. It leaves already migrated pages unchanged.
 - assets/private.css, assets/private.js, assets/portal-config.js — private workspace interface and public backend configuration.
 - supabase/schema.sql, supabase/SETUP.md — server-side access policies and owner onboarding steps.
 - assets/home.css, assets/home.js, assets/world.css, assets/world.js — public atlas layout, research disclosure, and reduced-potential preview.
@@ -31,6 +38,8 @@ No Node packages or build step are required. The site uses local HTML/CSS/JavaSc
 3. Merge approved changes into main, then push to the GitHub origin. The existing GitHub Pages workflow deploys the repository root.
 4. Keep the existing CNAME file so GitHub Pages continues serving the custom domain. No DNS changes are necessary for this HTML redesign.
 5. After deployment, submit https://www.swapnilsingh.co.in/sitemap.xml to Google Search Console. Search indexing and ranking are not automatic.
+
+Before committing a design update, run `node tools/check-site.mjs` and `node tools/test-theme.mjs`. The first checks internal links, canonical metadata and sitemap coverage; the second verifies theme switching, storage fallbacks and presence on every HTML page. No production account or authentication credentials are needed to test the public design.
 
 The private review deployment and the actual GitHub Pages publishing destination are independent.
 

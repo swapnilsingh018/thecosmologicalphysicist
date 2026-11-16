@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script src="../../assets/theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#09111f">
@@ -53,8 +54,9 @@
   </script>
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
+<link rel="stylesheet" href="../../assets/editorial-system.css">
 </head>
-<body>
+<body class="simulation-page">
   <a href="#main" class="skip-link">Skip to research</a>
   <div class="reading-progress" aria-hidden="true"><span id="readProgress"></span></div>
   <header class="site-header" id="top">
@@ -67,7 +69,8 @@
     </nav>
     <a class="nav-paper" href="https://arxiv.org/abs/2611.08491" target="_blank" rel="noopener noreferrer">READ PAPER <span aria-hidden="true">↗</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-controls="mobileNav" aria-expanded="false"><span></span><span></span></button>
-  </header>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span></button>
+</header>
   <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" hidden>
     <a href="#chamber">The 3D chamber</a><a href="#idea">The idea</a><a href="#potential">The valley</a><a href="#wall">The exact wall</a><a href="#breakdown">Adiabatic breakdown</a><a href="#flux">Flux lab</a><a href="#paper">The paper</a>
   </nav>

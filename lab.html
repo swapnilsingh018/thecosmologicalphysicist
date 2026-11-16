@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script src="assets/theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d160e">
@@ -24,6 +25,9 @@
   {"@context":"https://schema.org","@type":"ScholarlyArticle","name":"The Kähler Stability Wall in Perturbative Brane–Antibrane Inflation","author":{"@type":"Person","name":"Swapnil Kumar Singh"},"url":"https://arxiv.org/abs/2611.08491","identifier":"arXiv:2611.08491","isPartOf":{"@type":"CreativeWork","name":"arXiv"}}
   </script>
 <link rel="stylesheet" href="assets/olive-theme.css">
+<link rel="stylesheet" href="assets/editorial-system.css">
+<link rel="stylesheet" href="assets/folio-v11.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 </head>
 <body class="lab-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -38,17 +42,26 @@
       <a href="world.html">Research Atlas</a><a href="publications.html">Publications</a>
       <a href="lab.html" aria-current="page">Laboratory</a><a href="cv.html">About / CV</a><a href="world.html#contact">Contact</a>
     </nav>
-  </header>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span></button>
+</header>
   <main id="main">
     <section class="lab-hero">
       <div class="maxwrap">
-        <div class="section-topline light"><span>THE INTERACTIVE LABORATORY / 001</span><span>ARXIV:2611.08491 · HEP-TH</span></div>
-        <p class="lab-kicker">THEORY BECOMES GEOMETRY</p>
-        <h1>See the point<br/>where <em>stability ends.</em></h1>
-        <p class="lab-lead">A computational companion to <cite>The Kähler Stability Wall in Perturbative Brane–Antibrane Inflation.</cite> Vary the uplift, follow the disappearance of a metastable minimum, and explore what the effective theory permits.</p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#atlas">ENTER THE LABORATORY <span aria-hidden="true">↓</span></a>
-          <a class="button button-outline" href="https://arxiv.org/abs/2611.08491" target="_blank" rel="noopener noreferrer">READ THE PAPER <span aria-hidden="true">↗</span></a>
+        <div class="section-topline light"><span>Interactive research</span><span>arXiv:2611.08491</span></div>
+        <div class="folio-lab-hero-grid">
+          <div>
+            <p class="lab-kicker">A paper you can experiment with</p>
+            <h1>Where a stable<br/><em>valley disappears.</em></h1>
+            <p class="lab-lead">A live companion to <cite>The Kähler Stability Wall in Perturbative Brane–Antibrane Inflation.</cite> Vary the uplift and watch the minimum and barrier converge at the critical point.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#atlas">Explore the model <span aria-hidden="true">↗</span></a>
+              <a class="button button-outline" href="https://arxiv.org/abs/2611.08491" target="_blank" rel="noopener noreferrer">Read the preprint <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <a class="folio-lab-preview" href="#atlas" aria-label="Explore the interactive Kähler Stability Wall model">
+            <img src="research/kahler-stability-wall/og-cover.png" width="1200" height="630" loading="eager" alt="Cover of The Kähler Stability Wall interactive research atlas">
+            <span>See the model <b aria-hidden="true">↗</b></span>
+          </a>
         </div>
         <div class="lab-formula" aria-label="The critical saddle node occurs when the first and second derivatives of the potential vanish">
           <span>THE CRITICAL CONDITION</span>
@@ -59,9 +72,9 @@
     </section>
     <section id="atlas" class="atlas-section">
       <div class="maxwrap">
-        <div class="section-topline"><span>01 / EXPLORE THE MODEL</span><span>INTERACTIVE RESEARCH ATLAS</span></div>
+        <div class="section-topline"><span>Explore the model</span><span>Interactive scientific demonstration</span></div>
         <div class="atlas-heading">
-          <h2 class="display">A landscape<br/>you can <em>interrogate.</em></h2>
+          <h2 class="display">A landscape<br/><em>in motion.</em></h2>
           <p>The full atlas includes a three-dimensional potential landscape, parameter controls, local critical scaling and an account of the flux-consistency filters. It is an explanatory model interface, not a simulation of the universe evolving in time.</p>
         </div>
         <div class="atlas-frame">

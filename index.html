@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<script src="assets/theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d160e">
@@ -27,6 +28,9 @@
   <script defer src="assets/blackhole-gateway-v3.js?v=8"></script>
   <script defer src="assets/gateway.js"></script>
 <link rel="stylesheet" href="assets/olive-theme.css">
+<link rel="stylesheet" href="assets/editorial-system.css">
+<link rel="stylesheet" href="assets/folio-v11.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 </head>
 <body>
   <a class="skip-link" href="world.html">Skip the entrance and explore the Research Atlas</a>
@@ -34,12 +38,13 @@
     <section class="observatory" id="blackhole-entry" data-gateway-mode="portal" aria-label="Black-hole observatory entrance">
       <canvas id="blackhole-gateway-canvas" aria-hidden="true"></canvas>
       <div class="cosmic-vignette" aria-hidden="true"></div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span></button>
       <div class="warp-field" aria-hidden="true"><span></span></div>
       <div class="observatory-identity">
         <a class="minimal-brand" href="cv.html" aria-label="Swapnil Kumar Singh — background and education">Swapnil Kumar Singh</a>
         <p class="brand-role">PHYSICIST <span aria-hidden="true">&amp;</span> ENGINEER</p>
-        <p class="brand-motto">From first principles to working solutions.</p>
-        <a class="brand-profile-link" href="cv.html">PROFILE &amp; EDUCATION <span aria-hidden="true">↗</span></a>
+        <p class="brand-motto">Models, simulations, and the physics behind them.</p>
+        <a class="brand-profile-link" href="cv.html">Profile &amp; background <span aria-hidden="true">↗</span></a>
       </div>
       <h1 class="sr-only">Swapnil Kumar Singh — Physicist and Engineer</h1>
 
@@ -55,16 +60,16 @@
       <div class="portal-choices" id="portalChoices" aria-hidden="true">
         <div class="choices-shell">
           <button id="portalReturn" class="return-button" type="button" aria-label="Return to black hole">← Back</button>
-          <h2 class="choices-heading">Where to?</h2>
+          <h2 class="choices-heading">Explore.</h2>
           <div class="choices-grid">
             <a href="world.html" class="choice-card choice-public" tabindex="-1">
-              <span class="choice-numeral">01 / PUBLIC</span>
-              <strong>The Research Atlas</strong>
+              <span class="choice-numeral">01 / PUBLIC RESEARCH</span>
+              <strong>Explore my work</strong>
               <b aria-hidden="true">↗</b>
             </a>
             <a href="private.html" class="choice-card choice-private" tabindex="-1">
-              <span class="choice-numeral">02 / PRIVATE</span>
-              <strong>The Inner Observatory</strong>
+              <span class="choice-numeral">02 / PRIVATE WORKSPACE</span>
+              <strong>Collaborator access</strong>
               <b aria-hidden="true">↗</b>
             </a>
           </div>
