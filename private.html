@@ -1,76 +1,74 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script src="assets/theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="referrer" content="no-referrer">
-  <meta name="theme-color" content="#0d160e">
-  <title>The Inner Observatory — Swapnil Kumar Singh</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="theme-color" content="#0b130e">
+  <title>Private Workspace — Swapnil Kumar Singh</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/private.css">
+  <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <script src="assets/theme.js"></script>
+  <link rel="stylesheet" href="assets/portal-v12.css">
   <script defer src="assets/portal-config.js"></script>
   <script defer type="module" src="assets/private.js"></script>
-<link rel="stylesheet" href="assets/olive-theme.css">
-<link rel="stylesheet" href="assets/editorial-system.css">
-<link rel="stylesheet" href="assets/folio-v11.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 </head>
-<body>
-<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span></button>
+<body class="room-v12 quiet-v12">
   <a class="skip-link" href="#login-title">Skip to private access</a>
-  <main class="private-shell">
-    <div class="private-art" aria-hidden="true">
-      <div class="orbital-diagram"><span class="orbit-one"></span><span class="orbit-two"></span><span class="orbit-three"></span><span class="orbit-core"></span></div>
+  <header class="quiet-header">
+    <a href="index.html" class="quiet-brand">Swapnil Kumar Singh</a>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false">
+      <span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span>
+    </button>
+  </header>
+  <main class="private-main" id="main">
+    <div class="private-intro">
+      <p class="quiet-index">02 / Invited</p>
+      <h1 id="login-title">Private<br><em>Workspace.</em></h1>
+      <p class="private-subtitle">For invited collaborators.</p>
     </div>
-    <section class="private-form-section" aria-labelledby="login-title">
-      <div class="private-heading">
-        <a class="return-link" href="index.html">← RETURN TO THE OBSERVATORY</a>
-        <h1 id="login-title">The Inner<br/><em>Observatory.</em></h1>
-      </div>
-      <div class="private-form">
-        <p id="portalStatus" class="portal-status" role="status" aria-live="polite"></p>
 
-        <div id="loginView">
-          <form id="loginForm" aria-label="Inner Observatory sign in">
-            <label for="researchID">EMAIL ADDRESS</label>
-            <input id="researchID" type="email" name="email" autocomplete="username" placeholder="Your invited email" required disabled>
-            <label for="researchPassword">PASSWORD</label>
-            <input id="researchPassword" type="password" name="password" autocomplete="current-password" placeholder="Your password" required disabled>
-            <button id="loginButton" type="submit" disabled>ENTER THE OBSERVATORY <span aria-hidden="true">↗</span></button>
-          </form>
-          <div class="login-assistance">
-            <span>BY INVITATION ONLY</span>
-            <button id="resetButton" class="text-button" type="button" disabled>Forgot password?</button>
-          </div>
-        </div>
+    <section class="private-form" aria-label="Private account access">
+      <p id="portalStatus" class="portal-status" role="status" aria-live="polite"></p>
 
-        <div id="passwordView" hidden>
-          <p class="panel-intro">Choose your private password.</p>
-          <form id="passwordForm" aria-label="Set private workspace password">
-            <label for="newPassword">NEW PASSWORD</label>
-            <input id="newPassword" type="password" name="new-password" autocomplete="new-password" minlength="12" placeholder="12 characters or more" required>
-            <label for="confirmPassword">CONFIRM PASSWORD</label>
-            <input id="confirmPassword" type="password" name="confirm-password" autocomplete="new-password" minlength="12" required>
-            <button id="passwordButton" type="submit">SAVE PASSWORD <span aria-hidden="true">↗</span></button>
-          </form>
-        </div>
-
-        <div id="workspaceView" class="workspace-view" hidden>
-          <div class="workspace-account">
-            <span id="accountEmail" class="account-email"></span>
-            <button id="signOutButton" class="text-button" type="button">Sign out ↗</button>
-          </div>
-          <h2>Your research.</h2>
-          <div id="projectList" class="project-list" aria-live="polite"></div>
+      <div id="loginView">
+        <form id="loginForm" aria-label="Sign in to private workspace">
+          <label for="researchID">Email address</label>
+          <input id="researchID" type="email" name="email" autocomplete="username" placeholder="Invited email" required disabled>
+          <label for="researchPassword">Password</label>
+          <input id="researchPassword" type="password" name="password" autocomplete="current-password" placeholder="Password" required disabled>
+          <button id="loginButton" type="submit" disabled><span>Sign in</span><span aria-hidden="true">↗</span></button>
+        </form>
+        <div class="login-assistance">
+          <span>Invitation only</span>
+          <button id="resetButton" class="text-button" type="button" disabled>Forgot password?</button>
         </div>
       </div>
-      <div class="private-bottom"><a href="world.html">Research Atlas ↗</a></div>
+
+      <div id="passwordView" hidden>
+        <p class="panel-intro">Create your private password.</p>
+        <form id="passwordForm" aria-label="Set your workspace password">
+          <label for="newPassword">New password</label>
+          <input id="newPassword" type="password" name="new-password" autocomplete="new-password" minlength="12" placeholder="At least 12 characters" required>
+          <label for="confirmPassword">Confirm password</label>
+          <input id="confirmPassword" type="password" name="confirm-password" autocomplete="new-password" minlength="12" required>
+          <button id="passwordButton" type="submit"><span>Save password</span><span aria-hidden="true">↗</span></button>
+        </form>
+      </div>
+
+      <div id="workspaceView" class="workspace-view" hidden>
+        <div class="workspace-account">
+          <span id="accountEmail" class="account-email"></span>
+          <button id="signOutButton" class="text-button" type="button">Sign out</button>
+        </div>
+        <h2>Shared research</h2>
+        <div id="projectList" class="project-list" aria-live="polite"></div>
+      </div>
     </section>
   </main>
+  <footer class="quiet-footer"><a href="index.html">← Return to entrance</a><span>Private access</span></footer>
 </body>
 </html>

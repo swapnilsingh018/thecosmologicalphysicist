@@ -3,6 +3,27 @@
 A clean, buildless research portfolio for GitHub Pages at
 [www.swapnilsingh.co.in](https://www.swapnilsingh.co.in/).
 
+## Current redesign phase — minimal entrance (V12)
+
+The visitor-facing flow is deliberately limited to three pages while the owner
+redesigns the content:
+
+1. `index.html` — fixed-camera black-hole scene, name and role set in STIX Two
+   Text, one Enter button, then exactly two choices.
+2. `world.html` — intentionally empty public research holding page with a
+   clear return path. It carries `noindex` while there is no research content.
+3. `private.html` — a minimal login surface, retaining the Supabase-based
+   invitation, password-recovery and per-project authorization implementation.
+   Sign-in remains disabled until the owner completes the backend setup.
+
+`assets/portal-v12.css` is the self-contained visual system for these three
+pages. It carries the consistent mathematical-book typeface, dark olive and
+warm-paper appearances, subtle gold detail, and responsive layouts. Earlier
+project and publication pages are preserved in source control but are not
+linked from the new public entrance. They can be redesigned without losing
+their research content. Do not mistake the temporary public holding page for
+an SEO-ready research archive.
+
 ## Site structure
 
 - index.html — full-screen interactive black-hole observatory entrance, an artistic Enter control, and two dynamically revealed destinations.

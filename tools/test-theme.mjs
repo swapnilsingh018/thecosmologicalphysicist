@@ -70,7 +70,11 @@ for (const page of pages) {
   const html = fs.readFileSync(page, "utf8");
   assert.match(html, /data-theme-toggle/, `${page} requires a visible button`);
   assert.match(html, /assets\/theme\.js/, `${page} requires the theme runtime`);
-  assert.match(html, /assets\/editorial-system\.css/, `${page} requires both palettes`);
+  assert.match(html, /assets\/(?:editorial-system|portal-v12)\.css/, `${page} requires both palettes`);
 }
+
+const newPalette = fs.readFileSync(path.join(root, "assets/portal-v12.css"), "utf8");
+assert.match(newPalette, /:root\[data-theme="dark"\]/, "redesign must define a dark palette");
+assert.match(newPalette, /:root\[data-theme="light"\]/, "redesign must define a light palette");
 
 console.log(`PASS: theme switching, persistence, storage fallback, and controls on ${pages.length} pages.`);
