@@ -64,7 +64,7 @@
 .gateway-v12 .enter-orbit:hover .enter-arrow,
 .gateway-v12 .enter-orbit:focus-visible .enter-arrow { background: var(--room-gold); color: var(--room-gold-ink); rotate: 45deg; }
 
-/* Two original scientific engravings distinguish the choice of public/private. */
+/* The two routes remain understated, with a quiet gold hover response. */
 .gateway-v12 .choice-card { isolation: isolate; overflow: hidden; }
 .gateway-v12 .choice-card::before {
   content: ""; position: absolute; z-index: -1;
@@ -74,18 +74,6 @@
 }
 .gateway-v12 .choice-card:hover::before,
 .gateway-v12 .choice-card:focus-visible::before { width: 100%; }
-.gateway-v12 .choice-engraving {
-  position: absolute; right: clamp(50px, 5vw, 83px); top: 82px;
-  width: 118px; height: 118px;
-  fill: none; stroke: var(--room-gold); stroke-width: .8;
-  opacity: .54;
-  transform: rotate(-7deg);
-  transition: transform .65s cubic-bezier(.2,.7,.3,1), opacity .35s;
-  pointer-events: none;
-}
-.gateway-v12 .choice-engraving .choice-engraving-point { fill: var(--room-gold); stroke: none; }
-.gateway-v12 .choice-card:hover .choice-engraving,
-.gateway-v12 .choice-card:focus-visible .choice-engraving { transform: rotate(0deg) scale(1.065); opacity: .92; }
 .gateway-v12 .choice-card:hover .choice-arrow { transform: translate(4px,-4px) rotate(8deg); }
 
 /* The navigation is a tactile floating instrument. */
@@ -245,14 +233,12 @@
   .fold-formula { white-space: normal; font-size: 14px; }
   .fold-disclaimer { display: block; margin-left: 0; margin-top: 5px; font-size: 11px; }
   .fold-stage-action { width: 100%; justify-content: space-between; font-size: 14px; }
-  .gateway-v12 .choice-engraving { top: 25px; right: 36px; width: 72px; height: 72px; }
   .gateway-v12 .enter-orbit { min-width: 203px; padding: 12px 12px 12px 20px; }
   .gateway-v12 .enter-label { font-size: 23px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .room-v12 .enter-orbit,
   .room-v12 .choice-card,
-  .room-v12 .choice-engraving,
   .room-v12 .research-row,
   .room-v12 .research-gold-link,
   .room-v12 .research-portrait img,

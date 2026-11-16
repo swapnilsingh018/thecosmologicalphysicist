@@ -11,13 +11,13 @@ for (const [name, page] of [['entrance', entrance], ['public', publicPage], ['pr
   assert.match(page, /assets\/finish-v14\.css/, `${name} has shared visual finishes`);
   assert.match(page, /assets\/glass-v15\.css/, `${name} has the darker glass treatment`);
 }
-assert.equal((entrance.match(/class="choice-engraving"/g) ?? []).length, 2, 'two distinct route engravings');
+assert.equal((entrance.match(/class="choice-engraving"/g) ?? []).length, 0, 'route panels no longer carry decorative clutter');
 assert.match(publicPage, /data-fold-stage/, 'featured graphic has a live mathematical stage');
 assert.match(publicPage, /assets\/fold-study-v14\.js/, 'featured graphic loads its own animation');
 assert.match(publicPage, /local normal form/, 'the illustration discloses its scientific scope');
 assert.match(read('assets/finish-v14.css'), /prefers-reduced-motion: reduce/, 'motion has an accessible override');
 assert.match(read('assets/glass-v15.css'), /backdrop-filter: blur/, 'glass controls have true background blur');
-assert.match(read('assets/glass-v15.css'), /--room-bg: #060c09/, 'dark palette is deep olive');
+assert.match(read('assets/glass-v15.css'), /--room-bg: #020604/, 'dark palette is near-black olive');
 assert.match(publicPage, /data-fold-value/, 'live local parameter readout is part of the floating panel');
 
 const nodes = new Map();
@@ -47,4 +47,4 @@ assert.match(nodes.get('[data-fold-main]').attributes.d, /^M\d+\.\d+ \d+\.\d+ L/
 assert.equal(nodes.get('[data-fold-value]').textContent, '0.78', 'the floating readout agrees with the drawn initial curve');
 assert.match(nodes.get('[data-fold-progress]').style.width, /^\d+\.\d%$/, 'the floating glass meter has a live signal');
 
-console.log('PASS: distinct engravings, gold interactions, accessible motion and physically ordered fold extrema.');
+console.log('PASS: minimal route panels, gold interactions, accessible motion and physically ordered fold extrema.');

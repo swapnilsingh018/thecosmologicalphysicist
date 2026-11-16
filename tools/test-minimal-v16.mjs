@@ -8,11 +8,14 @@ const ideas = read('ideas.html');
 const seal = read('assets/sks-seal.svg');
 const blackhole = read('assets/blackhole-gateway-v3.js');
 
-assert.match(seal, /<circle\b/, 'clean circular mark');
+assert.match(seal, /<rect\b[^>]*rx="43"/, 'clean softly rounded monogram frame');
 assert.match(seal, />SKS<\/text>/, 'readable SKS letters');
-assert.doesNotMatch(seal, /laurel|stroke-dasharray|©|>SINGH<|<path\b/i, 'no ornamental clutter');
+assert.doesNotMatch(seal, /laurel|stroke-dasharray|©|>SINGH</i, 'no ornamental clutter');
+assert.equal((seal.match(/<path\b/g) ?? []).length, 1, 'one minimal underline only');
 assert.match(entrance, /gateway-location[^>]*data-i18n="location_florence"/, 'Florence follows entrance name');
 assert.match(world, /data-i18n="location_florence"/, 'Florence appears in public identity');
+assert.match(entrance, /class="gateway-live" data-availability data-chat-action/, 'presence is on the entry screen');
+assert.match(read('assets/minimal-v16.css'), /nav-island a \+ a::before/, 'navigation has restrained visual separators');
 
 for (const [name, page] of [['public', world], ['ideas', ideas]]) {
   const nav = page.match(/<nav class="nav-island"[\s\S]*?<\/nav>/)?.[0] ?? '';

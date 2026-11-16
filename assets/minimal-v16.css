@@ -17,10 +17,62 @@
 }
 .gateway-v12 .gateway-identity h1 { letter-spacing: -.067em; }
 .gateway-v12 .enter-orbit { min-width: 212px; }
+.gateway-v12 .choices-heading { font-size: clamp(52px,6vw,87px); margin-bottom: clamp(42px,6vh,74px); }
+.gateway-v12 .choice-card strong { font-size: clamp(37px,4.1vw,60px); line-height: 1.04; }
 
 /* No decorative dividing lines within the five-item navigation. */
 .public-v13 .nav-island { gap: clamp(18px,2vw,31px); padding-inline: 27px; }
 .public-v13 .nav-island a { letter-spacing: .015em; }
+.public-v13 .nav-island a + a::before {
+  content: ""; position: absolute; width: 1px; height: 16px;
+  left: -16px; top: 50%; transform: translateY(-50%);
+  background: rgba(217,189,132,.31); pointer-events: none;
+}
+:root[data-theme="light"] .public-v13 .nav-island a + a::before { background: rgba(79,92,67,.30); }
+
+/* One radius system: rounded glass, soft cards, generous capsule controls. */
+.room-v12 .language-switch,
+.room-v12 .theme-toggle,
+.public-v13 .nav-menu-button,
+.gateway-v12 .enter-orbit,
+.public-v13 .research-gold-link,
+.public-v13 .research-filters button,
+.quiet-v12 .private-form form>button { border-radius: 999px; }
+.gateway-v12 .enter-orbit::after,
+.public-v13 .research-gold-link::before { border-radius: 999px; }
+.gateway-v12 .choice-card,
+.gateway-v12 .choice-card + .choice-card { border-radius: 22px; }
+.public-v13 .research-feature-image,
+.public-v13 .fold-stage { border-radius: 24px; }
+.public-v13 .research-portrait { border-radius: 23px; }
+.public-v13 .research-portrait::before { border-radius: 29px; }
+.public-v13 .research-portrait img { border-radius: 15px; }
+.public-v13 .research-portrait figcaption { border-radius: 0 0 15px 15px; }
+.public-v13 .research-row:hover,
+.public-v13 .research-row:focus-visible { border-radius: 12px; }
+.fold-glass-meter { border-radius: 17px; }
+.quiet-v12 .private-form { border-radius: 23px; }
+.availability-dock { border-radius: 999px; }
+.availability-action { border-radius: 999px; }
+
+/* A genuine live indicator belongs beside Enter on the first impression. */
+.gateway-v12 .portal-entry { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.gateway-v12 .gateway-live {
+  display: inline-flex; align-items: center; gap: 11px;
+  min-height: 45px; padding: 10px 17px;
+  border: 1px solid rgba(214,189,137,.37); border-radius: 999px;
+  background: linear-gradient(140deg, rgba(27,43,29,.68), rgba(5,15,8,.68));
+  color: #bdc8b5;
+  box-shadow: inset 0 1px rgba(248,236,200,.11), 0 10px 28px rgba(0,0,0,.20);
+  backdrop-filter: blur(21px); -webkit-backdrop-filter: blur(21px);
+  font-size: 13px; white-space: nowrap;
+  transition: border-color .25s ease, background .25s ease;
+}
+.gateway-v12 .gateway-live:hover,
+.gateway-v12 .gateway-live:focus-visible { border-color: var(--room-gold); background: rgba(45,65,42,.64); }
+:root[data-theme="light"] .gateway-v12 .gateway-live { background: rgba(246,244,227,.79); color: #334632; }
+.gateway-v12 .gateway-live.is-online { color: #e2f2e4; border-color: rgba(122,211,148,.54); }
+.gateway-v12 .gateway-live.is-away { border-color: rgba(224,188,109,.55); }
 
 /* One compact availability instrument, separate from the main navigation. */
 .availability-dock {
@@ -71,10 +123,14 @@
 @media (max-width: 1220px) {
   .public-v13 .nav-island { padding: 14px 22px; gap: 0; }
   .public-v13 .nav-island a { padding-block: 13px; }
+  .public-v13 .nav-island a + a::before { display: none; }
 }
 @media (max-width: 650px) {
   .research-brand>span small { font-size: 9px; margin-top: 3px; }
   .gateway-v12 .gateway-identity .gateway-location { margin-top: 23px; font-size: 15px; }
+  .gateway-v12 .portal-entry { gap: 11px; }
+  .gateway-v12 .gateway-live { min-height: 40px; padding: 7px 13px; font-size: 12px; }
+  .gateway-v12 .choice-card strong { font-size: 43px; }
   .availability-dock { right: 12px; bottom: 12px; gap: 9px; padding: 7px 8px 7px 12px; }
   .availability-label { font-size: 11px; }
   .availability-action { font-size: 12px; padding: 7px 8px; }

@@ -6,7 +6,7 @@
   const config = window.SKS_ENGAGEMENT_CONFIG || {};
   const dock = document.querySelector('[data-availability]');
   const label = dock?.querySelector('[data-availability-label]');
-  const action = dock?.querySelector('[data-chat-action]');
+  const action = dock?.matches?.('[data-chat-action]') ? dock : dock?.querySelector('[data-chat-action]');
   const actionLabel = action?.querySelector('[data-chat-label]');
   const stat = document.querySelector('[data-visitor-stat]');
   const number = stat?.querySelector('[data-visitor-number]');
@@ -15,9 +15,9 @@
 
   const words = {
     unknown: ['availability_unknown', 'By email'],
-    online: ['availability_online', 'Available now'],
-    away: ['availability_away', 'Currently away'],
-    offline: ['availability_offline', 'Currently offline']
+    online: ['availability_online', 'Online'],
+    away: ['availability_away', 'Away'],
+    offline: ['availability_offline', 'Offline']
   };
   const translate = (key, fallback) => window.SKSLanguage?.translate(key, fallback) ?? fallback;
   const reflect = () => {
