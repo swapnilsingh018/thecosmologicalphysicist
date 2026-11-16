@@ -8,7 +8,8 @@ A clean, buildless research portfolio for GitHub Pages at
 - index.html — full-screen interactive black-hole observatory entrance, an artistic Enter control, and two dynamically revealed destinations.
 - world.html — the public Research Atlas: a concise introduction and seventeen projects organized across three fields, plus a research feature and publications.
 - private.html — invitation-only Inner Observatory portal, ready for connection to Supabase Auth and private, per-project file sharing. Until configured, login is explicitly disabled.
-- lab.html — companion page embedding the complete interactive physics atlas for [arXiv:2611.08491](https://arxiv.org/abs/2611.08491).
+- lab.html — companion page embedding the first-party interactive physics atlas for [arXiv:2611.08491](https://arxiv.org/abs/2611.08491).
+- research/kahler-stability-wall/ — complete self-hosted 3D scientific simulator, served under the portfolio domain with independent canonical, social metadata, and local assets.
 - publications.html — separately labelled preprints, accepted/published articles, manuscripts, and talks.
 - projects.html, cosmology.html, computation.html, engineering.html, and projects/ — research and engineering archive.
 - cv.html, news.html, quiet-hours.html — research profile, updates, and Quiet Hours.
@@ -21,7 +22,7 @@ A clean, buildless research portfolio for GitHub Pages at
 - styles.css, assets/refinement.css, assets/css/, assets/site-runtime.js — shared styling and behavior for secondary pages.
 - sitemap.xml, robots.txt — crawler discovery.
 
-No Node packages or build step are required. The site uses local HTML/CSS/JavaScript assets and Google Fonts. The full 3D simulator is hosted separately, linked from the public Research Atlas and embedded in the Laboratory.
+No Node packages or build step are required. The site uses local HTML/CSS/JavaScript assets and Google Fonts. The full 3D simulator is bundled inside the GitHub Pages repository, linked from the public Research Atlas and embedded in the Laboratory. It does not load from a separate website platform.
 
 ## Preview and deploy
 
@@ -39,7 +40,7 @@ Once a journal DOI or publisher page exists, replace the forthcoming-link elemen
 
 ## Scientific and publication notes
 
-The interactive plot in assets/home.js uses the reduced potential defined in the Kähler Stability Wall manuscript. It illustrates a parameter sweep, not cosmological time evolution. The black-hole rendering is cinematic scientific artwork, not validated ray tracing or an observational dataset. The separate 3D atlas explains the paper's analytical and numerical structure.
+The interactive plot in assets/home.js uses the reduced potential defined in the Kähler Stability Wall manuscript. It illustrates a parameter sweep, not cosmological time evolution. The black-hole rendering is cinematic scientific artwork, not validated ray tracing or an observational dataset. The self-hosted 3D atlas explains the paper's analytical and numerical structure.
 
 The entrance uses a fixed camera and a 30 fps target, with softened disk filaments and edge-aware antialiasing. The artificial photon-ring outline and narrow diffraction spikes have been removed; gravitational lensing comes from the integrated light rays. The entrance name and profile link lead to cv.html for background, education and project inquiries.
 
