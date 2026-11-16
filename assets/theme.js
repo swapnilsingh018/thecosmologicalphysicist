@@ -14,7 +14,7 @@
     root.dataset.theme = value;
     root.style.colorScheme = value;
     const color = document.querySelector('meta[name="theme-color"]');
-    if (color) color.content = value === "light" ? "#ebe6da" : "#101811";
+    if (color) color.content = value === "light" ? "#ebe6da" : "#060c09";
     document.querySelectorAll("[data-theme-toggle]").forEach(button => {
       const next = value === "dark" ? "light" : "dark";
       const italian = root.lang === "it";

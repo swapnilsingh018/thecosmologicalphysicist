@@ -3,7 +3,7 @@
 A clean, buildless research portfolio for GitHub Pages at
 [www.swapnilsingh.co.in](https://www.swapnilsingh.co.in/).
 
-## Current redesign phase — bilingual public research (V13)
+## Current redesign phase — bilingual public research (V15)
 
 The visitor-facing flow has three primary rooms. Public Research now provides
 the planned structure for ten future interactive study pages:
@@ -26,6 +26,10 @@ warm-paper appearances, subtle gold detail, and responsive layouts.
 and island/filter behavior; `assets/i18n-v13.js` maintains both languages with
 saved language preference and shareable `?lang=it` state. `assets/sks-seal.svg`
 is a first-party original laurel monogram, not a copy of an institutional logo.
+`assets/finish-v14.css` adds engraved-gold interaction details and
+`assets/fold-study-v14.js` draws the animated local saddle-node normal form,
+not the full Kähler potential. `assets/glass-v15.css` applies the darker
+smoked-olive palette and translucent, accessible controls to the three rooms.
 
 The ten existing project destinations are **research records**, not ten fully
 interactive models yet. Each will be designed and verified separately before

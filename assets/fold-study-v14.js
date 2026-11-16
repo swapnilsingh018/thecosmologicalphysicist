@@ -13,6 +13,8 @@
   const minimum = stage.querySelector('[data-fold-point="minimum"]');
   const barrierGuide = stage.querySelector('[data-fold-guide="barrier"]');
   const minimumGuide = stage.querySelector('[data-fold-guide="minimum"]');
+  const reading = stage.querySelector('[data-fold-value]');
+  const progress = stage.querySelector('[data-fold-progress]');
   if (![main, far, near, barrier, minimum, barrierGuide, minimumGuide].every(Boolean)) return;
 
   const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
@@ -55,6 +57,8 @@
     const stationary = Math.sqrt(a);
     setPoint(barrier, barrierGuide, -stationary, a);
     setPoint(minimum, minimumGuide, stationary, a);
+    if (reading) reading.textContent = a.toFixed(2);
+    if (progress) progress.style.width = `${Math.max(0, Math.min(100, a / 1.15 * 100)).toFixed(1)}%`;
   }
 
   function animate(time) {
