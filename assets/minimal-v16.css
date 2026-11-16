@@ -1,0 +1,88 @@
+/* A lighter hand: five destinations, one monogram, and an honest status. */
+.research-brand>span small,
+.quiet-brand>span small { display: block; margin-top: 5px; color: var(--room-faint); font-size: 10px; letter-spacing: .035em; font-weight: 400; }
+.research-brand img,
+.gateway-v12 .gateway-initials img,
+.quiet-v12 .quiet-brand img { filter: none; }
+:root[data-theme="light"] .research-brand img,
+:root[data-theme="light"] .gateway-v12 .gateway-initials img,
+:root[data-theme="light"] .quiet-v12 .quiet-brand img { filter: brightness(.56); }
+
+/* A quiet place-name beneath the entrance signature. */
+.gateway-v12 .gateway-identity .gateway-location {
+  margin-top: 31px;
+  color: var(--room-muted);
+  font-size: clamp(16px, 1.3vw, 19px);
+  letter-spacing: .035em;
+}
+.gateway-v12 .gateway-identity h1 { letter-spacing: -.067em; }
+.gateway-v12 .enter-orbit { min-width: 212px; }
+
+/* No decorative dividing lines within the five-item navigation. */
+.public-v13 .nav-island { gap: clamp(18px,2vw,31px); padding-inline: 27px; }
+.public-v13 .nav-island a { letter-spacing: .015em; }
+
+/* One compact availability instrument, separate from the main navigation. */
+.availability-dock {
+  position: fixed; z-index: 125; right: clamp(18px,3.2vw,52px); bottom: clamp(17px,3vw,37px);
+  display: flex; align-items: center; gap: 12px;
+  max-width: calc(100% - 36px); padding: 9px 11px 9px 15px;
+  border: 1px solid rgba(219,193,141,.45); color: var(--room-ink);
+  background: linear-gradient(145deg, rgba(40,57,43,.86), rgba(11,24,17,.89));
+  backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  box-shadow: inset 0 1px rgba(248,236,200,.15), 0 13px 37px rgba(0,0,0,.25);
+  font-size: 12px;
+}
+:root[data-theme="light"] .availability-dock {
+  background: linear-gradient(145deg, rgba(255,255,252,.89), rgba(237,234,218,.87));
+  border-color: rgba(95,91,65,.37); box-shadow: inset 0 1px rgba(255,255,255,.8), 0 13px 34px rgba(32,46,30,.16);
+}
+.availability-light {
+  flex: 0 0 7px; width: 7px; height: 7px; border-radius: 50%;
+  background: #898e83; box-shadow: 0 0 0 4px rgba(160,163,151,.1);
+  transition: background .3s ease, box-shadow .3s ease;
+}
+.availability-dock.is-online .availability-light { background: #6cdf93; box-shadow: 0 0 0 4px rgba(108,223,147,.12), 0 0 13px rgba(108,223,147,.45); }
+.availability-dock.is-away .availability-light { background: #e4ba6d; box-shadow: 0 0 0 4px rgba(228,186,109,.12); }
+.availability-label { white-space: nowrap; color: var(--room-muted); }
+.availability-action { display: inline-flex; align-items: center; gap: 9px; padding: 7px 10px; border: 1px solid rgba(227,200,145,.40); color: var(--room-ink); white-space: nowrap; }
+.availability-action:hover, .availability-action:focus-visible { background: rgba(216,191,131,.16); border-color: var(--room-gold); }
+.availability-action>span:last-child { color: var(--room-gold); font-size: 17px; line-height: .6; }
+.visitors-stat { font-size: 13px; color: #b7c3b3; }
+.visitors-stat strong { color: #e4cf9f; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* Ideas is a reserved editorial page, rather than a fabricated project list. */
+.ideas-main {
+  isolation: isolate; position: relative; display: flex; align-items: center;
+  width: min(1280px, calc(100% - clamp(44px,8vw,150px))); min-height: min(850px,100svh);
+  margin: 0 auto; padding: 160px 0 105px;
+}
+.ideas-content { position: relative; z-index: 2; max-width: 790px; }
+.ideas-content .research-index-label { margin-bottom: 31px; }
+.ideas-content h1 { margin: 0; font-weight: 400; font-size: clamp(65px,9vw,128px); line-height: .99; letter-spacing: -.075em; }
+.ideas-content>p:not(.research-index-label) { max-width: 480px; color: var(--room-muted); font-size: 20px; line-height: 1.6; margin: 32px 0 48px; }
+.ideas-content .research-underlined { font-size: 16px; padding-bottom: 7px; }
+.ideas-etching { position: absolute; right: -5%; top: 23%; width: 47%; aspect-ratio: 1; opacity: .44; pointer-events: none; }
+.ideas-etching span { position: absolute; inset: 8%; border: 1px solid var(--room-gold); border-radius: 50%; transform: rotate(-24deg) scaleY(.54); }
+.ideas-etching span:nth-child(2) { inset: 23%; opacity: .5; transform: rotate(36deg) scaleY(.82); }
+.ideas-etching span:nth-child(3) { inset: 38%; opacity: .7; transform: none; }
+.ideas-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 25px clamp(24px,6vw,100px); border-top: 1px solid var(--room-rule); color: var(--room-faint); font-size: 13px; }
+
+@media (max-width: 1220px) {
+  .public-v13 .nav-island { padding: 14px 22px; gap: 0; }
+  .public-v13 .nav-island a { padding-block: 13px; }
+}
+@media (max-width: 650px) {
+  .research-brand>span small { font-size: 9px; margin-top: 3px; }
+  .gateway-v12 .gateway-identity .gateway-location { margin-top: 23px; font-size: 15px; }
+  .availability-dock { right: 12px; bottom: 12px; gap: 9px; padding: 7px 8px 7px 12px; }
+  .availability-label { font-size: 11px; }
+  .availability-action { font-size: 12px; padding: 7px 8px; }
+  .ideas-main { width: calc(100% - 42px); min-height: calc(100svh - 78px); }
+  .ideas-content h1 { font-size: 64px; }
+  .ideas-etching { opacity: .22; width: 75%; top: 12%; }
+  .ideas-footer { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .availability-light { transition: none; }
+}

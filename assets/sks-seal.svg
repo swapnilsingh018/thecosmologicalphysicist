@@ -1,24 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="seal-title">
-  <title id="seal-title">SKS — Swapnil Kumar Singh</title>
-  <g fill="none" stroke="#d4ba84" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="120" cy="120" r="109" stroke-width="1.35"/>
-    <circle cx="120" cy="120" r="103" stroke-width=".6" opacity=".65"/>
-    <circle cx="120" cy="120" r="88" stroke-width=".6" opacity=".52"/>
-    <circle cx="120" cy="120" r="81" stroke-width=".45" stroke-dasharray=".8 5.3" opacity=".52"/>
-    <path d="M120 26l2.2 5.1 5.6.5-4.2 3.7 1.3 5.5-4.9-2.9-4.9 2.9 1.3-5.5-4.2-3.7 5.6-.5z" stroke-width=".8"/>
-    <path d="M120 203l2.2 4.6 5.1.6-3.7 3.5.9 5-4.5-2.5-4.5 2.5.9-5-3.7-3.5 5.1-.6z" stroke-width=".7"/>
-    <path d="M63 177c-15-19-20-42-13-67 4-15 13-28 23-35" stroke-width="1.1"/>
-    <path d="M177 177c15-19 20-42 13-67-4-15-13-28-23-35" stroke-width="1.1"/>
-    <g stroke-width=".8" fill="#d4ba84" fill-opacity=".16">
-      <path d="M68 175q-16 0-20-12 13 1 20 12zM61 164q-17-3-18-15 14 3 18 15zM55 152q-15-6-14-18 13 6 14 18zM51 138q-12-11-8-21 11 10 8 21zM50 123q-9-14-3-23 8 12 3 23zM53 108q-4-14 4-22 5 13-4 22zM61 93q2-14 13-18-1 13-13 18z"/>
-      <path d="M172 175q16 0 20-12-13 1-20 12zM179 164q17-3 18-15-14 3-18 15zM185 152q15-6 14-18-13 6-14 18zM189 138q12-11 8-21-11 10-8 21zM190 123q9-14 3-23-8 12-3 23zM187 108q4-14-4-22-5 13 4 22zM179 93q-2-14-13-18 1 13 13 18z"/>
-    </g>
-    <path d="M84 150h72" stroke-width=".8" opacity=".72"/>
-    <path d="M92 158h56" stroke-width=".45" opacity=".5"/>
-    <path d="M105 57h30" stroke-width=".75"/>
-    <path d="M112 62h16" stroke-width=".45" opacity=".6"/>
-  </g>
-  <text x="120" y="137" text-anchor="middle" fill="#e7d2a8" font-family="Georgia, 'Times New Roman', serif" font-size="62" letter-spacing="-7" font-style="italic">SKS</text>
-  <text x="120" y="180" text-anchor="middle" fill="#d4ba84" font-family="Georgia, 'Times New Roman', serif" font-size="10" letter-spacing="2.2">SINGH</text>
-  <text x="120" y="199" text-anchor="middle" fill="#d4ba84" font-family="Georgia, 'Times New Roman', serif" font-size="8" letter-spacing="1.2">© 2026</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title">
+  <title id="title">SKS — Swapnil Kumar Singh</title>
+  <circle cx="80" cy="80" r="74" fill="none" stroke="#d8bb83" stroke-width="1.8"/>
+  <text x="80" y="100" text-anchor="middle" fill="#ecd9b4" font-family="STIX Two Text, Georgia, Times New Roman, serif" font-weight="500" font-size="59" letter-spacing="-5">SKS</text>
 </svg>

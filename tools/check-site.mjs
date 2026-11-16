@@ -59,6 +59,7 @@ for (const file of htmlFiles) {
 const map = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 for (const rel of paths) {
   if (rel === "404.html" || rel === "private.html") continue;
+  if (/name="robots" content="noindex/.test(fs.readFileSync(path.join(root, rel), "utf8"))) continue;
   const publicPath = rel === "index.html" ? "" : rel.endsWith("/index.html") ? rel.slice(0, -"index.html".length) : rel;
   if (!map.includes("https://www.swapnilsingh.co.in/" + publicPath)) {
     issues.push("Sitemap missing " + rel);

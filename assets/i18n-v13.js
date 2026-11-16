@@ -7,6 +7,7 @@
     skip: 'Vai al contenuto',
     skip_entrance: 'Vai all’ingresso',
     role: 'Fisico e ingegnere',
+    location_florence: 'Firenze, Italia',
     enter: 'Entra',
     choose_space: 'Scegli uno spazio.',
     back: '← Indietro',
@@ -18,6 +19,8 @@
     primary_nav: 'Navigazione principale',
     footer_nav: 'Collegamenti nel piè di pagina',
     nav_home: 'Inizio',
+    nav_publications: 'Pubblicazioni',
+    nav_ideas: 'Idee',
     nav_work: 'Ricerca',
     nav_lab: 'Laboratorio',
     nav_papers: 'Pubblicazioni',
@@ -91,6 +94,17 @@
     contact_desc: 'Sono disponibile per collaborazioni scientifiche, modellazione computazionale e progetti di ingegneria. Partiamo dalla domanda.',
     contact_action: 'Avvia una conversazione',
     return_entry: 'Ingresso',
+    availability_unknown: 'Via email',
+    availability_online: 'Disponibile ora',
+    availability_away: 'Al momento assente',
+    availability_offline: 'Non disponibile ora',
+    message_me: 'Scrivimi',
+    chat_live: 'Chat dal vivo',
+    visitors_label: 'Visitatori',
+    ideas_kicker: 'Appunti / Idee',
+    ideas_title: 'Idee in divenire.',
+    ideas_note: 'Uno spazio per domande aperte e note di ricerca. In preparazione.',
+    ideas_back: 'Torna alla ricerca',
     back_top: 'Torna in alto ↑',
     private_index: '02 / Su invito',
     private_title_a: 'Area',
@@ -174,7 +188,8 @@
       button.classList.toggle('is-active', active);
     });
     if (language === 'it') {
-      document.title = document.body.classList.contains('public-v13') ? 'Ricerca pubblica — Swapnil Kumar Singh'
+      document.title = document.body.classList.contains('ideas-v16') ? 'Idee — Swapnil Kumar Singh'
+        : document.body.classList.contains('public-v13') ? 'Ricerca pubblica — Swapnil Kumar Singh'
         : document.body.classList.contains('gateway-v12') ? 'Swapnil Kumar Singh — Fisico e ingegnere'
         : 'Area riservata — Swapnil Kumar Singh';
       if (description) description.content = 'Swapnil Kumar Singh — fisico e ingegnere. Ricerca, simulazioni scientifiche e collaborazioni.';

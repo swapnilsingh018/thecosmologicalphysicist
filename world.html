@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b130e">
   <meta name="author" content="Swapnil Kumar Singh">
-  <meta name="description" content="Swapnil Kumar Singh — physicist and engineer. Research in cosmology, gravitation, astrophysics and scientific engineering. Explore ten selected studies and an interactive physics laboratory.">
+  <meta name="description" content="Swapnil Kumar Singh — physicist and engineer based in Florence, Italy. Explore research in cosmology, gravitation, astrophysics and engineering.">
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="Swapnil Kumar Singh">
   <meta property="og:title" content="Public Research | Swapnil Kumar Singh">
@@ -24,9 +24,12 @@
   <link rel="stylesheet" href="assets/public-v13.css">
   <link rel="stylesheet" href="assets/finish-v14.css">
   <link rel="stylesheet" href="assets/glass-v15.css">
+  <link rel="stylesheet" href="assets/minimal-v16.css">
   <script defer src="assets/i18n-v13.js"></script>
   <script defer src="assets/public-v13.js"></script>
   <script defer src="assets/fold-study-v14.js"></script>
+  <script defer src="assets/engagement-config.js"></script>
+  <script defer src="assets/engagement.js"></script>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Person","name":"Swapnil Kumar Singh","url":"https://www.swapnilsingh.co.in/","image":"https://www.swapnilsingh.co.in/assets/profile.jpeg","jobTitle":["Physicist","Engineer"],"sameAs":["https://github.com/swapnilsingh018","https://inspirehep.net/authors/2052015"]}
   </script>
@@ -36,15 +39,14 @@
   <header class="research-header" id="page-header">
     <a href="index.html" class="research-brand" aria-label="Swapnil Kumar Singh — home">
       <img src="assets/sks-seal.svg" alt="" width="58" height="58">
-      <span>Swapnil Kumar<br><strong>Singh</strong></span>
+      <span>Swapnil Kumar<br><strong>Singh</strong><small data-i18n="location_florence">Florence, Italy</small></span>
     </a>
     <nav class="nav-island" id="research-nav" aria-label="Primary navigation" data-i18n-aria="primary_nav">
       <a href="#main" aria-current="page" data-i18n="nav_home">Home</a>
-      <a href="#work" data-i18n="nav_work">Research</a>
-      <a href="lab.html" data-i18n="nav_lab">Laboratory</a>
-      <a href="publications.html" data-i18n="nav_papers">Papers</a>
       <a href="cv.html" data-i18n="nav_about">About</a>
-      <a class="nav-contact" href="#contact" data-i18n="nav_contact">Contact</a>
+      <a href="#work" data-i18n="nav_work">Research</a>
+      <a href="publications.html" data-i18n="nav_publications">Publications</a>
+      <a href="ideas.html" data-i18n="nav_ideas">Ideas</a>
     </nav>
     <div class="research-tools">
       <div class="language-switch" role="group" aria-label="Language" data-i18n-aria="language">
@@ -74,7 +76,7 @@
       </div>
       <figure class="research-portrait">
         <img src="assets/profile.jpeg" width="1254" height="1254" alt="Portrait of Swapnil Kumar Singh" fetchpriority="high">
-        <figcaption><span>Swapnil Kumar Singh</span><span data-i18n="portrait_caption">Physics / Engineering</span></figcaption>
+        <figcaption><span>Swapnil Kumar Singh</span><span data-i18n="location_florence">Florence, Italy</span></figcaption>
       </figure>
       <div class="research-hero-bottom"><span data-i18n="hero_bottom">Theory · Computation · Engineering</span><a href="#featured" data-i18n="scroll_selected">Selected work ↓</a></div>
     </section>
@@ -170,7 +172,13 @@
   <footer class="research-footer"><div class="research-container research-footer-grid">
     <div class="research-footer-brand"><img src="assets/sks-seal.svg" alt="" width="62" height="62"><span>© 2026 Swapnil Kumar Singh</span></div>
     <nav aria-label="Footer links" data-i18n-aria="footer_nav"><a href="publications.html" data-i18n="nav_papers">Papers</a><a href="cv.html" data-i18n="nav_about">About</a><a href="index.html" data-i18n="return_entry">Entrance</a><a href="https://github.com/swapnilsingh018" target="_blank" rel="noopener noreferrer">GitHub</a></nav>
+    <span class="visitors-stat" data-visitor-stat hidden><span data-i18n="visitors_label">Visitors</span> <strong data-visitor-number></strong></span>
     <a href="#main" data-i18n="back_top">Back to top ↑</a>
   </div></footer>
+  <aside class="availability-dock" data-availability aria-label="Contact availability">
+    <span class="availability-light" data-availability-light aria-hidden="true"></span>
+    <span class="availability-label" data-availability-label>By email</span>
+    <a class="availability-action" data-chat-action href="mailto:swapnilsingh.ph@gmail.com?subject=Website%20enquiry"><span data-chat-label>Message me</span><span aria-hidden="true">↗</span></a>
+  </aside>
 </body>
 </html>

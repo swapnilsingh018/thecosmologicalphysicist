@@ -11,7 +11,7 @@ assert.ok(body, 'Italian dictionary should be present');
 const keys = new Set([...body.matchAll(/^\s*([a-z][a-z0-9_]+):/gm)].map(([, key]) => key));
 
 let elements = 0;
-for (const filename of ['index.html', 'world.html', 'private.html']) {
+for (const filename of ['index.html', 'world.html', 'private.html', 'ideas.html']) {
   const html = read(filename);
   assert.match(html, /data-set-lang="en"/);
   assert.match(html, /data-set-lang="it"/);
@@ -29,7 +29,7 @@ assert.equal(records.filter(value => value === 'theory').length, 4);
 assert.equal(records.filter(value => value === 'astro').length, 3);
 assert.equal(records.filter(value => value === 'engineering').length, 3);
 
-for (const source of ['assets/i18n-v13.js', 'assets/public-v13.js', 'assets/private.js']) {
+for (const source of ['assets/i18n-v13.js', 'assets/public-v13.js', 'assets/private.js', 'assets/engagement.js']) {
   assert.doesNotMatch(read(source), /chatgpt|openai|luckyarbor/i, `${source} contains unwanted platform branding`);
 }
-console.log(`PASS: ${elements} bilingual interface labels, three rooms, and ten curated study links.`);
+console.log(`PASS: ${elements} bilingual interface labels, four rooms, and ten curated study links.`);

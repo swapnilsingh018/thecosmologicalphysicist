@@ -10,7 +10,7 @@
  */
 (() => {
   'use strict';
-  window.__BLACKHOLE_BUILD__ = 'galactic-observatory-v8-20261116';
+  window.__BLACKHOLE_BUILD__ = 'galactic-observatory-v16-adaptive';
 
   const canvas = document.getElementById('blackhole-gateway-canvas');
   const gate = document.getElementById('blackhole-entry');
@@ -57,7 +57,7 @@
     const h = Math.max(1, Math.round(rect.height));
     canvas.width = w; canvas.height = h;
     const bg = cx.createRadialGradient(w*.48, h*.46, 0, w*.48, h*.46, Math.max(w,h)*.76);
-    bg.addColorStop(0, '#101823'); bg.addColorStop(.54, '#060d17'); bg.addColorStop(1, '#01040a');
+    bg.addColorStop(0, '#14231b'); bg.addColorStop(.54, '#07110e'); bg.addColorStop(1, '#020603');
     cx.fillStyle = bg; cx.fillRect(0,0,w,h);
     // A quiet, fixed starfield also appears when WebGL is unavailable.
     for(let i=0;i<480;i++){
@@ -413,12 +413,17 @@ void main(){
   let stopped = false;
   let previousTime = 0;
   let raf = 0;
-  const startTime = performance.now();
   // Higher-resolution default without demanding a full 4K ray pass on laptops.
   const renderQuality=(params.get('quality')||'balanced').toLowerCase();
   const frameInterval=1000/(renderQuality==='low' ? 24 : 30);
   const maxWidth=renderQuality==='cinema' ? 1920 : renderQuality==='high' ? 1600 : renderQuality==='low' ? 760 : 1320;
   const maxHeight=renderQuality==='cinema' ? 1180 : renderQuality==='high' ? 980 : renderQuality==='low' ? 540 : 830;
+  const adaptive = renderQuality === 'balanced';
+  let adaptiveScale = 1;
+  let visualSeconds = 0;
+  let lastPresented = 0;
+  let slowFrames = 0;
+  let fastFrames = 0;
   let compositorOK=false;
   function resizeCompositor(width,height){
     compositorOK=false;
@@ -437,8 +442,8 @@ void main(){
   function resize() {
     const box=gate.getBoundingClientRect();
     const deviceScale=Math.min(window.devicePixelRatio||1,1.35);
-    const targetWidth=Math.max(1,box.width*deviceScale);
-    const targetHeight=Math.max(1,box.height*deviceScale);
+    const targetWidth=Math.max(1,box.width*deviceScale*adaptiveScale);
+    const targetHeight=Math.max(1,box.height*deviceScale*adaptiveScale);
     const scale = Math.min(1, maxWidth/targetWidth, maxHeight/targetHeight);
     const width=Math.max(2,Math.round(targetWidth*scale));
     const height=Math.max(2,Math.round(targetHeight*scale));
@@ -447,7 +452,7 @@ void main(){
       gl.viewport(0,0,width,height);
       resizeCompositor(width,height);
     }
-    render(reduced?0:(performance.now()-startTime)*.001);
+    render(reduced?0:visualSeconds);
   }
   function render(seconds) {
     gl.bindFramebuffer(gl.FRAMEBUFFER,compositorOK ? sceneBuffer : null);
@@ -469,7 +474,28 @@ void main(){
     if(stopped || document.hidden || !visible || reduced) return;
     if(now-previousTime >= frameInterval){
       previousTime=now-((now-previousTime)%frameInterval);
-      render((now-startTime)*.001);
+      const elapsed=lastPresented ? now-lastPresented : frameInterval;
+      // A clamped simulation clock prevents sudden orbital jumps after a tab
+      // resumes or a laptop misses several display refreshes.
+      visualSeconds += Math.min(.048,Math.max(0,elapsed*.001));
+      lastPresented=now;
+      // Adapt pixel density slowly if the current GPU cannot sustain the
+      // target cadence. Hysteresis avoids constant framebuffer reallocations.
+      if(adaptive){
+        if(elapsed>48){ slowFrames++; fastFrames=Math.max(0,fastFrames-2); }
+        else if(elapsed<37){ fastFrames++; slowFrames=Math.max(0,slowFrames-1); }
+        else { slowFrames=Math.max(0,slowFrames-1); fastFrames=Math.max(0,fastFrames-1); }
+        if(slowFrames>=22 && adaptiveScale>.70){
+          adaptiveScale=Math.max(.70,adaptiveScale-.08);
+          slowFrames=0; fastFrames=0;
+          resize();
+        } else if(fastFrames>=150 && adaptiveScale<1){
+          adaptiveScale=Math.min(1,adaptiveScale+.04);
+          slowFrames=0; fastFrames=0;
+          resize();
+        }
+      }
+      render(visualSeconds);
     }
     raf=requestAnimationFrame(frame);
   }
@@ -480,7 +506,10 @@ void main(){
     else if(raf){ cancelAnimationFrame(raf);raf=0; }
   },{threshold:0.01});
   io.observe(gate);
-  document.addEventListener('visibilitychange',queueFrame);
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden) lastPresented=0;
+    queueFrame();
+  });
   window.addEventListener('resize',resize,{passive:true});
   canvas.addEventListener('webglcontextlost',(e)=>{
     e.preventDefault();stopped=true;

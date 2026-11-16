@@ -1,7 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="32" fill="#111d15"/>
-  <circle cx="32" cy="32" r="29" fill="none" stroke="#d4ba84" stroke-width="1.3"/>
-  <circle cx="32" cy="32" r="25.8" fill="none" stroke="#d4ba84" stroke-width=".55" opacity=".7"/>
-  <text x="32" y="37.5" text-anchor="middle" fill="#ead9b1" font-family="Georgia,'Times New Roman',serif" font-size="20" font-style="italic" letter-spacing="-2.5">SKS</text>
-  <path d="M21 45h22" stroke="#d4ba84" stroke-width=".75"/>
+  <circle cx="32" cy="32" r="32" fill="#07110b"/>
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#d8bb83" stroke-width="1.15"/>
+  <text x="32" y="40" text-anchor="middle" fill="#ecd9b4" font-family="Georgia, Times New Roman, serif" font-weight="500" font-size="24" letter-spacing="-2.3">SKS</text>
 </svg>
