@@ -43,3 +43,20 @@ body.about-v27{background:radial-gradient(ellipse 70% 28% at 20% 1%,rgba(70,92,5
 @media(max-width:980px){.about-layout{grid-template-columns:minmax(205px,260px) minmax(0,1fr);gap:40px}.experience-row{grid-template-columns:36px minmax(0,1fr)}.experience-when{grid-column:2;text-align:left;display:flex;gap:9px;flex-wrap:wrap}.experience-when time,.experience-when span{display:inline}}
 @media(max-width:690px){.about-main{padding-top:112px}.about-layout{display:block;width:min(100% - 40px,580px)}.about-identity{position:static;max-width:100%;display:grid;grid-template-columns:125px minmax(0,1fr);gap:12px 17px;align-items:end;margin-bottom:40px}.about-portrait{grid-row:span 2;aspect-ratio:4/5;height:166px}.about-portrait img{object-position:center 21%}.about-identity-copy{padding-top:0}.about-identity-copy h1{font-size:22px}.about-links{margin:0;grid-column:2;gap:5px}.about-links a{font-size:12px;padding:6px 10px}.experience-row{gap:10px}.education-row{display:block}.education-row time{display:block;text-align:left;margin-top:9px}.methods-list>div{display:block}.methods-list dd{margin-top:3px}.about-footer{flex-direction:column;align-items:start}}
 @media(prefers-reduced-motion:reduce){.about-links a{transition:none}}
+
+/* Project index on About: unboxed, compact and consistent with the appointment ledger. */
+.about-projects .about-section-head{margin-bottom:17px}
+.about-project-group{border-top:1px solid var(--ab-line);padding:18px 0 8px}
+.about-project-group-heading{font:500 15px/1.3 'STIX Two Text',Georgia,serif;color:var(--ab-gold);margin:0 0 11px}
+.about-project-index{list-style:none;margin:0 0 7px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+.about-project-index li{min-width:0;border-bottom:1px solid var(--ab-line)}
+.about-project-index a{display:block;padding:12px 2px;text-decoration:none;color:var(--ab-muted);font:400 14px/1.45 'STIX Two Text',Georgia,serif;transition:color .2s ease,padding-left .2s ease}
+.about-project-index a:hover,.about-project-index a:focus-visible{color:var(--ab-ink);padding-left:6px}
+@media(max-width:900px){.about-project-index{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.about-project-index a{transition:none}}
+
+.about-engagement-list{border-top:1px solid var(--ab-line)}
+.about-engagement{display:grid;grid-template-columns:minmax(160px,260px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--ab-line)}
+.about-engagement h3{font:500 15px/1.4 'STIX Two Text',Georgia,serif;color:var(--ab-ink);margin:0}
+.about-engagement p{font:400 14px/1.55 'STIX Two Text',Georgia,serif;color:var(--ab-muted);margin:0}
+@media(max-width:900px){.about-engagement{grid-template-columns:1fr;gap:5px}}

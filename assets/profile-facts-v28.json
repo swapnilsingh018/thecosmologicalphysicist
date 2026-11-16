@@ -1,14 +1,11 @@
 {
   "papers": {
     "minimum": 25,
-    "suffix": "+",
-    "basis": "Owner-provided count of papers and manuscripts (CV list is not current)"
+    "suffix": "+"
   },
   "projects": 17,
   "countries": {
-    "total": 7,
-    "scope": "Italy, India, Japan, Taiwan, Poland, Egypt, USA; includes remote research and academic affiliations"
+    "total": 7
   },
-  "firstAppointment": "2022-07-01",
-  "notes": "Years count from the first listed research/engineering appointment in July 2022 and are not additive full-time experience."
+  "firstAppointment": "2022-07-01"
 }
