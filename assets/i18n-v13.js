@@ -1,5 +1,5 @@
-/* EN / IT presentation for the three public-facing rooms.
-   Source labels remain in the HTML for accessibility and graceful fallback. */
+/* Unified EN / IT translations for the complete static portfolio.
+   Original English HTML is retained as a no-script fallback. */
 (() => {
   'use strict';
 
@@ -198,6 +198,8 @@
     return_entrance: ' Torna all’ingresso'
   };
 
+  Object.assign(italian, window.SKS_TRANSLATIONS_V28?.data || {});
+
   const messages = {
     'Private access is being prepared. Invitations are not active yet.': 'L’accesso riservato è in preparazione. Gli inviti non sono ancora attivi.',
     'The private workspace is temporarily unavailable.': 'L’area riservata è temporaneamente non disponibile.',
@@ -217,6 +219,52 @@
     'This invitation or recovery link may have expired. Request a new link.': 'Questo link potrebbe essere scaduto. Richiedine uno nuovo.',
     'That file could not be opened. Please try again.': 'Impossibile aprire il file. Riprova.'
   };
+
+  const supplementary = window.SKS_TRANSLATIONS_V28 || {};
+  const phrases = supplementary.text || {};
+  const pageTitles = supplementary.pageTitles || {};
+  const originalInline = new WeakMap();
+  const originalHref = new WeakMap();
+
+  // Preserve the markup of nested headings, links and MathJax controls; translate
+  // only original text nodes. The source language is recoverable without reloads.
+  function translateRemainingText() {
+    if (!document.body || !document.createTreeWalker) return;
+    const scan = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = scan.nextNode())) {
+      const parent = node.parentElement;
+      if (!parent || parent.closest('[data-i18n], [data-no-translate], [translate="no"], script, style, noscript, textarea, code, pre, svg, math, iframe')) continue;
+      if (!originalInline.has(node)) originalInline.set(node, node.nodeValue);
+      const original = originalInline.get(node);
+      const key = original.replace(/\s+/g, ' ').trim();
+      const translated = phrases[key];
+      if (language !== 'it' || typeof translated !== 'string') {
+        if (node.nodeValue !== original) node.nodeValue = original;
+        continue;
+      }
+      const before = (original.match(/^\s*/) || [''])[0];
+      const after = (original.match(/\s*$/) || [''])[0];
+      node.nodeValue = before + translated + after;
+    }
+  }
+
+  function retainLanguageAcrossPages() {
+    if (!document.body) return;
+    document.querySelectorAll('a[href]').forEach(link => {
+      if (!originalHref.has(link)) originalHref.set(link, link.getAttribute('href'));
+      const href = originalHref.get(link);
+      if (!href || href[0] === '#' || /^(?:mailto:|tel:|data:|javascript:)/i.test(href)) return;
+      try {
+        const url = new URL(href, location.href);
+        if (url.origin !== location.origin) return;
+        if (!(/\.html$/i.test(url.pathname) || url.pathname.endsWith('/'))) return;
+        if (language === 'it') url.searchParams.set('lang', 'it');
+        else url.searchParams.delete('lang');
+        link.setAttribute('href', url.pathname + url.search + url.hash);
+      } catch { /* A malformed href should not break language controls. */ }
+    });
+  }
 
   const originalText = new WeakMap();
   const originalAria = new WeakMap();
@@ -259,7 +307,15 @@
       button.setAttribute('aria-pressed', String(active));
       button.classList.toggle('is-active', active);
     });
-    if (language === 'it') {
+    translateRemainingText();
+    retainLanguageAcrossPages();
+    const pageKey = location.pathname.includes('/research/kahler-stability-wall/')
+      ? 'research/kahler-stability-wall/index.html'
+      : (location.pathname.split('/').pop() || 'index.html');
+    if (language === 'it' && pageTitles[pageKey]) {
+      document.title = pageTitles[pageKey];
+      if (description) description.content = 'Profilo di Swapnil Kumar Singh: ricerca, fisica computazionale e ingegneria.';
+    } else if (language === 'it') {
       document.title = document.body.classList.contains('ideas-v16') ? 'Idee — Swapnil Kumar Singh'
         : document.body.classList.contains('about-v27') ? 'Profilo — Swapnil Kumar Singh'
         : document.body.classList.contains('public-v13') ? 'Ricerca pubblica — Swapnil Kumar Singh'
@@ -288,8 +344,12 @@
     message(value) { return language === 'it' ? (messages[value] ?? value) : value; },
     apply
   };
-  document.querySelectorAll('[data-set-lang]').forEach(button => {
-    button.addEventListener('click', () => apply(button.dataset.setLang, true));
-  });
-  apply(readPreference());
+  const initialize = () => {
+    document.querySelectorAll('[data-set-lang]').forEach(button => {
+      button.addEventListener('click', () => apply(button.dataset.setLang, true));
+    });
+    apply(readPreference());
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initialize, { once: true });
+  else initialize();
 })();

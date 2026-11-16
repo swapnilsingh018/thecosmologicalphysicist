@@ -22,9 +22,13 @@
         button.classList.toggle("is-active", selected);
       });
       if (count) {
-        const label = filters.find(button => button.dataset.projectFilter === chosen)?.textContent.trim().replace(/\s+\d+$/, "") || "this field";
-        count.textContent = chosen === "all" ? "Showing all " + visible + " studies"
-          : "Showing " + visible + " studies in " + label;
+        const it = document.documentElement.lang === 'it';
+        const labels = it
+          ? { all: 'tutti', theory: 'cosmologia e teoria', observation: 'astrofisica', engineering: 'ingegneria' }
+          : { all: 'all', theory: 'cosmology and theory', observation: 'astrophysics', engineering: 'engineering' };
+        count.textContent = it
+          ? chosen === 'all' ? `Mostrati tutti i ${visible} studi` : `Mostrati ${visible} studi di ${labels[chosen]}`
+          : chosen === 'all' ? `Showing all ${visible} studies` : `Showing ${visible} studies in ${labels[chosen]}`;
       }
       if (updateURL) {
         const url = new URL(location.href);
@@ -34,6 +38,7 @@
       }
     }
     filters.forEach(button => button.addEventListener("click", () => showField(button.dataset.projectFilter, true)));
+    document.addEventListener('sks:languagechange', () => showField(new URLSearchParams(location.search).get('field') || 'all'));
     showField(new URLSearchParams(location.search).get("field") || "all");
   }
 
