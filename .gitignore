@@ -6,3 +6,10 @@
 node_modules/
 dist/
 .openai/
+
+# Local releases and editor instructions
+*.bundle
+*.patch
+INSTALL-*.md
+__MACOSX/
+_site/

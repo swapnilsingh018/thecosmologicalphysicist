@@ -28,7 +28,7 @@ for (const [name, page] of [['public', world], ['ideas', ideas]]) {
   assert.deepEqual(labels, ['nav_home', 'nav_about', 'nav_work', 'nav_publications', 'nav_ideas']);
 }
 for (const [name, page] of [['about', about], ['publications', papers]]) {
-  const nav = page.match(/<nav\b[^>]*id="nav"[^>]*>[\s\S]*?<\/nav>/)?.[0] ?? '';
+  const nav = page.match(/<nav\b[^>]*(?:id="nav"|class="nav-island")[^>]*>[\s\S]*?<\/nav>/)?.[0] ?? '';
   assert.equal((nav.match(/<a\s/g) ?? []).length, 5, `${name} retains five destinations`);
   assert.deepEqual([...nav.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map(m => m[1]),
     ['Home', 'About', 'Research', 'Publications', 'Idea'], `${name} uses the canonical menu order`);
