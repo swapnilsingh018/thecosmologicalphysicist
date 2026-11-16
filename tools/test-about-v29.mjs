@@ -34,3 +34,14 @@ assert.equal((html.match(/data-stat=/g)||[]).length,4);
 for(const a of [...html.matchAll(/<a href="(projects\/[^"#?]+\.html)"/g)])assert.ok(fs.existsSync(path.join(root,a[1])));
 assert.doesNotMatch(fs.readFileSync(path.join(root,'research/kahler-stability-wall/index.html'),'utf8'),/journal-version button is reserved/);
 console.log('PASS: 14 CV appointments/projects, five CV engagements, 17 linked research records, bilingual labels, and no editorial disclaimers.');
+
+// V30 safeguard: professional links are part of the profile and must not disappear.
+for(const href of ['https://www.linkedin.com/in/swapnilsingh018','https://inspirehep.net/authors/2052015','https://github.com/swapnilsingh018','mailto:swapnilsingh.ph@gmail.com']){
+ assert.ok(html.includes(`href="${href}"`),`About is missing professional link: ${href}`);
+}
+assert.match(html,/aria-label="LinkedIn profile of Swapnil Kumar Singh"/);
+for(const key of ['about_focus_cosmology','about_focus_computation','about_focus_engineering','about_focus_aria']){
+ assert.match(html,new RegExp(`data-i18n(?:-aria)?="${key}"`));
+ assert.ok(italian.includes(`${key}:`),`Missing Italian copy for ${key}`);
+}
+console.log('PASS: LinkedIn restored prominently; INSPIRE-HEP, GitHub and email preserved.');
