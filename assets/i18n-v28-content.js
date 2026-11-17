@@ -55,7 +55,7 @@ window.SKS_TRANSLATIONS_V28 = Object.freeze({
     "Read on arXiv": "Leggi su arXiv",
     "Read the preprint": "Leggi il preprint",
     "Skip to private access": "Vai all’area riservata",
-    "M.Sc. in Physical and Astrophysical Sciences": "Laurea magistrale in Scienze Fisiche e Astrofisiche",
+    "MS in Physical and Astrophysical Sciences": "MS in Scienze Fisiche e Astrofisiche",
     "B.E. in Mechanical Engineering": "Laurea in Ingegneria Meccanica",
     "Florence, Italy": "Firenze, Italia",
     "Bengaluru, India": "Bengaluru, India",
