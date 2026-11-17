@@ -11,7 +11,4 @@
       row.style.setProperty('--about-my', `${Math.round(event.clientY-r.top)}px`);
     }, { passive:true }));
   }
-  document.querySelectorAll('.institution-favicon').forEach((image) => {
-    image.addEventListener('error', () => image.parentElement?.classList.add('icon-unavailable'), {once:true});
-  });
 })();

@@ -8,7 +8,7 @@ const page=fs.readFileSync(path.join(root,'cv.html'),'utf8');
 const it=fs.readFileSync(path.join(root,'assets/i18n-v13.js'),'utf8');
 assert.equal((page.match(/class="experience-institution"/g)||[]).length,14);
 assert.equal((page.match(/class="experience-position"/g)||[]).length,14);
-assert.equal((page.match(/class="institution-favicon"/g)||[]).length,13);
+assert.equal((page.match(/class="institution-favicon"/g)||[]).length,0);
 assert.equal((page.match(/class="experience-row"/g)||[]).length,14);
 assert.doesNotMatch(page, /fellow|m\.sc\./i);
 assert.doesNotMatch(it,/fellow|borsista/i);
@@ -23,4 +23,4 @@ assert.match(fs.readFileSync(path.join(root,'news.html'),'utf8'),/TEEP research 
 const translations=fs.readFileSync(path.join(root,'assets/i18n-v28-content.js'),'utf8');
 const context={window:{}};vm.runInNewContext(translations,context);
 assert.equal(context.window.SKS_TRANSLATIONS_V28.text['MS in Physical and Astrophysical Sciences'],'MS in Scienze Fisiche e Astrofisiche');
-console.log('PASS: V31 institutional-first appointments, real-site icon fallbacks, technical methods, MS→PhD direction, bilingual copy and restored links.');
+console.log('PASS: institution-first appointments, restrained numerical markers, technical methods, MS→PhD direction, bilingual copy and restored links.');
