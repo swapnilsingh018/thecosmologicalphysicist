@@ -13,3 +13,7 @@ dist/
 INSTALL-*.md
 __MACOSX/
 _site/
+
+# Secrets
+.env
+.env.*

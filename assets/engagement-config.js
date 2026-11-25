@@ -1,8 +1,3 @@
-/* Public integration identifiers only — never put private tokens here.
-   Leave values empty until the services and privacy notice are configured.
-   A blank configuration NEVER invents visitor counts or online availability. */
-window.SKS_ENGAGEMENT_CONFIG = Object.freeze({
-  tawkPropertyId: "6afb1aa20808f53cc365feca",
-  tawkWidgetId: "1k7ie034n",
-  visitorStatsEndpoint: ""
-});
+/* Live chat has been removed from the site. Kept only so legacy pages that
+   still reference this file load without errors. */
+window.SKS_ENGAGEMENT_CONFIG = Object.freeze({});
