@@ -35,3 +35,7 @@ body { background: #000; color: #ece7dd; }
 /* Inside the Lab page the host page already provides navigation and footer. */
 .embedded .site-header, .embedded .mobile-nav, .embedded .footer, .embedded .reading-progress { display: none !important; }
 .embedded .hero-grid { padding-top: 64px !important; }
+
+/* Labels are now sentence case; drop the tracking that was set for capitals. */
+body *:not(.display-title):not(h1):not(h2) { letter-spacing: normal !important; text-transform: none !important; }
+.hero-overline { font: 400 15px/1.4 var(--sans) !important; color: #bdb7ab !important; }

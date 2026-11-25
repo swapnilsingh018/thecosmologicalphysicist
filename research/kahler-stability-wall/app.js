@@ -158,7 +158,7 @@ function setPotential(q) {
   const roots = stationaryPoints(tensionRatio);
   const state = $("potentialState");
   state.className = "plot-state " + (tensionRatio > 1.0005 ? "lost" : tensionRatio >= .9995 ? "critical" : "stable");
-  state.textContent = tensionRatio > 1.0005 ? "VALLEY LOST" : tensionRatio >= .9995 ? "CRITICAL FOLD" : "METASTABLE VALLEY";
+  state.textContent = tensionRatio > 1.0005 ? "No minimum" : tensionRatio >= .9995 ? "Critical fold" : "Metastable minimum";
   if (tensionRatio < 1 && roots.length === 2) {
     const minU = U(roots[0] * BENCH.sigmaC, BENCH.aC * tensionRatio);
     const maxU = U(roots[1] * BENCH.sigmaC, BENCH.aC * tensionRatio);
@@ -172,8 +172,8 @@ function setPotential(q) {
     $("barrierHeight").textContent = "0";
     $("potentialExplain").textContent = "At the exact fold, Uσ and Uσσ vanish together. The Kähler minimum and barrier collide.";
   } else {
-    $("minSigma").textContent = "NO LOCAL ROOT";
-    $("barrierSigma").textContent = "NO LOCAL ROOT";
+    $("minSigma").textContent = "No local root";
+    $("barrierSigma").textContent = "No local root";
     $("barrierHeight").textContent = "—";
     $("potentialExplain").textContent = "Beyond the wall, the nearby metastable Kähler valley has disappeared. The local one-volume stabilization no longer exists.";
   }
@@ -295,7 +295,7 @@ function drawChamber(now = performance.now()) {
   const wallPoint = P(1, 1, 0);
   ctx.save(); ctx.shadowColor = "#ffe4b0"; ctx.shadowBlur = 24;
   dot(ctx, wallPoint.x, wallPoint.y, "#f7ddb2", 4.5, false); ctx.restore();
-  label(ctx, "CRITICAL FOLD", wallPoint.x + 13, wallPoint.y - 23, "#e9cf9e", w < 500 ? 8 : 10);
+  label(ctx, "Critical fold", wallPoint.x + 13, wallPoint.y - 23, "#e9cf9e", w < 500 ? 8 : 10);
   label(ctx, "a / ac = 1", wallPoint.x + 13, wallPoint.y - 9, "#a7aebb", w < 500 ? 8 : 9);
 
   // Stationary branches: the blue stable solution and warm-orange barrier
@@ -354,8 +354,8 @@ function drawChamber(now = performance.now()) {
   label(ctx, "reduced U", zo.x + 5, zo.y - 7, "#8cabbc", 10);
 
   // Horizon register and camera status.
-  label(ctx, "EXACT POTENTIAL SURFACE  /  ROTATABLE", 25, h - 102, "#7293a8", w < 500 ? 7 : 9);
-  const phase = tensionRatio > 1.0005 ? "NO STABLE PAIR" : tensionRatio >= .9995 ? "FOLD" : "METASTABLE PAIR";
+  label(ctx, "Potential surface", 25, h - 102, "#7293a8", w < 500 ? 7 : 9);
+  const phase = tensionRatio > 1.0005 ? "No stable pair" : tensionRatio >= .9995 ? "FOLD" : "Metastable pair";
   label(ctx, phase, w - 25, h - 102,
     tensionRatio > 1.0005 ? "#f4a3a9" : "#e2c796", w < 500 ? 8 : 10, "right");
 }
@@ -371,29 +371,29 @@ function updateChamberFromTension(q, roots) {
   const heroState = $("heroCriticalityState");
   let phase, headline, narrative;
   if (q > 1.0005) {
-    phase = 4; headline = "THE VALLEY IS GONE";
+    phase = 4; headline = "Minimum gone";
     narrative = "Across the exact stability wall, the nearby minimum–barrier pair no longer exists. This one-volume model has lost its metastable Kähler valley.";
     state.className = "tower-state state-lost";
     hero.className = "hero-live-readout lost";
-    heroState.textContent = "NO STABLE PAIR";
+    heroState.textContent = "No stable pair";
   } else if (q >= .9995) {
-    phase = 3; headline = "THE WALL IS HERE";
+    phase = 3; headline = "At the wall";
     narrative = "Minimum and barrier meet at σc. At this saddle-node fold the first and second volume derivatives both vanish: Uσ = Uσσ = 0.";
     state.className = "tower-state state-critical";
     hero.className = "hero-live-readout critical";
-    heroState.textContent = "CRITICAL FOLD";
+    heroState.textContent = "Critical fold";
   } else if (q >= .88) {
-    phase = 2; headline = "THE BARRIER THINS";
+    phase = 2; headline = "Barrier thinning";
     narrative = "The two stationary solutions close in. The canonical field separation and the potential barrier shrink toward zero as uplift approaches its critical value.";
     state.className = "tower-state";
     hero.className = "hero-live-readout";
-    heroState.textContent = "BARRIER THINNING";
+    heroState.textContent = "Barrier thinning";
   } else {
-    phase = 1; headline = "THE VALLEY EXISTS";
+    phase = 1; headline = "Minimum present";
     narrative = "A locally stable lower-volume minimum is protected by a higher-volume decompactification barrier. Increase the uplift to see both branches converge.";
     state.className = "tower-state";
     hero.className = "hero-live-readout";
-    heroState.textContent = "METASTABLE VALLEY";
+    heroState.textContent = "Metastable minimum";
   }
   $("chamberStateNo").textContent = "0" + phase + " / 04";
   state.textContent = headline;
@@ -410,9 +410,9 @@ function updateChamberFromTension(q, roots) {
     $("chamberBarrier").textContent = "0";
     $("chamberCurvature").textContent = "ZERO (0)";
   } else {
-    $("chamberSeparation").textContent = "NO PAIR";
-    $("chamberBarrier").textContent = "NO BARRIER";
-    $("chamberCurvature").textContent = "NO MINIMUM";
+    $("chamberSeparation").textContent = "No pair";
+    $("chamberBarrier").textContent = "No barrier";
+    $("chamberCurvature").textContent = "No minimum";
   }
   if (lastChamberQ < 1 && q >= 1 && !chamberMotionReduced) {
     const flash = $("wallFlash");
@@ -429,7 +429,7 @@ function stopChamberPlayback(preservePosition = false) {
   chamberPlaying = false;
   chamberPlaybackEpoch++;
   $("chamberPlayIcon").textContent = "▶";
-  $("chamberPlayText").textContent = chamberPausedElapsed > 0 ? "RESUME THE SWEEP" : "RUN THE CATASTROPHE";
+  $("chamberPlayText").textContent = chamberPausedElapsed > 0 ? "Resume the sweep" : "Sweep through the wall";
   chamberPlay.setAttribute("aria-pressed", "false");
 }
 function smoothChamber(t) {
@@ -460,7 +460,7 @@ chamberPlay.addEventListener("click", () => {
   if (chamberPlaying) { stopChamberPlayback(true); return; }
   chamberPlaying = true;
   $("chamberPlayIcon").textContent = "Ⅱ";
-  $("chamberPlayText").textContent = "PAUSE THE SWEEP";
+  $("chamberPlayText").textContent = "Pause the sweep";
   chamberPlay.setAttribute("aria-pressed", "true");
   if (chamberPausedElapsed === 0) setPotential(.55);
   chamberStart = performance.now() - chamberPausedElapsed;

@@ -1,0 +1,88 @@
+{
+ "title": "Simulation and analysis for engineering and research teams",
+ "lede": "I build physical models that hold up to scrutiny: high-fidelity simulations, thermal and structural design studies, and statistical analysis of difficult data. The same standards I apply in theoretical physics, applied to your problem.",
+ "services": [
+  {
+   "title": "High-fidelity simulation",
+   "text": "Multiphysics and CFD models built from the governing equations up, with mesh and time-step convergence studies, checks against analytic limits and validation against measurements. You receive the model itself, ready to rerun and extend.",
+   "tools": "ANSYS, COMSOL Multiphysics, Python and C solvers",
+   "proof": [
+    [
+     "bio-inspired-aeroacoustics",
+     "Airfoil noise study validated in a wind tunnel"
+    ],
+    [
+     "ammonia-hydrogen-combustion",
+     "Detailed-kinetics flame modelling"
+    ]
+   ],
+   "short": "Multiphysics and CFD models with convergence studies and validation against measurements."
+  },
+  {
+   "title": "Thermal and flow engineering",
+   "text": "Heat transfer, cooling architectures, reacting flows and emissions. I set up conjugate heat-transfer and flow models to compare design options and find the margins that matter before hardware is built.",
+   "tools": "ANSYS, COMSOL Multiphysics, Python",
+   "proof": [
+    [
+     "battery-thermal-management",
+     "Liquid and phase-change cooling for high-power cells"
+    ],
+    [
+     "ammonia-hydrogen-combustion",
+     "NOₓ pathways in ammonia–hydrogen flames"
+    ]
+   ],
+   "short": "Heat transfer, cooling design, reacting flows and emissions."
+  },
+  {
+   "title": "Structural analysis and design optimisation",
+   "text": "Finite-element stress and fatigue analysis, and topology optimisation to remove mass without giving up stiffness or service life. Geometry is delivered back in CAD, ready for the next iteration.",
+   "tools": "ANSYS, SolidWorks, Solid Edge",
+   "proof": [
+    [
+     "orthotic-systems",
+     "Lower-limb orthotics at the Dassault Systèmes Product Innovation Lab"
+    ],
+    [
+     "satellite-servicing",
+     "Servicing architectures and transfer budgets for on-orbit repair"
+    ]
+   ],
+   "short": "Stress and fatigue analysis, and topology optimisation for lighter parts."
+  },
+  {
+   "title": "Data analysis and inference",
+   "text": "Bayesian parameter estimation, MCMC with proper convergence diagnostics, model comparison and uncertainty quantification for noisy or correlated data. Every result comes with its error budget and the code that produced it.",
+   "tools": "Python (NumPy, SciPy), MCMC, Mathematica",
+   "proof": [
+    [
+     "running-hubble",
+     "Supernova cosmology with full covariance at NAOJ and ENEA–Sapienza"
+    ],
+    [
+     "superluminous-supernovae",
+     "Model selection with supernova data"
+    ]
+   ],
+   "short": "Bayesian estimation, MCMC and uncertainty quantification for difficult data."
+  }
+ ],
+ "process": [
+  {
+   "title": "Define the question",
+   "text": "A call to pin down what has to be decided, what data and drawings exist, and what a useful answer looks like."
+  },
+  {
+   "title": "Agree the scope",
+   "text": "A short written scope with deliverables, assumptions and a timeline, before any modelling starts."
+  },
+  {
+   "title": "Model and check",
+   "text": "Work in stages with interim results, so assumptions are visible and can be challenged early."
+  },
+  {
+   "title": "Hand over",
+   "text": "A technical report, the models or code, and a walkthrough so your team can reuse and extend the work."
+  }
+ ]
+}

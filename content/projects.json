@@ -162,7 +162,7 @@
    "slug": "superluminous-supernovae",
    "field": "astro",
    "title": "Superluminous supernovae as cosmological probes",
-   "question": "Can Type Ic superluminous supernovae add useful leverage when standard and modified cosmological backgrounds are compared?",
+   "question": "Can Type Ic superluminous supernovae tighten the comparison between standard and modified cosmological backgrounds?",
    "summary": "Standard and alternative cosmological models compared using supernova observations, with Bayesian parameter estimation, convergence analysis and model selection.",
    "methods": [
     "Supernova likelihood inference",

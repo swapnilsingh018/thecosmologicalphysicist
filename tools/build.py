@@ -15,6 +15,7 @@ YEAR = "2026"
 profile = json.loads((ROOT / "content/profile.json").read_text("utf8"))
 pubs = json.loads((ROOT / "content/publications.json").read_text("utf8"))
 proj = json.loads((ROOT / "content/projects.json").read_text("utf8"))
+consulting = json.loads((ROOT / "content/consulting.json").read_text("utf8"))
 FIELDS = {f["id"]: f for f in proj["fields"]}
 PROJECTS = proj["projects"]
 BY_SLUG = {p["slug"]: p for p in PROJECTS}
@@ -32,7 +33,8 @@ def project_href(slug, prefix=""):
 
 # ---------------------------------------------------------------- shell
 NAV = [("research", "Research", "research.html"), ("publications", "Publications", "publications.html"),
-       ("lab", "Lab", "lab.html"), ("about", "About", "cv.html"), ("contact", "Contact", "#contact")]
+       ("lab", "Lab", "lab.html"), ("consulting", "Consulting", "consulting.html"), ("about", "About", "cv.html"),
+       ("contact", "Contact", "#contact")]
 
 
 def head(*, title, description, path, prefix="", og_image="assets/portrait-public-v27.jpg", noindex=False, extra=""):
@@ -61,7 +63,8 @@ def head(*, title, description, path, prefix="", og_image="assets/portrait-publi
   <link rel="preload" href="{prefix}assets/fonts/lm-roman-10.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="{prefix}assets/fonts/crimson-pro.woff" as="font" type="font/woff" crossorigin>
   <link rel="stylesheet" href="{prefix}assets/v3/site.css">
-  <script defer src="{prefix}assets/v3/site.js"></script>{extra}
+  <script defer src="{prefix}assets/v3/site.js"></script>
+  <script defer src="{prefix}assets/v3/inspire.js"></script>{extra}
 </head>"""
 
 
@@ -90,28 +93,27 @@ def footer(prefix=""):
     links = "".join(f'<li><a href="{e(l["href"])}">{e(l["label"])}</a></li>' for l in profile["links"])
     pages = "".join(f'<li><a href="{prefix}{h}">{t}</a></li>' for t, h in
                     [("Research", "research.html"), ("Publications", "publications.html"), ("Lab", "lab.html"),
-                     ("About and CV", "cv.html"), ("Privacy", "privacy.html")])
+                     ("Consulting", "consulting.html"), ("About", "cv.html")])
     return f"""
   <footer class="site-footer" id="contact">
     <div class="wrap top">
       <div>
         <h2>Contact</h2>
-        <p>For collaboration, questions about a paper or an invitation to speak, write to me.</p>
+        <p>Research questions, collaborations and consulting projects.</p>
         <a class="email" href="mailto:{EMAIL}">{EMAIL}</a>
       </div>
-      <div><h3>Elsewhere</h3><ul>{links}</ul></div>
-      <div><h3>This site</h3><ul>{pages}</ul></div>
+      <div><h3>Profiles</h3><ul>{links}</ul></div>
+      <div><h3>Pages</h3><ul>{pages}</ul></div>
     </div>
     <div class="wrap bottom">
-      <span>© {YEAR} {e(NAME)}</span>
+      <span>© {YEAR} {e(NAME)}, Florence</span>
       <p class="visitor-count" data-visitor-count hidden><span class="live-dot" aria-hidden="true"></span><span><span data-visitor-number></span> unique visitors</span></p>
-      <span class="colophon">Set in Latin Modern, Crimson Pro and Fira Sans.</span>
+      <a href="{prefix}privacy.html">Privacy</a>
     </div>
   </footer>
 </body>
 </html>
 """
-
 
 def page(path, body, *, title, description, active=None, transparent=False, noindex=False, og_image=None, extra=""):
     prefix = "../" if "/" in path else ""
@@ -149,8 +151,9 @@ def ref_links(p):
 def ref(p, prefix=""):
     a = authors(p.get("authors"))
     title = e(p["title"])
-    if p.get("lab"):
-        title = f'<a href="{prefix}lab.html">{title}</a>'
+    href = (f"https://arxiv.org/abs/{p['arxiv']}" if p.get("arxiv") else f"https://doi.org/{p['doi']}" if p.get("doi") else p.get("url"))
+    if href:
+        title = f'<a href="{e(href)}">{title}</a>'
     venue = []
     if p.get("venue"):
         v = f'<i>{e(p["venue"])}</i>'
@@ -161,17 +164,17 @@ def ref(p, prefix=""):
         v += f' ({e(p["year"])})'
         venue.append(v)
     elif p.get("year"):
-        venue.append(f'Preprint, {e(p["year"])}')
+        venue.append(f'arXiv preprint ({e(p["year"])})')
     if p.get("status"):
         venue.append(f'<span class="status">{e(p["status"])}</span>')
     venue += ref_links(p)
     if p.get("lab"):
         venue.append(f'<a href="{prefix}lab.html">Interactive model</a>')
+    keys = " ".join(x for x in [p.get("arxiv", ""), p.get("doi", "").lower()] if x)
+    cites = f'<span class="cites" data-cites="{e(keys)}" hidden></span>' if keys else ""
     a_html = f'<span class="a">{a}</span>' if a else ""
-    return f'<li class="ref"><div><span class="t">{title}</span>{a_html}<span class="v">{"".join(f"<span>{x}</span>" for x in venue)}</span></div></li>'
+    return f'<li class="ref"><div><span class="t">{title}</span>{a_html}<span class="v">{"".join(f"<span>{x}</span>" for x in venue)}{cites}</span></div></li>'
 
-
-# ---------------------------------------------------------------- figures
 def path_from(fn, x0, x1, X, Y, n=160):
     pts = []
     for i in range(n + 1):
@@ -268,93 +271,108 @@ def fig_fold_interactive():
 
 
 # ---------------------------------------------------------------- pages
+def stats_line():
+    return ('<p class="stats" data-inspire-stats hidden><span data-inspire-papers></span> papers on '
+            '<a href="https://inspirehep.net/authors/2052015">INSPIRE-HEP</a>, cited <span data-inspire-cites></span> times</p>')
+
+
+def orgs_block(heading="Research and engineering with"):
+    items = "".join(f"<li>{e(o)}</li>" for o in profile["organisations"])
+    return f'<div class="orgs"><h2>{heading}</h2><ul>{items}</ul></div>'
+
+
 def build_home():
     selected = [p for p in pubs["articles"] if p.get("selected")]
     total = len(pubs["articles"]) + len(pubs["preprints"])
     bio = "".join(f"<p>{e(p)}</p>" for p in profile["bio"])
+    now = ""
+    for c in profile["currently"]:
+        t = f'<a href="{e(c["href"])}">{e(c["text"])}</a>' if c.get("href") else e(c["text"])
+        now += f"<div><dt>{e(c['label'])}</dt><dd>{t}</dd></div>"
     themes = [
-        ("Inflation and the early universe", fig_inflation(), "2a",
-         "A plateau potential of the α-attractor type. Inflation lasts while the field rolls slowly along the plateau.",
-         "Which inflationary models survive ACT DR6 and DESI DR2, how α-attractors arise in supergravity, and how primordial black holes and induced gravitational waves are produced through a cosmological bounce.",
-         [("inflation-act-desi", "Inflation under ACT and DESI"), ("pbh-sigw-bounce", "Black holes in a bounce")]),
-        ("String compactification and quantum gravity", fig_fold(), "2b",
-         "Raising the uplift lifts the volume minimum toward its barrier until both disappear at the stability wall (dashed).",
+        ("Inflation and the early universe", fig_inflation(),
+         "Which inflationary models survive ACT DR6 and DESI DR2, how α-attractors arise in supergravity, and how primordial black holes and induced gravitational waves form in a bouncing universe.",
+         [("inflation-act-desi", "Inflation under ACT and DESI"), ("pbh-sigw-bounce", "Black holes in a bounce")], ""),
+        ("String compactification and quantum gravity", fig_fold(),
          "When a string vacuum can support inflation at all: moduli stabilisation and its limits in brane–antibrane inflation, deformed phase-space geometry, and higher-loop structure in supersymmetric gauge theory.",
-         [("kahler-stability-wall", "The Kähler stability wall"), ("quantum-phase-space", "Deformed phase space")]),
-        ("Late-time cosmology and probes", fig_hubble(), "2c",
-         "Schematic of the test, with illustrative points: H₀ fitted in redshift bins. A constant lies flat; a drift points to new physics or a mis-specified background.",
-         "Whether the Hubble constant runs with redshift in supernova data, emergent cosmologies in dissipative f(T) gravity, and lensed fast radio bursts as distance probes.",
-         [("running-hubble", "A running Hubble constant"), ("emergent-ft-gravity", "Emergent f(T) cosmology"), ("frb-lensing", "FRB lensing")]),
+         [("kahler-stability-wall", "The Kähler stability wall"), ("quantum-phase-space", "Deformed phase space")], ""),
+        ("Late-time cosmology", fig_hubble(),
+         "Whether the Hubble constant drifts with redshift in supernova data, emergent cosmologies in dissipative f(T) gravity, and lensed fast radio bursts as distance probes.",
+         [("running-hubble", "A running Hubble constant"), ("emergent-ft-gravity", "Emergent f(T) cosmology"), ("frb-lensing", "FRB lensing")],
+         "Schematic, not data."),
     ]
     theme_html = ""
-    for title, svg, num, cap, text, rel in themes:
-        links = ", ".join(f'<a href="{project_href(s)}">{e(t)}</a>' for s, t in rel)
+    for title, svg, text, rel, note in themes:
+        links = "".join(f'<li><a href="{project_href(s)}">{e(t)}</a></li>' for s, t in rel)
+        cap = f"<figcaption>{e(note)}</figcaption>" if note else ""
         theme_html += f"""
           <article class="theme">
-            <figure class="figure">{svg}<figcaption><b>Figure {num}.</b> {e(cap)}</figcaption></figure>
+            <figure class="figure">{svg}{cap}</figure>
             <h3>{e(title)}</h3>
             <p>{e(text)}</p>
-            <p class="related">Projects: {links}</p>
+            <ul class="related">{links}</ul>
           </article>"""
     kw = ALL_PUBS["kahler-wall"]
     refs = "".join(ref(p) for p in selected)
+    services = "".join(f'<li><h3>{e(s["title"])}</h3><p>{e(s["short"])}</p></li>' for s in consulting["services"])
     body = f"""
     <section class="hero" aria-labelledby="name">
       <div class="bh-stage" id="blackhole-entry" data-gateway-mode="portal"><canvas id="blackhole-gateway-canvas" aria-hidden="true"></canvas></div>
       <div class="wrap">
         <div class="hero-copy">
+          <p class="role">{e(profile["title"])}</p>
           <h1 id="name">{e(NAME)}</h1>
-          <p class="affil">Theoretical cosmology, University of Florence</p>
           <p class="lede">{e(profile["lede"])}</p>
           <div class="actions">
-            <a class="btn btn-primary" href="#latest">Latest result</a>
-            <a class="btn" href="publications.html">Publications</a>
+            <a class="btn btn-primary" href="research.html">Research</a>
+            <a class="btn" href="consulting.html">Consulting</a>
           </div>
+          {stats_line()}
         </div>
       </div>
-      <p class="fig1"><b>Figure 1.</b> Light bending around a Schwarzschild black hole with a Doppler-brightened accretion disk, rendered live in your browser.</p>
     </section>
 
-    <section class="section" aria-labelledby="abstract-h">
-      <div class="wrap abstract">
+    <section class="section about" aria-labelledby="about-h">
+      <div class="wrap about-grid">
         <figure class="portrait"><img src="assets/portrait-about.webp" width="1122" height="1402" alt="Portrait of {e(NAME)}" loading="lazy"></figure>
         <div class="text">
-          <h2 id="abstract-h">Abstract</h2>
+          <h2 id="about-h" class="sr-only">About</h2>
           {bio}
-          <div class="actions"><a class="btn" href="cv.html">About and CV</a></div>
+          <div class="actions"><a class="btn" href="cv.html">Full CV</a><a class="btn" href="publications.html">Publications</a></div>
         </div>
+        <dl class="now">{now}</dl>
       </div>
+      <div class="wrap">{orgs_block()}</div>
     </section>
 
     <section class="section" id="research-themes" aria-labelledby="research-h">
       <div class="wrap">
-        <h2 class="section-title" id="research-h"><span class="n">1</span> Research</h2>
-        <p class="section-intro">Three connected questions about where the universe came from and how we can test it. Each links to the projects behind it.</p>
+        <h2 class="section-title" id="research-h">Research</h2>
         <div class="themes">{theme_html}
         </div>
-        <p class="engineering-note">Before physics I trained as a mechanical engineer. That work, in combustion, heat transfer, structures and space systems, is in the <a href="research.html#engineering">research index</a>.</p>
+        <p class="engineering-note">My earlier engineering work, in combustion, heat transfer, structures and space systems, is listed in the <a href="research.html#engineering">research index</a>.</p>
       </div>
     </section>
 
     <section class="section" id="latest" aria-labelledby="latest-h">
       <div class="wrap">
-        <h2 class="section-title" id="latest-h"><span class="n">2</span> Latest result</h2>
+        <h2 class="section-title" id="latest-h">Latest paper</h2>
         <div class="latest">
           <div>
             <h3><a href="https://arxiv.org/abs/{kw["arxiv"]}">The Kähler stability wall in perturbative brane–antibrane inflation</a></h3>
             <p class="byline">S. K. Singh, arXiv:{kw["arxiv"]} [hep-th], November 2026</p>
             <div class="summary">
-              <p>Brane–antibrane inflation needs the Kähler volume to stay stabilised while the anti-D3 tension drives inflation. That sets an exact upper bound on the tension: beyond it, the volume minimum and its barrier merge and disappear.</p>
-              <p>The paper finds this boundary in closed form, derives how the modulus mass and barrier height vanish as it is approached, and turns the result into necessary conditions on the flux data of candidate compactifications.</p>
+              <p>Brane–antibrane inflation needs the Kähler volume to stay stabilised while the anti-D3 tension drives inflation. That requirement sets an exact upper bound on the tension. Beyond it, the volume minimum and its barrier merge and disappear.</p>
+              <p>The paper finds the boundary in closed form, derives how the modulus mass and barrier height vanish as it is approached, and turns the result into necessary conditions on the flux data of candidate compactifications.</p>
             </div>
             <div class="actions">
               <a class="btn btn-primary" href="https://arxiv.org/abs/{kw["arxiv"]}">Read on arXiv</a>
-              <a class="btn" href="lab.html">Open the full model</a>
+              <a class="btn" href="lab.html">Interactive model</a>
             </div>
           </div>
           <figure class="figure">
             {fig_fold_interactive()}
-            <figcaption id="fold-help"><b>Figure 3.</b> Drag <span class="math">a</span> toward zero. Near the wall the potential takes the local form <span class="math">V = x<sup>3</sup>/3 − a x</span>: the minimum (amber) and barrier (ring) approach each other, the barrier height falls as <span class="math">a<sup>3/2</sup></span> and the curvature as <span class="math">a<sup>1/2</sup></span>.</figcaption>
+            <figcaption id="fold-help">Drag <span class="math">a</span> toward zero. Near the wall the potential reduces to <span class="math">V = x<sup>3</sup>/3 − a x</span>. The minimum and the barrier close in on each other; the barrier height falls as <span class="math">a<sup>3/2</sup></span> and the curvature as <span class="math">a<sup>1/2</sup></span>.</figcaption>
           </figure>
         </div>
       </div>
@@ -362,22 +380,75 @@ def build_home():
 
     <section class="section" id="papers" aria-labelledby="papers-h">
       <div class="wrap">
-        <h2 class="section-title" id="papers-h"><span class="n">3</span> Selected papers</h2>
-        <div class="article">
-          <div class="main"><ol class="refs">{refs}</ol>
-            <div class="actions more-link"><a class="btn" href="publications.html">All {total} papers and preprints</a><a class="btn" href="https://inspirehep.net/authors/2052015">INSPIRE-HEP</a></div>
-          </div>
-          <aside class="margin"><p class="margin-note">Journal articles, newest first. Author lists are complete; my name is in bold.</p></aside>
+        <h2 class="section-title" id="papers-h">Selected papers</h2>
+        <div class="narrow"><ol class="refs">{refs}</ol>
+          <div class="actions more-link"><a class="btn" href="publications.html">All {total} papers and preprints</a><a class="btn" href="https://inspirehep.net/authors/2052015">INSPIRE-HEP profile</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="consulting" aria-labelledby="consult-h">
+      <div class="wrap">
+        <h2 class="section-title" id="consult-h">Consulting</h2>
+        <div class="consult-teaser">
+          <p class="big">I also take on simulation and analysis work for engineering and research teams, drawing on a background in mechanical engineering and computational physics.</p>
+          <ul class="service-list">{services}</ul>
+          <div class="actions"><a class="btn btn-primary" href="consulting.html">How I can help</a><a class="btn" href="mailto:{EMAIL}?subject=Project%20enquiry">Describe your project</a></div>
         </div>
       </div>
     </section>"""
     extra = '\n  <script defer src="assets/blackhole-gateway-v3.js?v=16"></script>\n  <script defer src="assets/v3/fold.js"></script>\n  <script type="application/ld+json">' + json.dumps({
         "@context": "https://schema.org", "@type": "Person", "name": NAME, "url": SITE, "email": "mailto:" + EMAIL,
-        "jobTitle": "Physicist", "affiliation": {"@type": "CollegeOrUniversity", "name": "University of Florence"},
-        "knowsAbout": ["Cosmology", "Inflation", "String compactification", "Early universe"],
+        "jobTitle": profile["title"], "affiliation": {"@type": "CollegeOrUniversity", "name": "University of Florence"},
+        "knowsAbout": ["Cosmology", "Inflation", "String compactification", "Computational physics", "Simulation"],
         "image": SITE + "assets/portrait-about.webp", "sameAs": [l["href"] for l in profile["links"]]}, ensure_ascii=False) + "</script>"
-    page("index.html", body, title=f"{NAME}: theoretical cosmology",
-         description=profile["lede"] + " University of Florence.", transparent=True, extra=extra)
+    page("index.html", body, title=f"{NAME}, theoretical cosmologist and computational physicist",
+         description=profile["lede"], transparent=True, extra=extra)
+
+def build_consulting():
+    svc = ""
+    for s in consulting["services"]:
+        proof = "".join(f'<li><a href="{project_href(slug)}">{e(t)}</a></li>' for slug, t in s["proof"])
+        svc += f"""
+        <article class="service">
+          <h3>{e(s["title"])}</h3>
+          <p>{e(s["text"])}</p>
+          <dl class="facts"><div><dt>Tools</dt><dd>{e(s["tools"])}</dd></div></dl>
+          <h4>Past work</h4>
+          <ul class="related">{proof}</ul>
+        </article>"""
+    steps = "".join(f'<li><h3>{e(x["title"])}</h3><p>{e(x["text"])}</p></li>' for x in consulting["process"])
+    body = f"""
+    <header class="page-head"><div class="wrap">
+      <h1>{e(consulting["title"])}</h1>
+      <p class="lede">{e(consulting["lede"])}</p>
+      <div class="actions"><a class="btn btn-primary" href="mailto:{EMAIL}?subject=Project%20enquiry">Describe your project</a><a class="btn" href="#services">Services</a></div>
+    </div></header>
+    <div class="wrap">
+      <section class="section" id="services" aria-labelledby="h-services">
+        <h2 class="section-title" id="h-services">Services</h2>
+        <div class="services">{svc}
+        </div>
+      </section>
+      <section class="section" aria-labelledby="h-process">
+        <h2 class="section-title" id="h-process">How a project runs</h2>
+        <ol class="process">{steps}</ol>
+      </section>
+      <section class="section" aria-labelledby="h-orgs">
+        <h2 class="sr-only" id="h-orgs">Organisations</h2>
+        {orgs_block("Experience gained at")}
+      </section>
+      <section class="section cta" aria-labelledby="h-start">
+        <h2 class="section-title" id="h-start">Start a project</h2>
+        <div class="narrow">
+          <p class="big">Send a short description of the problem, what you already have (drawings, data, earlier models) and when you need an answer. I will reply with questions or a first outline of how I would approach it.</p>
+          <div class="actions"><a class="btn btn-primary" href="mailto:{EMAIL}?subject=Project%20enquiry">{EMAIL}</a></div>
+        </div>
+      </section>
+    </div>"""
+    page("consulting.html", body, title=f"Consulting: simulation and analysis | {NAME}",
+         description="High-fidelity simulation, CFD and thermal engineering, FEA and design optimisation, and Bayesian data analysis for engineering and research teams.",
+         active="consulting")
 
 
 def project_row(p):
@@ -392,7 +463,7 @@ def build_research():
         sections += f"""
       <section class="field" id="{f['id'] if f['id'] != 'engineering' else 'engineering'}" aria-labelledby="h-{f['id']}">
         <div class="wrap">
-          <h2 class="section-title" id="h-{f['id']}"><span class="n">{i}</span> {e(f['title'])}</h2>
+          <h2 class="section-title" id="h-{f['id']}">{e(f['title'])}</h2>
           <p class="section-intro">{e(f['intro'])}</p>
           <ul class="project-list">{rows}</ul>
         </div>
@@ -400,7 +471,7 @@ def build_research():
     body = f"""
     <header class="page-head"><div class="wrap">
       <h1>Research</h1>
-      <p class="lede">{len(PROJECTS)} projects, from string compactifications to flame chemistry. Each record states the question, the methods and where the work was done.</p>
+      <p class="lede">Theoretical cosmology first, with the astrophysics and engineering work that came before it.</p>
     </div></header>{sections}"""
     page("research.html", body, title=f"Research | {NAME}", description="Research projects of Swapnil Kumar Singh in cosmology, astrophysics and engineering.", active="research")
 
@@ -465,26 +536,27 @@ def build_publications():
     body = f"""
     <header class="page-head"><div class="wrap">
       <h1>Publications</h1>
-      <p class="lede">{len(arts)} journal articles and {len(pre)} preprints. The live record, with citations, is on <a href="https://inspirehep.net/authors/2052015">INSPIRE-HEP</a>.</p>
+      <p class="lede">{len(arts)} journal articles and {len(pre)} preprints in cosmology, gravitation and high-energy theory.</p>
+      <p class="stats" data-inspire-stats hidden><span data-inspire-papers></span> records on <a href="https://inspirehep.net/authors/2052015">INSPIRE-HEP</a>, cited <span data-inspire-cites></span> times</p>
     </div></header>
     <div class="wrap">
       <section class="section" id="articles" aria-labelledby="h-articles">
-        <h2 class="section-title" id="h-articles"><span class="n">1</span> Journal articles</h2>
+        <h2 class="section-title" id="h-articles">Journal articles</h2>
         <div class="article"><div class="main"><ol class="refs">{''.join(ref(p) for p in arts)}</ol></div>
-        <aside class="margin"><p class="margin-note">Newest first. Complete author lists; my name is in bold. Two Annals of Physics articles are in press and listed with their volume.</p></aside></div>
+        <aside class="margin"></aside></div>
       </section>
       <section class="section" id="preprints" aria-labelledby="h-preprints">
-        <h2 class="section-title" id="h-preprints"><span class="n">2</span> Preprints</h2>
+        <h2 class="section-title" id="h-preprints">Preprints</h2>
         <div class="article"><div class="main"><ol class="refs" style="--start:{n1}">{pre_html}</ol></div>
-        <aside class="margin"><p class="margin-note">On arXiv. Where a manuscript is with a journal, the journal is named.</p></aside></div>
+        <aside class="margin"></aside></div>
       </section>
       <section class="section" id="in-review" aria-labelledby="h-review">
-        <h2 class="section-title" id="h-review"><span class="n">3</span> Under review</h2>
+        <h2 class="section-title" id="h-review">Under review, not yet public</h2>
         <div class="article"><div class="main"><ol class="refs" style="--start:{n1 + len(pre)}">{rev_html}</ol></div>
-        <aside class="margin"><p class="margin-note">Not yet public.</p></aside></div>
+        <aside class="margin"></aside></div>
       </section>
       <section class="section" id="talks" aria-labelledby="h-talks">
-        <h2 class="section-title" id="h-talks"><span class="n">4</span> Talks and posters</h2>
+        <h2 class="section-title" id="h-talks">Talks and posters</h2>
         <div class="article"><div class="main"><ol class="refs">{talk_html}</ol></div><aside class="margin"></aside></div>
       </section>
     </div>"""
@@ -513,13 +585,13 @@ def build_cv():
             ("skills", "Methods and tools", f'<dl class="skills">{skills}</dl>')]
     sec_html = "".join(f"""
       <section class="section" id="{sid}" aria-labelledby="h-{sid}">
-        <h2 class="section-title" id="h-{sid}"><span class="n">{i}</span> {t}</h2>
+        <h2 class="section-title" id="h-{sid}">{t}</h2>
         <div class="article"><div class="main">{c}</div><aside class="margin"></aside></div>
       </section>""" for i, (sid, t, c) in enumerate(secs, 1))
     body = f"""
     <header class="page-head"><div class="wrap">
       <h1>About</h1>
-      <p class="lede">Theoretical physicist working on the early universe. MSc student at the University of Florence.</p>
+      <p class="lede">{e(profile["title"])}, University of Florence.</p>
     </div></header>
     <div class="wrap">
       <section class="section" aria-label="Biography">
@@ -545,10 +617,10 @@ def build_lab():
     <div class="wrap">
       <div class="lab-frame">
         <iframe title="The Kähler stability wall: interactive model" src="research/kahler-stability-wall/" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
-        <div class="lab-frame-bar"><span>An explanatory model of the potential, not a simulation of the universe evolving in time.</span><a href="research/kahler-stability-wall/">Open in its own tab</a></div>
+        <div class="lab-frame-bar"><span>The reduced potential of the paper, explored in 3D.</span><a href="research/kahler-stability-wall/">Open in its own tab</a></div>
       </div>
       <section class="section" aria-labelledby="h-moves">
-        <h2 class="section-title" id="h-moves"><span class="n">1</span> The paper in three steps</h2>
+        <h2 class="section-title" id="h-moves">What the paper shows</h2>
         <div class="movements">
           <article><h3>The boundary</h3><p>The positive-tension stability wall is found analytically, at the saddle-node point where the Kähler minimum merges with its decompactification barrier.</p></article>
           <article><h3>Where the effective theory breaks</h3><p>Near the wall the modulus mass and barrier height scale critically. A Schur-complement test shows when integrating out the volume stops being justified.</p></article>
@@ -556,7 +628,7 @@ def build_lab():
         </div>
       </section>
       <section class="section" aria-labelledby="h-cite">
-        <h2 class="section-title" id="h-cite"><span class="n">2</span> Cite</h2>
+        <h2 class="section-title" id="h-cite">Cite</h2>
         <div class="article"><div class="main"><ol class="refs"><li class="ref"><div><span class="t">The Kähler stability wall in perturbative brane–antibrane inflation</span><span class="a"><b>S. K. Singh</b></span><span class="v"><span>arXiv:2611.08491 [hep-th] (2026)</span><span><a href="https://arxiv.org/abs/2611.08491">arXiv</a></span></span></div></li></ol></div><aside class="margin"></aside></div>
       </section>
     </div>"""
@@ -568,14 +640,14 @@ def build_lab():
 def build_privacy():
     body = """
     <header class="page-head"><div class="wrap"><h1>Privacy</h1>
-      <p class="lede">This site has no accounts, forms, advertising or live chat, and sets no cookies.</p></div></header>
+      <p class="lede">No accounts, forms, advertising or cookies.</p></div></header>
     <div class="wrap"><div class="article" style="padding-top:3.5rem"><div class="main prose">
       <h2>Who is responsible</h2>
       <p>This is the personal research website of Swapnil Kumar Singh, Florence, Italy. Write to <a href="mailto:swapnilsingh.ph@gmail.com">swapnilsingh.ph@gmail.com</a> with any privacy question.</p>
       <h2>Visitor statistics</h2>
       <p>Visits are counted with <a href="https://www.goatcounter.com/help/privacy">GoatCounter</a>, which uses no cookies and does not store IP addresses. It records the page visited, the referring site, browser type, screen size and approximate country, and uses a short-lived hash to count each visitor once. The total number of unique visitors is shown at the foot of each page. The legal basis is a legitimate interest in knowing, in aggregate, how the site is used (Art. 6(1)(f) GDPR).</p>
       <h2>Hosting and other services</h2>
-      <p>The site is hosted on GitHub Pages, which processes connection data such as IP addresses to deliver pages (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy statement</a>). All typefaces are served from this site; no fonts or scripts are loaded from Google. Links to arXiv, INSPIRE-HEP, journals, GitHub and LinkedIn lead to sites with their own policies.</p>
+      <p>The site is hosted on GitHub Pages, which processes connection data such as IP addresses to deliver pages (<a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub privacy statement</a>). All typefaces are served from this site; nothing is loaded from Google. Pages that list publications ask the public INSPIRE-HEP database for current citation counts; that request contains no personal data beyond what any web request carries. Links to arXiv, INSPIRE-HEP, journals, GitHub and LinkedIn lead to sites with their own policies.</p>
       <h2>Email</h2>
       <p>If you write to me, I use your message and address only to reply, and keep them no longer than the conversation needs.</p>
       <h2>Your rights</h2>
@@ -620,7 +692,7 @@ def build_redirects():
 
 
 def build_sitemap():
-    urls = ["index.html", "research.html", "publications.html", "lab.html", "cv.html"]
+    urls = ["index.html", "research.html", "publications.html", "lab.html", "consulting.html", "cv.html"]
     urls += [f"projects/{p['slug']}.html" for p in PROJECTS if not p.get("href")]
     urls.append("research/kahler-stability-wall/")
     body = "".join(f"  <url><loc>{SITE}{'' if u == 'index.html' else u}</loc></url>\n" for u in urls)
@@ -629,5 +701,5 @@ def build_sitemap():
 
 if __name__ == "__main__":
     build_home(); build_research(); build_projects(); build_publications(); build_cv()
-    build_lab(); build_privacy(); build_404(); build_redirects(); build_sitemap()
+    build_lab(); build_consulting(); build_privacy(); build_404(); build_redirects(); build_sitemap()
     print(f"Built {len(BUILT) + 1} pages, {len(REDIRECTS)} redirects and sitemap.xml")
