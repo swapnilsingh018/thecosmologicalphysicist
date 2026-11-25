@@ -18,8 +18,8 @@ const BENCH = Object.freeze({
 });
 const REDUCED_SCALE = BENCH.beta * Math.exp(-9 * BENCH.L / 2);
 const PRESET_COLORS = {
-  bg: "#0a1829", grid: "rgba(184,207,218,.10)", text: "#9eafbc",
-  gold: "#dfbb79", blue: "#7fc9d3", orange: "#edac74", rose: "#d77b93"
+  bg: "#000000", grid: "rgba(236,231,221,.09)", text: "#8b857a",
+  gold: "#e3a764", blue: "#9fc4c9", orange: "#e3a764", rose: "#d58a8a"
 };
 const superscript = (str) => String(str).replace(/-/g, "⁻").replace(/0/g, "⁰").replace(/1/g, "¹").replace(/2/g, "²").replace(/3/g, "³").replace(/4/g, "⁴").replace(/5/g, "⁵").replace(/6/g, "⁶").replace(/7/g, "⁷").replace(/8/g, "⁸").replace(/9/g, "⁹");
 const sci = (n, digits = 3) => Number.isFinite(n) ? n.toExponential(digits).replace("e-", " × 10⁻").replace("e+", " × 10⁺") : "—";
@@ -107,7 +107,7 @@ function drawPotential() {
   const Y = (y) => p.top + (ymax - y) / (ymax - ymin) * ph;
 
   const wash = ctx.createLinearGradient(0, 0, 0, h);
-  wash.addColorStop(0, "#0b2135"); wash.addColorStop(1, "#091525");
+  wash.addColorStop(0, "#0a0907"); wash.addColorStop(1, "#000000");
   ctx.fillStyle = wash; ctx.fillRect(0, 0, w, h);
   ctx.lineWidth = 1;
   for (let i = 0; i <= 6; i++) {
@@ -240,9 +240,9 @@ function drawChamber(now = performance.now()) {
   const { ctx, w, h } = canvasSize(manifoldCanvas);
   const P = (x, q, z) => chamberProject(x, q, z, w, h);
   const ambient = ctx.createRadialGradient(w * .5, h * .43, 5, w * .5, h * .45, Math.max(w, h) * .8);
-  ambient.addColorStop(0, "#18384b");
-  ambient.addColorStop(.43, "#0b2437");
-  ambient.addColorStop(1, "#061320");
+  ambient.addColorStop(0, "#1a1610");
+  ambient.addColorStop(.43, "#0c0a08");
+  ambient.addColorStop(1, "#000000");
   ctx.fillStyle = ambient; ctx.fillRect(0, 0, w, h);
 
   // A quiet technical grid provides parallax without claiming physical coordinates.
@@ -716,7 +716,7 @@ function drawFlux() {
   label(ctx, "RR FLUX QUANTUM M", left + W / 2, h - 4, "#526372", 10, "center");
   label(ctx, "K ↑", left - 36, top + 3, "#526372", 10);
   const x = left + (selectedFlux.M - .5) * s, y = top + (80.5 - selectedFlux.K) * s;
-  ctx.save(); ctx.strokeStyle = "#162c43"; ctx.lineWidth = 2;
+  ctx.save(); ctx.strokeStyle = "#2b2924"; ctx.lineWidth = 2;
   ctx.beginPath(); ctx.arc(x, y, Math.max(7, s * 1.3), 0, TAU); ctx.stroke();
   ctx.beginPath(); ctx.arc(x, y, Math.max(3, s * .4), 0, TAU); ctx.fillStyle = "#fff"; ctx.fill(); ctx.restore();
 }

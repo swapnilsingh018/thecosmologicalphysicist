@@ -1,117 +1,80 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script src="assets/theme.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0d160e">
+  <title>The Kähler stability wall: interactive model | Swapnil Kumar Singh</title>
+  <meta name="description" content="Interactive companion to arXiv:2611.08491: explore where the Kähler minimum and its barrier merge in brane–antibrane inflation.">
   <meta name="author" content="Swapnil Kumar Singh">
-  <meta name="description" content="Interactive computational cosmology laboratory by Swapnil Kumar Singh. Explore the Kähler Stability Wall and the saddle-node loss of modulus stabilization through a physics-based simulation.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://www.swapnilsingh.co.in/lab.html">
-  <title>Interactive Physics Laboratory — Swapnil Kumar Singh</title>
-  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Interactive Physics Laboratory — Swapnil Kumar Singh">
-  <meta property="og:description" content="An interactive research laboratory for computational cosmology, featuring the Kähler Stability Wall.">
+  <meta property="og:site_name" content="Swapnil Kumar Singh">
+  <meta property="og:title" content="The Kähler stability wall: interactive model | Swapnil Kumar Singh">
+  <meta property="og:description" content="Interactive companion to arXiv:2611.08491: explore where the Kähler minimum and its barrier merge in brane–antibrane inflation.">
   <meta property="og:url" content="https://www.swapnilsingh.co.in/lab.html">
-  <meta property="og:image" content="https://www.swapnilsingh.co.in/assets/portrait-public-v27.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/home.css">
-  <link rel="stylesheet" href="assets/lab.css">
-  <script defer src="assets/home.js"></script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"ScholarlyArticle","name":"The Kähler Stability Wall in Perturbative Brane–Antibrane Inflation","author":{"@type":"Person","name":"Swapnil Kumar Singh"},"url":"https://arxiv.org/abs/2611.08491","identifier":"arXiv:2611.08491","isPartOf":{"@type":"CreativeWork","name":"arXiv"}}
-  </script>
-<link rel="stylesheet" href="assets/olive-theme.css">
-<link rel="stylesheet" href="assets/editorial-system.css">
-<link rel="stylesheet" href="assets/folio-v11.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="assets/legacy-v27.css">
-<script defer src="assets/i18n-v28-content.js"></script>
-<script defer src="assets/i18n-v13.js"></script>
-<link rel="stylesheet" href="assets/i18n-v28.css">
+  <meta property="og:image" content="https://www.swapnilsingh.co.in/research/kahler-stability-wall/og-cover.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/lm-roman-10.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/crimson-pro.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="assets/v3/site.css">
+  <script defer src="assets/v3/site.js"></script>
 </head>
-<body class="lab-page">
+<body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
-  <header class="masthead" data-header>
-    <a href="index.html" class="identity" aria-label="Swapnil Kumar Singh home">
-      <span class="seal" aria-hidden="true">S<span class="seal-dot">·</span>K<span class="seal-dot">·</span>S</span>
-      <span class="identity-copy"><strong>Swapnil Kumar Singh</strong><small>COMPUTATIONAL PHYSICS / COSMOLOGY</small></span>
-  </a>
-    <button class="menu" type="button" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation"><span></span><span></span></button>
-    <nav id="nav" aria-label="Primary navigation"><a href="world.html#main">Home</a><a href="cv.html">About</a><a href="world.html#work">Research</a><a href="publications.html">Publications</a><a href="ideas.html">Idea</a></nav>
-  <div class="language-switch sks-language-switch" role="group" aria-label="Language" data-i18n-aria="language"><button type="button" data-set-lang="en" aria-pressed="true">EN</button><span aria-hidden="true">/</span><button type="button" data-set-lang="it" aria-pressed="false">IT</button></div>
-<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color mode" aria-pressed="false"><span class="theme-symbol" aria-hidden="true">☼</span><span class="theme-word">Light</span></button>
-</header>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="site-name" href="index.html">Swapnil Kumar Singh</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><i aria-hidden="true"></i><span>Menu</span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="lab.html" aria-current="page">Lab</a></li><li><a href="cv.html">About</a></li><li><a href="#contact">Contact</a></li></ul>
+      </nav>
+    </div>
+  </header>
   <main id="main">
-    <section class="lab-hero">
-      <div class="maxwrap">
-        <div class="section-topline light"><span>Interactive research</span><span>arXiv:2611.08491</span></div>
-        <div class="folio-lab-hero-grid">
-          <div>
-            <p class="lab-kicker">A paper you can experiment with</p>
-            <h1>Where a stable<br/><em>valley disappears.</em></h1>
-            <p class="lab-lead">A live companion to <cite>The Kähler Stability Wall in Perturbative Brane–Antibrane Inflation.</cite> Vary the uplift and watch the minimum and barrier converge at the critical point.</p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#atlas">Explore the model <span aria-hidden="true"></span></a>
-              <a class="button button-outline" href="https://arxiv.org/abs/2611.08491" target="_blank" rel="noopener noreferrer">Read the preprint <span aria-hidden="true"></span></a>
-            </div>
-          </div>
-          <a class="folio-lab-preview" href="#atlas" aria-label="Explore the interactive Kähler Stability Wall model">
-            <img src="research/kahler-stability-wall/og-cover.png" width="1200" height="630" loading="eager" alt="Cover of The Kähler Stability Wall interactive research atlas">
-            <span>See the model <b aria-hidden="true"></b></span>
-        </a>
-        </div>
-        <div class="lab-formula" aria-label="The critical saddle node occurs when the first and second derivatives of the potential vanish">
-          <span>THE CRITICAL CONDITION</span>
-          <strong>U<sub>σ</sub> = U<sub>σσ</sub> = 0</strong>
-          <span>MINIMUM + BARRIER → FOLD</span>
-        </div>
+    <header class="page-head"><div class="wrap">
+      <p class="crumb"><a href="research.html">Research</a> / <a href="research.html#theory">Cosmology and theory</a></p>
+      <h1>The Kähler stability wall</h1>
+      <p class="lede">An interactive companion to arXiv:2611.08491. Vary the uplift and watch the volume minimum and its barrier converge at the critical point.</p>
+      <div class="actions"><a class="btn btn-primary" href="https://arxiv.org/abs/2611.08491">Read the paper</a><a class="btn" href="https://arxiv.org/pdf/2611.08491">PDF</a><a class="btn" href="research/kahler-stability-wall/">Open full screen</a></div>
+    </div></header>
+    <div class="wrap">
+      <div class="lab-frame">
+        <iframe title="The Kähler stability wall: interactive model" src="research/kahler-stability-wall/" loading="lazy" allow="fullscreen" allowfullscreen></iframe>
+        <div class="lab-frame-bar"><span>An explanatory model of the potential, not a simulation of the universe evolving in time.</span><a href="research/kahler-stability-wall/">Open in its own tab</a></div>
       </div>
-    </section>
-    <section id="atlas" class="atlas-section">
-      <div class="maxwrap">
-        <div class="section-topline"><span>Explore the model</span><span>Interactive scientific demonstration</span></div>
-        <div class="atlas-heading">
-          <h2 class="display">A landscape<br/><em>in motion.</em></h2>
-          <p>The full atlas includes a three-dimensional potential landscape, parameter controls, local critical scaling and an account of the flux-consistency filters. It is an explanatory model interface, not a simulation of the universe evolving in time.</p>
+      <section class="section" aria-labelledby="h-moves">
+        <h2 class="section-title" id="h-moves"><span class="n">1</span> The paper in three steps</h2>
+        <div class="movements">
+          <article><h3>The boundary</h3><p>The positive-tension stability wall is found analytically, at the saddle-node point where the Kähler minimum merges with its decompactification barrier.</p></article>
+          <article><h3>Where the effective theory breaks</h3><p>Near the wall the modulus mass and barrier height scale critically. A Schur-complement test shows when integrating out the volume stops being justified.</p></article>
+          <article><h3>Flux filters</h3><p>Throat, tadpole, conifold, normalisation and mass-matrix conditions restrict candidate compact realisations. They are necessary, not sufficient: no compact vacuum is claimed.</p></article>
         </div>
-        <div class="atlas-frame">
-          <div class="atlas-bar"><span><i></i> RESEARCH SIMULATOR / INTERACTIVE</span><a href="research/kahler-stability-wall/" target="_blank" rel="noopener noreferrer">OPEN FULL SCREEN </a></div>
-          <iframe title="The Kähler Stability Wall interactive 3D physics simulator" src="research/kahler-stability-wall/" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen" allowfullscreen></iframe>
-        </div>
-        <p class="atlas-note">For the full interactive experience, <a href="research/kahler-stability-wall/" target="_blank" rel="noopener noreferrer">open the research atlas in its own tab</a>.</p>
-      </div>
-    </section>
-    <section class="lab-findings">
-      <div class="maxwrap">
-        <div class="section-topline light"><span>02 / THE PHYSICAL STRUCTURE</span><span>THE PAPER IN THREE MOVEMENTS</span></div>
-        <div class="lab-findings-grid">
-          <article><span>01 — EXISTENCE</span><h3>The boundary</h3><p>The positive-tension stability wall is determined analytically at the saddle-node merging of the Kähler minimum and its decompactification barrier.</p></article>
-          <article><span>02 — BREAKDOWN</span><h3>The effective field theory</h3><p>Near the fold, modulus mass and barrier height scale critically. The Schur complement tests when integrating out the volume ceases to be justified.</p></article>
-          <article><span>03 — CONTROL</span><h3>The flux filters</h3><p>Necessary throat, tadpole, conifold, normalization, and mass-matrix conditions restrict candidate compact realizations. They do not establish a compact vacuum.</p></article>
-        </div>
-      </div>
-    </section>
-    <section class="lab-paper">
-      <div class="maxwrap lab-paper-grid">
-        <div><p class="eyebrow">03 / SOURCE DOCUMENT</p><h2 class="display">The paper<br/><em>behind the picture.</em></h2><p>32 pages · 4 figures · 4 tables · High Energy Physics — Theory. The preprint can be read and cited directly through arXiv.</p></div>
-        <div class="paper-links">
-          <a href="https://arxiv.org/abs/2611.08491" target="_blank" rel="noopener noreferrer"><span>PUBLIC PREPRINT</span><strong>arXiv:2611.08491</strong><b aria-hidden="true"></b></a>
-          <a href="https://arxiv.org/pdf/2611.08491" target="_blank" rel="noopener noreferrer"><span>FULL MANUSCRIPT</span><strong>Download the PDF</strong><b aria-hidden="true"></b></a>
-          <div class="forthcoming-link"><span>JOURNAL VERSION</span><strong>Published version</strong></div>
-        </div>
-      </div>
-    </section>
+      </section>
+      <section class="section" aria-labelledby="h-cite">
+        <h2 class="section-title" id="h-cite"><span class="n">2</span> Cite</h2>
+        <div class="article"><div class="main"><ol class="refs"><li class="ref"><div><span class="t">The Kähler stability wall in perturbative brane–antibrane inflation</span><span class="a"><b>S. K. Singh</b></span><span class="v"><span>arXiv:2611.08491 [hep-th] (2026)</span><span><a href="https://arxiv.org/abs/2611.08491">arXiv</a></span></span></div></li></ol></div><aside class="margin"></aside></div>
+      </section>
+    </div>
   </main>
-  <footer class="footer"><div class="maxwrap footer-grid">
-    <div><strong>Swapnil Kumar Singh</strong><p>Computational physics · Cosmology · Gravitation</p></div>
-    <div class="footer-links"><a href="index.html">Home</a><a href="world.html">Research Atlas</a><a href="publications.html">Publications</a></div>
-    <div class="footer-links"><a href="cv.html">About / CV</a><a href="mailto:swapnilsingh.ph@gmail.com">Email</a><a href="#main">Back to top </a></div>
-    <div class="footer-bottom"><span>© <span id="year">2026</span> SWAPNIL KUMAR SINGH</span><span>THEORY / COMPUTATION / EVIDENCE</span></div>
-  </div></footer>
+  <footer class="site-footer" id="contact">
+    <div class="wrap top">
+      <div>
+        <h2>Contact</h2>
+        <p>For collaboration, questions about a paper or an invitation to speak, write to me.</p>
+        <a class="email" href="mailto:swapnilsingh.ph@gmail.com">swapnilsingh.ph@gmail.com</a>
+      </div>
+      <div><h3>Elsewhere</h3><ul><li><a href="https://inspirehep.net/authors/2052015">INSPIRE-HEP</a></li><li><a href="https://github.com/swapnilsingh018">GitHub</a></li><li><a href="https://www.linkedin.com/in/swapnilsingh018">LinkedIn</a></li></ul></div>
+      <div><h3>This site</h3><ul><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="lab.html">Lab</a></li><li><a href="cv.html">About and CV</a></li><li><a href="privacy.html">Privacy</a></li></ul></div>
+    </div>
+    <div class="wrap bottom">
+      <span>© 2026 Swapnil Kumar Singh</span>
+      <p class="visitor-count" data-visitor-count hidden><span class="live-dot" aria-hidden="true"></span><span><span data-visitor-number></span> unique visitors</span></p>
+      <span class="colophon">Set in Latin Modern, Crimson Pro and Fira Sans.</span>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,0 +1,37 @@
+/* Brings the interactive atlas onto the site's v3 type and palette.
+   Loaded after styles.css; overrides only. */
+@font-face { font-family: "LM Roman"; src: url("../../assets/fonts/lm-roman-10.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "LM Roman"; src: url("../../assets/fonts/lm-roman-10-italic.woff") format("woff"); font-style: italic; font-display: swap; }
+@font-face { font-family: "LM Math"; src: url("../../assets/fonts/lm-math.woff") format("woff"); font-display: swap; unicode-range: U+0391-03C9, U+03D1, U+03D5, U+03F5, U+2032, U+2070-209F, U+210F, U+2202, U+2207, U+2211, U+221A, U+221D, U+221E, U+222B, U+2248, U+2260-2265; }
+@font-face { font-family: "Fira Sans"; src: url("../../assets/fonts/fira-sans.woff") format("woff"); font-display: swap; }
+@font-face { font-family: "Fira Sans"; src: url("../../assets/fonts/fira-sans-medium.woff") format("woff"); font-weight: 500 700; font-display: swap; }
+
+:root {
+  --navy: #000; --navy2: #070707; --navy3: #0e0d0b;
+  --cream: #ece7dd; --ink: #ece7dd; --muted: #bdb7ab;
+  --gold: #e3a764; --gold2: #b9834e; --orange: #e3a764;
+  --line: #2b2924;
+  --sans: "Fira Sans", "LM Math", system-ui, sans-serif;
+  --serif: "LM Roman", "LM Math", Georgia, serif;
+  --mono: "Fira Sans", "LM Math", system-ui, sans-serif;
+}
+body { background: #000; color: #ece7dd; }
+
+/* Every section on black; the old cream "paper" sections become dark. */
+.hero, .chamber-section, .premise, .lab-section, .wall-section, .breakdown-section,
+.flux-section, .boundary-section, .paper-section, .footer { background: #000 !important; color: #ece7dd !important; }
+.premise, .lab-section, .wall-section, .breakdown-section, .flux-section, .boundary-section, .paper-section { border-top: 1px solid #2b2924; }
+.premise *, .wall-section *, .flux-section *, .paper-section * { color: inherit; border-color: #2b2924; }
+.premise p, .wall-section p, .flux-section p, .paper-section p, .section-summary { color: #bdb7ab !important; }
+.display-title { font-family: var(--serif) !important; font-weight: 400 !important; letter-spacing: -.01em !important; }
+.display-title em, .flux-section .display-title em, .paper-section .display-title em { color: #e3a764 !important; }
+.equation-stage, .chamber-console, .chamber-tower, .simulation-controls, .flux-controls, .scaling-controls, .hero-live-readout {
+  background: #070707 !important; box-shadow: none !important; border-color: #2b2924 !important; }
+.chamber-play { background: #ece7dd !important; color: #000 !important; border-color: #ece7dd !important; }
+.site-header { background: rgba(0,0,0,.9) !important; border-bottom-color: #2b2924 !important; }
+.brand-type strong { font: 400 20px/1 var(--serif) !important; letter-spacing: 0 !important; text-transform: none !important; }
+.brand-type small, .brand-symbol { display: none !important; }
+
+/* Inside the Lab page the host page already provides navigation and footer. */
+.embedded .site-header, .embedded .mobile-nav, .embedded .footer, .embedded .reading-progress { display: none !important; }
+.embedded .hero-grid { padding-top: 64px !important; }

@@ -1,8 +1,0 @@
-/* Consistent editorial controls on archived pages. */
-.folio-page,.folio-page button,.folio-page input,.folio-page select{font-family:'STIX Two Text',Georgia,serif}
-.folio-page h1,.folio-page h2,.folio-page h3,.folio-page .identity-copy strong,.folio-page nav a{font-family:'STIX Two Text',Georgia,serif;letter-spacing:-.016em}
-.folio-page .masthead nav,.folio-page .theme-toggle{border-radius:999px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.folio-page .folio-pill,.folio-page button,.folio-page .folio-text-action{transition:color .24s ease,background .24s ease,border-color .24s ease,transform .24s ease}
-.folio-page .folio-pill:hover,.folio-page button:hover,.folio-page .folio-text-action:hover{transform:translateY(-1px)}
-.folio-page .folio-record-hero h1{font-size:clamp(39px,5vw,72px);line-height:1.08}
-@media(prefers-reduced-motion:reduce){.folio-page .folio-pill,.folio-page button,.folio-page .folio-text-action{transition:none;transform:none}}

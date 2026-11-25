@@ -28,8 +28,14 @@ const paths = new Set(htmlFiles.map(f => path.relative(root, f)));
 for (const file of htmlFiles) {
   const html = fs.readFileSync(file, "utf8");
   const rel = path.relative(root, file);
-  if (rel === "404.html" || rel === "private.html") {
+  const isRedirect = /http-equiv="refresh"/.test(html);
+  if (rel === "404.html" || isRedirect) {
     if (!html.includes('name="robots" content="noindex')) issues.push(rel + ": must be noindex");
+    if (isRedirect) {
+      const target = (html.match(/content="0; url=([^"#]+)/) || [])[1];
+      if (!target || !fs.existsSync(path.resolve(path.dirname(file), target))) issues.push(rel + ": redirect target missing");
+    }
+    if (rel === "404.html") continue;
     continue;
   }
   const publicPath = rel === "index.html" ? "/" : rel.endsWith("/index.html") ? "/" + rel.slice(0, -"index.html".length) : "/" + rel;
@@ -58,7 +64,7 @@ for (const file of htmlFiles) {
 }
 const map = fs.readFileSync(path.join(root, "sitemap.xml"), "utf8");
 for (const rel of paths) {
-  if (rel === "404.html" || rel === "private.html") continue;
+  if (rel === "404.html") continue;
   if (/name="robots" content="noindex/.test(fs.readFileSync(path.join(root, rel), "utf8"))) continue;
   const publicPath = rel === "index.html" ? "" : rel.endsWith("/index.html") ? rel.slice(0, -"index.html".length) : rel;
   if (!map.includes("https://www.swapnilsingh.co.in/" + publicPath)) {

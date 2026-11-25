@@ -1,0 +1,59 @@
+{
+  "name": "Swapnil Kumar Singh",
+  "short_role": "Physicist, University of Florence",
+  "email": "swapnilsingh.ph@gmail.com",
+  "lede": "I study the early universe: how inflation can be realised in string theory and supergravity, and what the newest cosmological data still allow it to be.",
+  "bio": [
+    "I am a theoretical physicist working on the early universe. My research asks how inflation can be realised in string theory and supergravity, and what the newest CMB, large-scale-structure and pulsar-timing data, from ACT DR6 and DESI DR2 onwards, allow it to be.",
+    "I am completing an MSc in Physical and Astrophysical Sciences at the University of Florence, after a first degree in mechanical engineering. I have worked with research groups in Tokyo, Rome, Warsaw, Hsinchu, Hyderabad, Cairo and Delhi, and I build computational tools, like the interactive companion to my latest paper, alongside the analytic work."
+  ],
+  "links": [
+    {"label": "INSPIRE-HEP", "href": "https://inspirehep.net/authors/2052015"},
+    {"label": "GitHub", "href": "https://github.com/swapnilsingh018"},
+    {"label": "LinkedIn", "href": "https://www.linkedin.com/in/swapnilsingh018"}
+  ],
+  "education": [
+    {"degree": "MSc in Physical and Astrophysical Sciences", "place": "University of Florence, Italy", "dates": "2026 – present", "detail": "Curriculum in astrophysics and cosmology: relativistic astrophysics, cosmology, machine learning for physicists."},
+    {"degree": "BE in Mechanical Engineering", "place": "BMS College of Engineering, Bengaluru, India", "dates": "2021 – 2025", "detail": "Research Excellence Award. Coursework in advanced calculus, linear algebra, Fourier analysis, probability, quantum mechanics, astrophysics and space science."}
+  ],
+  "appointments": [
+    {"role": "Researcher", "org": "National Astronomical Observatory of Japan and ENEA–Sapienza University of Rome", "place": "Tokyo and Rome", "dates": "Mar – Sep 2026", "text": "Redshift dependence of cosmological parameters in Type Ia supernova data: covariance-aware Bayesian inference, MCMC diagnostics and stability across redshift bins.", "project": "running-hubble"},
+    {"role": "Research intern", "org": "Institute of Astronomy, National Tsing Hua University", "place": "Hsinchu, Taiwan", "dates": "Jul – Sep 2025", "text": "Gravitational lensing of fast radio bursts by compact binaries, using numerical lens inversion and propagation delays; high-redshift structure in JWST COSMOS-Web data.", "project": "frb-lensing"},
+    {"role": "Research intern", "org": "Institute of Theoretical Physics, University of Warsaw", "place": "Warsaw, Poland (remote)", "dates": "Mar – Jul 2025", "text": "Inflationary observables for single-field and non-minimally coupled models, frame transformations, slow-roll evolution and parameter scans against ACT and DESI data.", "project": "inflation-act-desi"},
+    {"role": "Researcher", "org": "BITS Pilani, Hyderabad Campus", "place": "Hyderabad, India", "dates": "Mar – May 2025", "text": "Emergent-universe solutions in causal dissipative f(T) gravity: dynamical equations, phase-space equilibria and comparison with supernova and expansion data.", "project": "emergent-ft-gravity"},
+    {"role": "Research associate", "org": "Future University in Egypt and Egyptian Center for Theoretical Physics", "place": "Cairo, Egypt (remote)", "dates": "Sep 2024 – Mar 2026", "text": "Effective gravitational and inflationary dynamics on a quantum-deformed phase-space geometry: induced metric, equations of motion, scalar and tensor perturbations.", "project": "quantum-phase-space"},
+    {"role": "Researcher", "org": "Centre for Cosmology and Science Popularization, SGT University", "place": "Delhi NCR, India", "dates": "Jun – Dec 2024", "text": "Primordial black holes and scalar-induced gravitational waves in non-singular bounce scenarios, with loop corrections, non-Gaussianity and pulsar-timing constraints.", "project": "pbh-sigw-bounce"},
+    {"role": "Researcher", "org": "Miranda House, University of Delhi", "place": "New Delhi, India", "dates": "Jun – Oct 2023", "text": "Standard and alternative cosmological models compared with supernova observations: Bayesian parameter estimation, convergence analysis and model selection.", "project": "superluminous-supernovae"},
+    {"role": "Research intern", "org": "Deep Space Initiative, Andromeda Research Project", "place": "Denver, USA (remote)", "dates": "Feb 2023 – Feb 2024", "text": "Research training in space-science methods: radiation-resilient power systems, orbital energy budgets and space environments.", "project": "deep-space-power"},
+    {"role": "Research intern", "org": "Space Advancement and Research Cell", "place": "Keonjhar, India", "dates": "Aug – Oct 2022", "text": "Solar radio dispersion, coronal plasma diagnostics and MHD energy cascades.", "project": "solar-radio-plasma"}
+  ],
+  "engineering": [
+    {"role": "Engineering design intern and project lead", "org": "Dassault Systèmes Product Innovation Lab", "place": "Bengaluru, India", "dates": "Jun 2023 – Dec 2025", "text": "Simulation-driven lower-limb orthotics: finite-element stress analysis, fatigue-life prediction and topology optimisation.", "project": "orthotic-systems"},
+    {"role": "Research assistant and team lead", "org": "Propel Lab 3, BMS College of Engineering", "place": "Bengaluru, India", "dates": "Jul 2022 – Jul 2024", "text": "Autonomous satellite servicing and orbital-debris reuse: servicing architectures, combined propulsion and multi-impulse transfers.", "project": "satellite-servicing"},
+    {"role": "Research assistant", "org": "CFD Laboratory, BMS College of Engineering", "place": "Bengaluru, India", "dates": "Jul 2023 – Jan 2024", "text": "Ammonia–hydrogen premixed combustion: flame speeds, ignition delay and NOₓ chemistry with detailed kinetic mechanisms.", "project": "ammonia-hydrogen-combustion"},
+    {"role": "Undergraduate thesis", "org": "Wind Tunnel Laboratory, BMS College of Engineering", "place": "Bengaluru, India", "dates": "Jul 2023 – Jul 2025", "text": "Bio-inspired airfoils with tubercles and serrations: RANS CFD, Ffowcs Williams–Hawkings aeroacoustics and wind-tunnel validation.", "project": "bio-inspired-aeroacoustics"},
+    {"role": "Computational thermal systems researcher", "org": "Heat Transfer Laboratory, BMS College of Engineering", "place": "Bengaluru, India", "dates": "Mar – Dec 2024", "text": "Thermal management for high-power lithium-ion cells: liquid cooling and phase-change materials with conjugate heat-transfer simulation.", "project": "battery-thermal-management"}
+  ],
+  "activities": [
+    {"title": "Minkowski Institute for Fundamental Studies", "text": "Affiliate member; participant in the 2024 spacetime conference."},
+    {"title": "MIT Exoplanet Research Project", "text": "Qatar-1b transit-timing measurements and multi-epoch light-curve analysis with EXOTIC."},
+    {"title": "International Astronomical Search Collaboration (NASA partner)", "text": "Asteroid-candidate identification in Pan-STARRS and Catalina Sky Survey images with Astrometrica."},
+    {"title": "Science writing", "text": "Articles on astrophysics and cosmology for Virtual Wire and the Youth Journal of STEM Research."}
+  ],
+  "training": [
+    "Modern Amplitude Methods for Gauge and Gravity Theories, ICTP-SAIFR / IFT-UNESP, 2023",
+    "Perturbative Quantum Gravity, University of Massachusetts Amherst, 2023",
+    "Quantum Information at the Interface of Quantum Theory and Gravity, ETH Zürich, 2023",
+    "The Basics of Loop Quantum Gravity, Bard College, 2023",
+    "The Challenges of Quantum Gravity, Virginia Tech, 2023",
+    "REYES Research Programme, University of California, Berkeley, 2023",
+    "Satellite Remote Sensing of the Atmosphere, Indian Institute of Remote Sensing, 2022"
+  ],
+  "skills": [
+    {"area": "Programming", "items": "Python, C, Mathematica, Octave"},
+    {"area": "Inference", "items": "Bayesian analysis, MCMC, model comparison"},
+    {"area": "Scientific codes", "items": "EinsteinPy, REBOUND, SNCosmo, EXOTIC, AMUSE, PLUTO (MHD)"},
+    {"area": "Engineering simulation", "items": "ANSYS, COMSOL Multiphysics, SolidWorks, Solid Edge"},
+    {"area": "Workflow", "items": "Git, LaTeX, Linux, scientific visualisation"}
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "_note": "Author lists and venues checked against INSPIRE-HEP (author record 2052015) on 25 Nov 2026. 'me' marks the site owner in author lists.",
+  "articles": [
+    {"id": "jheap-act-desi", "title": "What new physics can we extract from inflation using the ACT DR6 and DESI DR2 observations?", "authors": ["S. Choudhury", "G. Bauyrzhan", "me", "K. Yerzhanov"], "venue": "J. High Energy Astrophys.", "volume": "54", "pages": "100656", "year": "2026", "doi": "10.1016/j.jheap.2026.100656", "arxiv": "2506.15407", "selected": true, "project": "inflation-act-desi"},
+    {"id": "pdu-alpha-attractor", "title": "Symmetry-protected α-attractor hybrid inflation in supergravity and constraints from ACT DR6 and DESI DR2", "authors": ["me"], "venue": "Phys. Dark Univ.", "volume": "53", "year": "2026", "arxiv": "2511.05545", "selected": true},
+    {"id": "annphys-496", "title": "Power-law inflation from a covariant Hamiltonian phase-space deformation: exact background, Hessian geometry, and sound-cone correspondence as an effective quantum-gravity response", "authors": ["me", "S. O. Allehabi", "A. A. Alshehri", "M. Nasar", "A. F. El-Sherif", "A. N. Tawfik"], "venue": "Ann. Phys.", "volume": "496", "year": "2027", "inspire": true, "project": "quantum-phase-space"},
+    {"id": "annphys-495", "title": "Covariant Hamilton phase-space deformation of relativistic generalized uncertainty principle kinematics: analytical solutions and observables of dynamically closed and testable inflation", "authors": ["me", "S. O. Allehabi", "A. A. Alshehri", "M. Nasar", "A. F. El-Sherif", "A. N. Tawfik"], "venue": "Ann. Phys.", "volume": "495", "year": "2026", "inspire": true, "selected": true, "project": "quantum-phase-space"},
+    {"id": "jheap-ft", "title": "Emergent cosmology in causal dissipative f(T) gravity", "authors": ["me", "S. S. Mishra", "P. K. Sahoo"], "venue": "J. High Energy Astrophys.", "volume": "54", "pages": "100672", "year": "2026", "doi": "10.1016/j.jheap.2026.100672", "selected": true, "project": "emergent-ft-gravity"},
+    {"id": "tmp-beta", "title": "Three-loop gauge beta functions in supersymmetric theories with exponential higher covariant derivative regularization", "authors": ["me"], "venue": "Theor. Math. Phys.", "volume": "229", "year": "2026", "arxiv": "2509.06799", "selected": true},
+    {"id": "epjc-pbh", "title": "Negative non-Gaussianity as a salvager for PBHs with PTAs in bounce", "authors": ["S. Choudhury", "K. Dey", "S. Ganguly", "A. Karde", "me", "P. Tiwari"], "venue": "Eur. Phys. J. C", "volume": "85", "pages": "472", "year": "2025", "doi": "10.1140/epjc/s10052-025-14176-z", "arxiv": "2409.18983", "selected": true, "project": "pbh-sigw-bounce"},
+    {"id": "kpcb-microstates", "title": "Black hole microstates and entropy", "authors": null, "venue": "Kinematics Phys. Celest. Bodies", "volume": "41", "pages": "176–185", "year": "2025", "doi": "10.3103/S088459132504004X"},
+    {"id": "lhep-space", "title": "Advancing space sustainability: on-orbit repair and recycling through additive manufacturing and automated systems", "authors": null, "venue": "Lett. High Energy Phys.", "year": "2023", "url": "https://lettersinhighenergyphysics.com/index.php/LHEP/article/view/716", "project": "satellite-servicing"}
+  ],
+  "preprints": [
+    {"id": "kahler-wall", "title": "The Kähler stability wall in perturbative brane–antibrane inflation", "authors": ["me"], "year": "2026", "arxiv": "2611.08491", "category": "hep-th", "status": null, "lab": true},
+    {"id": "qdps-emergent", "title": "Quantum-deformed phase-space geometry and emergent inflation in effective four-dimensional spacetime", "authors": ["me", "S. O. Allehabi", "A. A. Alshehri", "M. Nasar", "A. F. El-Sherif", "A. N. Tawfik"], "year": "2026", "arxiv": "2604.18647", "status": "Submitted to Rep. Prog. Phys.", "project": "quantum-phase-space"},
+    {"id": "reevaluation-conformal", "title": "Reevaluation of inflationary dynamics in extended general relativity with perturbatively and tensorially structured conformal metric", "authors": ["me", "S. O. Allehabi", "A. A. Alshehri", "M. Nasar", "A. N. Tawfik"], "year": "2026", "arxiv": "2605.01619", "status": "Submitted to Phys. Rev. D", "project": "quantum-phase-space"},
+    {"id": "holographic-freeze", "title": "Oscillatory freeze from inertial holographic dark energy", "authors": ["me"], "year": "2026", "arxiv": "2601.07007", "status": "Submitted to Nucl. Phys. B"},
+    {"id": "quintessential-act", "title": "Quintessential inflation in light of ACT DR6", "authors": ["S. Choudhury", "me", "S. K. Sahoo"], "year": "2025", "arxiv": "2511.19898", "status": "Submitted to Phys. Dark Univ."},
+    {"id": "exciton-condensates", "title": "Self-interacting gravitational exciton condensates from extra-dimensional stabilization", "authors": ["me"], "year": "2025", "arxiv": "2503.00019", "status": null},
+    {"id": "topological-stars", "title": "Confinement phenomena in topological stars", "authors": ["me"], "year": "2024", "arxiv": "2405.16190", "status": null}
+  ],
+  "in_review": [
+    {"id": "tower-quintessence", "title": "Quintessence from regulated tower thresholds", "status": "Under review at Eur. Phys. J. C"},
+    {"id": "quadratic-gravity", "title": "A finite-curvature slow-roll branch of quantum quadratic gravity", "status": "Under review at Nucl. Phys. B"}
+  ],
+  "talks": [
+    {"title": "Optimizing solar-sail hybrid systems for interstellar exploration", "event": "75th International Astronautical Congress", "place": "Milan", "kind": "Talk", "year": "2024", "url": "https://doi.org/10.52202/078371-0080", "project": "deep-space-power"},
+    {"title": "Navigating the complexities of interstellar deep space", "event": "75th International Astronautical Congress", "place": "Milan", "kind": "Poster", "year": "2024", "url": "https://www.proceedings.com/078357-0252.html"},
+    {"title": "Quantum perturbations in BEC dark matter and primordial black hole genesis", "event": "13th International Conference on New Frontiers in Physics", "place": "Crete", "kind": "Poster", "year": "2024", "url": "https://indico.cern.ch/event/1307446/contributions/6032662/contribution.pdf"},
+    {"title": "Effect of NH₃/H₂ fuel doping on laminar flame speed and NO emissions", "event": "International Conference on Advances in Aerospace and Energy Systems, ISRO–LPSC", "place": null, "kind": "Poster", "year": "2024", "project": "ammonia-hydrogen-combustion"},
+    {"title": "Evaluating solar energy systems for long-duration deep-space missions", "event": "74th International Astronautical Congress", "place": "Baku", "kind": "Talk", "year": "2023", "url": "https://www.proceedings.com/72277.html", "project": "deep-space-power"},
+    {"title": "Dark matter and gravitational effects in the early universe", "event": "Gravitational Physics and Astronomy Conference", "place": "Cairo", "kind": "Talk", "year": "2022", "url": "https://indico.cern.ch/event/1109513/contributions/5059146/"},
+    {"title": "Gamma-ray bursts and afterglow phenomenology", "event": "Gravitational Physics and Astronomy Conference", "place": "Cairo", "kind": "Talk", "year": "2022", "url": "https://indico.cern.ch/event/1109513/contributions/5133227/"},
+    {"title": "Quantum effects in dark matter", "event": "Kashiwa Dark Matter Symposium, University of Tokyo", "place": "Kashiwa", "kind": "Poster", "year": "2022", "url": "https://2022.kashiwa-darkmatter-symposia.org/posters.html"}
+  ]
+}
