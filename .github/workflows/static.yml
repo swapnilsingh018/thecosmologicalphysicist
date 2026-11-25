@@ -1,56 +1,27 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+# Checks every push. Publishing is done by GitHub Pages "Deploy from a branch"
+# (Settings → Pages → Source: main / root), so this workflow does not deploy.
+name: Check site
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
+  pull_request:
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Check pages are built from content/
+      - name: Pages are built from content/
         run: |
           python3 tools/build.py
-          git diff --exit-code -- . ':(exclude)tools' || (echo "Run python3 tools/build.py and commit the result." && exit 1)
-      - name: Validate source before deployment
-        run: |
-          node tools/check-site.mjs
-          for test_file in tools/test-*.mjs; do node "$test_file"; done
-      - name: Assemble public website
-        run: |
-          mkdir -p _site
-          cp -v *.html sitemap.xml robots.txt CNAME _site/
-          cp -R assets projects research _site/
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Only public pages/assets; keep docs, tests, and Git metadata off the site.
-          path: './_site'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+          git diff --exit-code -- . ':(exclude)tools' || (echo "::error::Pages are out of date. Run python3 tools/build.py and commit the result." && exit 1)
+      - name: Links, metadata and sitemap
+        run: node tools/check-site.mjs
+      - name: Site structure
+        run: for test_file in tools/test-*.mjs; do node "$test_file"; done

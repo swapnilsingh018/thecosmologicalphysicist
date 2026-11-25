@@ -1,6 +1,6 @@
 # swapnilsingh.co.in
 
-Personal research website of Swapnil Kumar Singh, deployed to GitHub Pages from `main`.
+Personal research website of Swapnil Kumar Singh. GitHub Pages publishes the `main` branch directly (Settings → Pages → Deploy from a branch); `.nojekyll` makes it serve the files exactly as built. The `Check site` workflow only runs the checks below.
 
 ## How it is built
 
@@ -20,7 +20,7 @@ node tools/check-site.mjs   # links, metadata, sitemap
 node tools/test-site.mjs    # structure, fonts, publications, redirects
 ```
 
-Then commit and push. The deploy refuses to run if the pages are out of date with `content/`.
+Then commit and push. The `Check site` workflow fails if the pages are out of date with `content/`.
 
 ## Design
 
